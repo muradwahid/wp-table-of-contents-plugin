@@ -12,8 +12,8 @@ import AnchorsByTag from '../Panel/AnchorsByTag/AnchorsByTag';
 import IconPicker from '../Panel/IconPicker/IconPicker';
 import PanelAlign from '../Panel/PanelAlign/PanelAlign';
 import PanelInputAdd from '../Panel/PanelInputAdd/PanelInputAdd';
-import TabPanel from '../Panel/TabPanel/TabPanel';
 import PanelUnit from '../Panel/PanelUnit/PanelUnit';
+import TabPanel from '../Panel/TabPanel/TabPanel';
 const Settings = ({ attributes, setAttributes }) => {
   const {
     changeTab,
@@ -33,18 +33,36 @@ const Settings = ({ attributes, setAttributes }) => {
     sticky,
     verticalAlign,
     leftAlignDevice,
-    leftAlignUnit,
-    leftAlignValue,
+    leftAlignUnitDesktop,
+    leftAlignUnitTablet,
+    leftAlignUnitMobile,
+    leftAlignValueDesktop,
+    leftAlignValueTablet,
+    leftAlignValueMobile,
     rightAlignDevice,
-    rightAlignUnit,
-    rightAlignValue,
+    rightAlignUnitDesktop,
+    rightAlignUnitTablet,
+    rightAlignUnitMobile,
+    rightAlignValueDesktop,
+    rightAlignValueTablet,
+    rightAlignValueMobile,
     topAlignDevice,
-    topAlignUnit,
-    topAlignValue,
-    bottomAlignValue,
-    bottomAlignUnit,
+    topAlignUnitDesktop,
+    topAlignUnitTablet,
+    topAlignUnitMobile,
+    topAlignValueDesktop,
+    topAlignValueTablet,
+    topAlignValueMobile,
+    bottomAlignValueDesktop,
+    bottomAlignValueTablet,
+    bottomAlignValueMobile,
+    bottomAlignUnitDesktop,
+    bottomAlignUnitTablet,
+    bottomAlignUnitMobile,
     bottomAlignDevice,
     deskZindex,
+    mobileZindex,
+    tabletZindex,
     zIndexDevice,
   } = attributes;
   const htmlTags = [
@@ -302,20 +320,60 @@ const Settings = ({ attributes, setAttributes }) => {
                     onChange={(val) => setAttributes({ leftAlignDevice: val })}
                   />
                 </div>
-                <PanelUnit
-                  value={leftAlignUnit}
-                  units={['px', '%']}
-                  renderFunction={(value) =>
-                    setAttributes({ leftAlignUnit: value })
+                {leftAlignDevice === 'desktop' ? (
+                  <PanelUnit
+                    value={leftAlignUnitDesktop}
+                    units={['px', '%']}
+                    renderFunction={(value) =>
+                      setAttributes({ leftAlignUnitDesktop: value })
+                    }
+                  />
+                ) : leftAlignDevice == 'tablet' ? (
+                  <PanelUnit
+                    value={leftAlignUnitTablet}
+                    units={['px', '%']}
+                    renderFunction={(value) =>
+                      setAttributes({ leftAlignUnitTablet: value })
+                    }
+                  />
+                ) : (
+                  <PanelUnit
+                    value={leftAlignUnitMobile}
+                    units={['px', '%']}
+                    renderFunction={(value) =>
+                      setAttributes({ leftAlignUnitMobile: value })
+                    }
+                  />
+                )}
+              </div>
+              {leftAlignDevice === 'desktop' ? (
+                <RangeControl
+                  value={leftAlignValueDesktop}
+                  min={0}
+                  max={leftAlignUnitDesktop === 'px' ? 1000 : 100}
+                  onChange={(value) =>
+                    setAttributes({ leftAlignValueDesktop: value })
                   }
                 />
-              </div>
-              <RangeControl
-                value={leftAlignValue}
-                min={0}
-                max={leftAlignUnit === 'px' ? 1000 : 100}
-                onChange={(value) => setAttributes({ leftAlignValue: value })}
-              />
+              ) : leftAlignDevice == 'tablet' ? (
+                <RangeControl
+                  value={leftAlignValueTablet}
+                  min={0}
+                  max={leftAlignUnitTablet === 'px' ? 1000 : 100}
+                  onChange={(value) =>
+                    setAttributes({ leftAlignValueTablet: value })
+                  }
+                />
+              ) : (
+                <RangeControl
+                  value={leftAlignValueMobile}
+                  min={0}
+                  max={leftAlignUnitMobile === 'px' ? 1000 : 100}
+                  onChange={(value) =>
+                    setAttributes({ leftAlignValueMobile: value })
+                  }
+                />
+              )}
             </div>
           ) : (
             <div style={{ marginTop: '10px' }}>
@@ -335,20 +393,60 @@ const Settings = ({ attributes, setAttributes }) => {
                     onChange={(val) => setAttributes({ rightAlignDevice: val })}
                   />
                 </div>
-                <PanelUnit
-                  value={rightAlignUnit}
-                  units={['px', '%']}
-                  renderFunction={(value) =>
-                    setAttributes({ rightAlignUnit: value })
+                {rightAlignDevice === 'desktop' ? (
+                  <PanelUnit
+                    value={rightAlignUnitDesktop}
+                    units={['px', '%']}
+                    renderFunction={(value) =>
+                      setAttributes({ rightAlignUnitDesktop: value })
+                    }
+                  />
+                ) : rightAlignDevice === 'tablet' ? (
+                  <PanelUnit
+                    value={rightAlignUnitTablet}
+                    units={['px', '%']}
+                    renderFunction={(value) =>
+                      setAttributes({ rightAlignUnitTablet: value })
+                    }
+                  />
+                ) : (
+                  <PanelUnit
+                    value={rightAlignUnitTablet}
+                    units={['px', '%']}
+                    renderFunction={(value) =>
+                      setAttributes({ rightAlignUnitTablet: value })
+                    }
+                  />
+                )}
+              </div>
+              {rightAlignDevice === 'desktop' ? (
+                <RangeControl
+                  value={rightAlignValueDesktop}
+                  min={0}
+                  max={rightAlignUnitDesktop === 'px' ? 1000 : 100}
+                  onChange={(value) =>
+                    setAttributes({ rightAlignValueDesktop: value })
                   }
                 />
-              </div>
-              <RangeControl
-                value={rightAlignValue}
-                min={0}
-                max={rightAlignUnit === 'px' ? 1000 : 100}
-                onChange={(value) => setAttributes({ rightAlignValue: value })}
-              />
+              ) : rightAlignDevice === 'tablet' ? (
+                <RangeControl
+                  value={rightAlignValueTablet}
+                  min={0}
+                  max={rightAlignUnitTablet === 'px' ? 1000 : 100}
+                  onChange={(value) =>
+                    setAttributes({ rightAlignValueTablet: value })
+                  }
+                />
+              ) : (
+                <RangeControl
+                  value={rightAlignValueMobile}
+                  min={0}
+                  max={rightAlignUnitMobile === 'px' ? 1000 : 100}
+                  onChange={(value) =>
+                    setAttributes({ rightAlignValueMobile: value })
+                  }
+                />
+              )}
             </div>
           )}
           {verticalAlign === 1 && (
@@ -369,20 +467,60 @@ const Settings = ({ attributes, setAttributes }) => {
                     onChange={(val) => setAttributes({ topAlignDevice: val })}
                   />
                 </div>
-                <PanelUnit
-                  value={topAlignUnit}
-                  units={['px', '%']}
-                  renderFunction={(value) =>
-                    setAttributes({ topAlignUnit: value })
+                {topAlignDevice === 'desktop' ? (
+                  <PanelUnit
+                    value={topAlignUnitDesktop}
+                    units={['px', '%']}
+                    renderFunction={(value) =>
+                      setAttributes({ topAlignUnitDesktop: value })
+                    }
+                  />
+                ) : topAlignDevice === 'tablet' ? (
+                  <PanelUnit
+                    value={topAlignUnitTablet}
+                    units={['px', '%']}
+                    renderFunction={(value) =>
+                      setAttributes({ topAlignUnitTablet: value })
+                    }
+                  />
+                ) : (
+                  <PanelUnit
+                    value={topAlignUnitMobile}
+                    units={['px', '%']}
+                    renderFunction={(value) =>
+                      setAttributes({ topAlignUnitMobile: value })
+                    }
+                  />
+                )}
+              </div>
+              {topAlignDevice === 'desktop' ? (
+                <RangeControl
+                  value={topAlignValueDesktop}
+                  min={0}
+                  max={topAlignUnitDesktop === 'px' ? 1000 : 100}
+                  onChange={(value) =>
+                    setAttributes({ topAlignValueDesktop: value })
                   }
                 />
-              </div>
-              <RangeControl
-                value={topAlignValue}
-                min={0}
-                max={topAlignUnit === 'px' ? 1000 : 100}
-                onChange={(value) => setAttributes({ topAlignValue: value })}
-              />
+              ) : topAlignDevice === 'tablet' ? (
+                <RangeControl
+                  value={topAlignValueTablet}
+                  min={0}
+                  max={topAlignUnitTablet === 'px' ? 1000 : 100}
+                  onChange={(value) =>
+                    setAttributes({ topAlignValueTablet: value })
+                  }
+                />
+              ) : (
+                <RangeControl
+                  value={topAlignValueMobile}
+                  min={0}
+                  max={topAlignUnitMobile === 'px' ? 1000 : 100}
+                  onChange={(value) =>
+                    setAttributes({ topAlignValueMobile: value })
+                  }
+                />
+              )}
             </div>
           )}
           {verticalAlign === 3 && (
@@ -405,20 +543,60 @@ const Settings = ({ attributes, setAttributes }) => {
                     }
                   />
                 </div>
-                <PanelUnit
-                  value={bottomAlignUnit}
-                  units={['px', '%']}
-                  renderFunction={(value) =>
-                    setAttributes({ bottomAlignUnit: value })
+                {bottomAlignDevice === 'desktop' ? (
+                  <PanelUnit
+                    value={bottomAlignUnitDesktop}
+                    units={['px', '%']}
+                    renderFunction={(value) =>
+                      setAttributes({ bottomAlignUnitDesktop: value })
+                    }
+                  />
+                ) : bottomAlignDevice === 'tablet' ? (
+                  <PanelUnit
+                    value={bottomAlignUnitTablet}
+                    units={['px', '%']}
+                    renderFunction={(value) =>
+                      setAttributes({ bottomAlignUnitTablet: value })
+                    }
+                  />
+                ) : (
+                  <PanelUnit
+                    value={bottomAlignUnitMobile}
+                    units={['px', '%']}
+                    renderFunction={(value) =>
+                      setAttributes({ bottomAlignUnitMobile: value })
+                    }
+                  />
+                )}
+              </div>
+              {bottomAlignDevice === 'desktop' ? (
+                <RangeControl
+                  value={bottomAlignValueDesktop}
+                  min={0}
+                  max={bottomAlignUnitDesktop === 'px' ? 1000 : 100}
+                  onChange={(value) =>
+                    setAttributes({ bottomAlignValueDesktop: value })
                   }
                 />
-              </div>
-              <RangeControl
-                value={bottomAlignValue}
-                min={0}
-                max={bottomAlignUnit === 'px' ? 1000 : 100}
-                onChange={(value) => setAttributes({ bottomAlignValue: value })}
-              />
+              ) : bottomAlignDevice === 'tablet' ? (
+                <RangeControl
+                  value={bottomAlignValueTablet}
+                  min={0}
+                  max={bottomAlignUnitTablet === 'px' ? 1000 : 100}
+                  onChange={(value) =>
+                    setAttributes({ bottomAlignValueTablet: value })
+                  }
+                />
+              ) : (
+                <RangeControl
+                  value={bottomAlignValueMobile}
+                  min={0}
+                  max={bottomAlignUnitMobile === 'px' ? 1000 : 100}
+                  onChange={(value) =>
+                    setAttributes({ bottomAlignValueMobile: value })
+                  }
+                />
+              )}
             </div>
           )}
           <div style={{ marginTop: '10px' }}>
@@ -439,12 +617,28 @@ const Settings = ({ attributes, setAttributes }) => {
                 />
               </div>
             </div>
-            <RangeControl
-              value={deskZindex}
-              min={0}
-              max={10000}
-              onChange={(value) => setAttributes({ deskZindex: value })}
-            />
+            {zIndexDevice === 'desktop' ? (
+              <RangeControl
+                value={deskZindex}
+                min={0}
+                max={10000}
+                onChange={(value) => setAttributes({ deskZindex: value })}
+              />
+            ) : zIndexDevice === 'tablet' ? (
+              <RangeControl
+                value={tabletZindex}
+                min={0}
+                max={10000}
+                onChange={(value) => setAttributes({ tabletZindex: value })}
+              />
+            ) : (
+              <RangeControl
+                value={mobileZindex}
+                min={0}
+                max={10000}
+                onChange={(value) => setAttributes({ mobileZindex: value })}
+              />
+            )}
           </div>
         </PanelBody>
       </InspectorControls>

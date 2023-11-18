@@ -2,15 +2,32 @@ const Style = ({ attributes }) => {
   const {
     markupView,
     sticky,
+    stickyDevice,
     horizontalAlign,
     verticalAlign,
-    leftAlignValue,
-    leftAlignUnit,
-    rightAlignUnit,
-    rightAlignValue,
-    topAlignUnit,
-    topAlignValue,
+    leftAlignValueDesktop,
+    leftAlignUnitDesktop,
+    leftAlignUnitTablet,
+    leftAlignUnitMobile,
+    leftAlignValueTablet,
+    leftAlignValueMobile,
+    rightAlignUnitDesktop,
+    rightAlignValueDesktop,
+    rightAlignUnitTablet,
+    rightAlignUnitMobile,
+    rightAlignValueTablet,
+    rightAlignValueMobile,
+    topAlignUnitDesktop,
+    topAlignValueDesktop,
+    bottomAlignUnitMobile,
+    bottomAlignUnitTablet,
+    bottomAlignUnitDesktop,
+    bottomAlignValueMobile,
+    bottomAlignValueTablet,
+    bottomAlignValueDesktop,
     deskZindex,
+    mobileZindex,
+    tabletZindex,
   } = attributes;
   return (
     <>
@@ -37,21 +54,21 @@ const Style = ({ attributes }) => {
         ${
           horizontalAlign === 1
             ? `.accordion.sticky.left{
-          left:${leftAlignValue}${leftAlignUnit};
+          left:${leftAlignValueDesktop}${leftAlignUnitDesktop};
         }`
             : `.accordion.sticky.right{
-          right:${rightAlignValue}${rightAlignUnit};
+          right:${rightAlignValueDesktop}${rightAlignUnitDesktop};
         }`
         }
         ${
           verticalAlign === 1
             ? `.accordion.sticky.top{
-          top:${topAlignValue}${topAlignUnit};
+          top:${topAlignValueDesktop}${topAlignUnitDesktop};
           }`
             : verticalAlign === 2
             ? `.accordion.sticky.center{top:50%;  transform: translateY(-50%)}`
             : `.accordion.sticky.bottom{
-            bottom:0px
+            bottom:${bottomAlignValueDesktop}${bottomAlignUnitDesktop};
           }`
         }
       ${
@@ -75,8 +92,48 @@ const Style = ({ attributes }) => {
       }
       @media screen and (min-width: 1024px) {
         .accordion.sticky {
-          position:initial;
+          z-index: ${deskZindex};
+          position:${stickyDevice.includes('Desktop') ? 'fixed' : 'initial'};
         }
+        .accordion.sticky.left{
+          left:${leftAlignValueDesktop}${leftAlignUnitDesktop};
+        }
+        .accordion.sticky.right{
+          right:${rightAlignValueDesktop}${rightAlignUnitDesktop};
+        }
+        .accordion.sticky.bottom{
+            bottom:${bottomAlignValueDesktop}${bottomAlignUnitDesktop};
+          }
+      }
+      @media (min-width: 768px) and (max-width: 1023px) {
+        .accordion.sticky {
+          z-index: ${tabletZindex};
+          position:${stickyDevice.includes('Tablet') ? 'fixed' : 'initial'};
+        }
+        .accordion.sticky.left{
+          left:${leftAlignValueTablet}${leftAlignUnitTablet};
+        }
+        .accordion.sticky.right{
+          right:${rightAlignValueTablet}${rightAlignUnitTablet};
+        }
+        .accordion.sticky.bottom{
+            bottom:${bottomAlignValueTablet}${bottomAlignUnitTablet};
+          }
+      }
+      @media screen and (max-width: 767px) {
+        .accordion.sticky {
+          z-index: ${mobileZindex};
+          position:${stickyDevice.includes('Mobile') ? 'fixed' : 'initial'};
+        }
+        .accordion.sticky.left{
+          left:${leftAlignValueMobile}${leftAlignUnitMobile};
+        }
+        .accordion.sticky.right{
+          right:${rightAlignValueMobile}${rightAlignUnitMobile};
+        }
+        .accordion.sticky.bottom{
+            bottom:${bottomAlignValueMobile}${bottomAlignUnitMobile};
+          }
       }
       `}
       </style>

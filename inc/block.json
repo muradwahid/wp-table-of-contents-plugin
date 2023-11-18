@@ -75,78 +75,151 @@
       "type": "string",
       "default": "fa-solid fa-chevron-up"
     },
-    "sticky":{
+    "sticky": {
       "type": "boolean",
       "default": false
     },
-    "stickyDevice":{
+    "stickyDevice": {
       "type": "array",
       "default": ["Desktop"]
     },
-    "horizontalAlign":{
-      "type":"number",
-      "default":1
+    "horizontalAlign": {
+      "type": "number",
+      "default": 1
     },
-    "verticalAlign":{
-      "type":"number",
-      "default":1
+    "verticalAlign": {
+      "type": "number",
+      "default": 1
     },
-    "leftAlignDevice":{
-      "type":"string",
+    "leftAlignDevice": {
+      "type": "string",
       "default": "desktop"
     },
-    "leftAlignUnit":{
-      "type":"string",
-      "default":"px"
+    "leftAlignUnitDesktop": {
+      "type": "string",
+      "default": "px"
     },
-    "leftAlignValue":{
-      "type":"number",
-      "default":0
+    "leftAlignValueDesktop": {
+      "type": "number",
+      "default": 0
     },
-    "rightAlignDevice":{
-      "type":"string",
+    "leftAlignUnitTablet": {
+      "type": "string",
+      "default": "px"
+    },
+    "leftAlignValueTablet": {
+      "type": "number",
+      "default": 0
+    },
+    "leftAlignUnitMobile": {
+      "type": "string",
+      "default": "px"
+    },
+    "leftAlignValueMobile": {
+      "type": "number",
+      "default": 0
+    },
+    "rightAlignDevice": {
+      "type": "string",
       "default": "desktop"
     },
-    "rightAlignUnit":{
-      "type":"string",
-      "default":"px"
+    "rightAlignUnitDesktop": {
+      "type": "string",
+      "default": "px"
     },
-    "rightAlignValue":{
-      "type":"number",
-      "default":0
+    "rightAlignUnitTablet": {
+      "type": "string",
+      "default": "px"
     },
-    "topAlignDevice":{
-      "type":"string",
+    "rightAlignUnitMobile": {
+      "type": "string",
+      "default": "px"
+    },
+    "rightAlignValueDesktop": {
+      "type": "number",
+      "default": 0
+    },
+    "rightAlignValueTablet": {
+      "type": "number",
+      "default": 0
+    },
+    "rightAlignValueMobile": {
+      "type": "number",
+      "default": 0
+    },
+    "topAlignDevice": {
+      "type": "string",
       "default": "desktop"
     },
-    "topAlignUnit":{
-      "type":"string",
-      "default":"px"
+    "topAlignUnitDesktop": {
+      "type": "string",
+      "default": "px"
     },
-    "topAlignValue":{
-      "type":"number",
-      "default":0
+    "topAlignUnitTablet": {
+      "type": "string",
+      "default": "px"
     },
-    "bottomAlignDevice":{
-      "type":"string",
+    "topAlignUnitMobile": {
+      "type": "string",
+      "default": "px"
+    },
+    "topAlignValueDesktop": {
+      "type": "number",
+      "default": 0
+    },
+    "topAlignValueMobile": {
+      "type": "number",
+      "default": 0
+    },
+    "topAlignValueTablet": {
+      "type": "number",
+      "default": 0
+    },
+    "bottomAlignDevice": {
+      "type": "string",
       "default": "desktop"
     },
-    "bottomAlignUnit":{
-      "type":"string",
-      "default":"px"
+    "bottomAlignUnitDesktop": {
+      "type": "string",
+      "default": "px"
     },
-    "bottomAlignValue":{
+    "bottomAlignUnitTablet": {
+      "type": "string",
+      "default": "px"
+    },
+    "bottomAlignUnitMobile": {
+      "type": "string",
+      "default": "px"
+    },
+    "bottomAlignValueDesktop": {
+      "type": "number",
+      "default": 0
+    },
+    "bottomAlignValueTablet": {
+      "type": "number",
+      "default": 0
+    },
+    "bottomAlignValueMobile": {
+      "type": "number",
+      "default": 0
+    },
+    "zIndexDevice": {
+      "type": "string",
+      "default": "desktop"
+    },
+    "deskZindex": {
+      "type": "number",
+      "default": 100
+    },
+    "tabletZindex": {
+      "type": "number",
+      "default":50
+    },
+    "mobileZindex":{
       "type":"number",
-      "default":0
-    },
-    "zIndexDevice":{
-      "type":"string",
-      "default":"desktop"
-    },
-    "deskZindex":{
-      "type":"number",
-      "default":100
+      "default":50
     }
+
   },
   "supports": {
     "align": ["wide", "full"],
