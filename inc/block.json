@@ -1,0 +1,166 @@
+{
+  "apiVersion": "1",
+  "name": "bppb/table-of-contents",
+  "title": "Table of Contents",
+  "description": "Description of Table of Contents.",
+  "category": "widgets",
+  "keywords": ["hello", "block", "gutenberg"],
+  "textdomain": "table-of-contents",
+  "attributes": {
+    "align": {
+      "type": "string",
+      "default": ""
+    },
+    "cId": {
+      "type": "string",
+      "default": ""
+    },
+    "content": {
+      "type": "string",
+      "default": ""
+    },
+    "changeTab": {
+      "type": "string",
+      "default": "tabone"
+    },
+    "tableTitle": {
+      "type": "string",
+      "default": "Table of Contents"
+    },
+    "titleTag": {
+      "type": "string",
+      "default": "h5"
+    },
+    "customStyle": {
+      "type": "string",
+      "default": "list"
+    },
+    "customStyleToggle": {
+      "type": "boolean",
+      "default": false
+    },
+    "anchorsByTags": {
+      "type": "array",
+      "default": ["h1", "h2", "h3"]
+    },
+    "isPopoverVisible": {
+      "type": "boolean",
+      "default": false
+    },
+    "markupView": {
+      "type": "string",
+      "default": "decimal"
+    },
+    "markupViewIcon": {
+      "type": "string",
+      "default": "fa-solid fa-circle"
+    },
+    "iconPopover": {
+      "type": "boolean",
+      "default": false
+    },
+    "minimizeBox": {
+      "type": "boolean",
+      "default": true
+    },
+    "expandIcon": {
+      "type": "string",
+      "default": "fa-solid fa-chevron-down"
+    },
+    "expanIconIsOpen": {
+      "type": "boolean",
+      "default": false
+    },
+    "collapseIcon": {
+      "type": "string",
+      "default": "fa-solid fa-chevron-up"
+    },
+    "sticky":{
+      "type": "boolean",
+      "default": false
+    },
+    "stickyDevice":{
+      "type": "array",
+      "default": ["Desktop"]
+    },
+    "horizontalAlign":{
+      "type":"number",
+      "default":1
+    },
+    "verticalAlign":{
+      "type":"number",
+      "default":1
+    },
+    "leftAlignDevice":{
+      "type":"string",
+      "default": "desktop"
+    },
+    "leftAlignUnit":{
+      "type":"string",
+      "default":"px"
+    },
+    "leftAlignValue":{
+      "type":"number",
+      "default":0
+    },
+    "rightAlignDevice":{
+      "type":"string",
+      "default": "desktop"
+    },
+    "rightAlignUnit":{
+      "type":"string",
+      "default":"px"
+    },
+    "rightAlignValue":{
+      "type":"number",
+      "default":0
+    },
+    "topAlignDevice":{
+      "type":"string",
+      "default": "desktop"
+    },
+    "topAlignUnit":{
+      "type":"string",
+      "default":"px"
+    },
+    "topAlignValue":{
+      "type":"number",
+      "default":0
+    },
+    "bottomAlignDevice":{
+      "type":"string",
+      "default": "desktop"
+    },
+    "bottomAlignUnit":{
+      "type":"string",
+      "default":"px"
+    },
+    "bottomAlignValue":{
+      "type":"number",
+      "default":0
+    },
+    "zIndexDevice":{
+      "type":"string",
+      "default":"desktop"
+    },
+    "deskZindex":{
+      "type":"number",
+      "default":100
+    }
+  },
+  "supports": {
+    "align": ["wide", "full"],
+    "html": false
+  },
+  "example": {
+    "attributes": {
+      "preview": true,
+      "columns": {
+        "desktop": 1,
+        "tablet": 1,
+        "mobile": 1
+      }
+    }
+  },
+  "editorScript": "file:./../dist/editor.js"
+}
