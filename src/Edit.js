@@ -15,7 +15,7 @@ const Edit = (props) => {
       <SmoothScroll />
       <Style attributes={attributes} />
       <Settings attributes={attributes} setAttributes={setAttributes} />
-      <TableContents attributes={attributes} setAttributes={setAttributes} />
+      <TableContents attributes={attributes}/>
     </div>
   );
 };

@@ -30,17 +30,6 @@ const TabPanel = ({ attributes, setAttributes }) => {
         ></i>
         <span>Style</span>
       </div>
-      <div
-        onClick={() => setAttributes({ changeTab: 'tabthree' })}
-        className={`single-tab ${
-          changeTab === 'tabthree'
-            ? 'is-tab-active active-tab-color'
-            : 'deActive-tab-color'
-        }`}
-      >
-        <Dashicon icon="admin-generic" />
-        <span>Advanced</span>
-      </div>
     </div>
   );
 };

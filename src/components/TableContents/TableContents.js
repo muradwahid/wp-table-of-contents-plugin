@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import DynamicTag from '../DynamicTag/DynamicTag';
-
 const TableContents = ({ attributes }) => {
   const [toggle, setToggle] = useState(true);
   const [content, setContent] = useState([]);
