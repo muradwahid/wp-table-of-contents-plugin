@@ -218,8 +218,171 @@
     "mobileZindex":{
       "type":"number",
       "default":50
+    },
+    "backgroundColor":{
+      "type":"object",
+      "default":{"bg":"#fff"}
+    },
+    "boxBWidth":{
+      "type":"number",
+      "default":1
+    },
+    "boxBColor":{
+      "type":"string",
+      "default":"#ccc"
+    },
+    "boxBRadius":{
+      "type":"number",
+      "default":0
+    },
+    "boxShadow":{
+      "type":"object"
+    },
+    "boxPaddingDevice":{
+      "type":"string",
+      "default":"desktop"
+    },
+    "boxPaddingDesktop":{
+      "type":"object",
+      "default":{ "top": "0px", "left": "0px", "right": "0px", "bottom": "0px" }
+    },
+    "boxPaddingTablet":{
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "left": "0px",
+        "right": "0px",
+        "bottom": "0px"
+      }
+    },
+    "boxPaddingMobile":{
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "left": "0px",
+        "right": "0px",
+        "bottom": "0px"
+      }
+    },
+    "headerBgColor":{
+      "type":"string",
+      "default":"#fff"
+    },
+    "headerTxtColor":{
+      "type":"string",
+      "defaul":"#444"
+    },
+    "headerIconColor":{
+      "type":"string",
+      "defaul":"#000"
+    },
+    "separatorWidth":{
+      "type":"number",
+      "default":1
+    },
+    "separatorColor":{
+      "type":"string",
+      "default":"#ccc"
+    },
+    "listPaddingDevice":{
+      "type":"string",
+      "default":"desktop"
+    },
+    "listPaddingDesktop":{
+      "type":"object",
+      "default":{
+        "top":"0px",
+        "bottom":"0px",
+        "left":"14px",
+        "right":"0px"
+      }
+    },
+    "listPaddingTablet":{
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "bottom": "0px",
+        "left": "14px",
+        "right": "0px"
+      }
+    },
+    "listPaddingMobile":{
+      "type": "object",
+      "default": {
+        "top": "0px",
+        "bottom": "0px",
+        "left": "14px",
+        "right": "0px"
+      }
+    },
+    "listMaxHeightDevice":{
+      "type":"string",
+      "default":"desktop"
+    },
+    "listMaxHeightDesktop":{
+      "type":"number",
+      "default":0
+    },
+    "listMaxHeightTablet":{
+      "type":"number",
+      "default":0
+    },
+    "listMaxHeightMobile":{
+      "type":"number",
+      "default":0
+    },
+    "listTextStyle":{
+      "type":"string",
+      "default":"normal"
+    },
+    "normalTxtColor":{
+      "type":"string",
+      "default":"#2e2e2e"
+    },
+    "normalTxtDecoration":{
+      "type":"boolean",
+      "default":false
+    },
+    "hoverTxtColor":{
+      "type":"string",
+      "default":"#0000ff"
+    },
+    "hoverTxtDecoration":{
+      "type":"boolean",
+      "default":true
+    },
+    "markerColor":{
+      "type":"string",
+      "default":"#0000ff"
+    },
+    "markerFontDevice":{
+      "type":"string",
+      "default":"desktop"
+    },
+    "markerFontSizeDesktop":{
+      "type":"number",
+      "default":16
+    },
+    "markerFontSizeTablet":{
+      "type":"number",
+      "default":16
+    },
+    "markerFontSizeMobile":{
+      "type":"number",
+      "default":16
+    },
+    "markerFontUnitDesktop":{
+      "type":"string",
+      "default":"px"
+    },
+    "markerFontUnitTablet":{
+      "type":"string",
+      "default":"px"
+    },
+    "markerFontUnitMobile":{
+      "type":"string",
+      "default":"px"
     }
-
   },
   "supports": {
     "align": ["wide", "full"],

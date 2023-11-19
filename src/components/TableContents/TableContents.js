@@ -17,6 +17,8 @@ const TableContents = ({ attributes }) => {
     sticky,
     horizontalAlign,
     verticalAlign,
+    headerTxtColor,
+    headerIconColor,
   } = attributes;
   useEffect(() => {
     const root = document.querySelector(
@@ -86,16 +88,19 @@ const TableContents = ({ attributes }) => {
     >
       <div ref={title} className="accordion-title">
         <DynamicTag
-          style={{ margin: '0' }}
+          style={{ margin: '0', color: headerTxtColor }}
           tagName={titleTag}
           value={tableTitle}
         />
         {minimizeBox && (
           <>
             {toggle ? (
-              <i className={collapseIcon}></i>
+              <i
+                style={{ color: headerIconColor }}
+                className={collapseIcon}
+              ></i>
             ) : (
-              <i className={expandIcon}></i>
+              <i style={{ color: headerIconColor }} className={expandIcon}></i>
             )}
           </>
         )}
@@ -106,7 +111,7 @@ const TableContents = ({ attributes }) => {
             {Array.from(content).map((headingElement, idx) => (
               <>
                 {storedAttr !== headingElement.getAttribute('data-anchor') && (
-                  <li onClick={() => setContentsAttr(idx)} key={idx}>
+                  <li className='panel-table-list-items' onClick={() => setContentsAttr(idx)} key={idx}>
                     <span>
                       {markupView !== 'decimal' && (
                         <i
