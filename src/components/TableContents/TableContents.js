@@ -20,40 +20,40 @@ const TableContents = ({ attributes }) => {
     headerTxtColor,
     headerIconColor,
   } = attributes;
-  useEffect(() => {
-    const root = document.querySelector(
-      '.wp-block-post-content-is-layout-constrained'
-    );
-    const selectorString = anchorsByTags.join(', ');
-    const headingElements = root?.querySelectorAll(`${selectorString}`);
-    const accordionTitle = document.querySelector('.accordion-title');
-    const removeAttrHeading = accordionTitle?.querySelector(`${titleTag}`);
-    if (removeAttrHeading.tagName.toLowerCase() !== 'div') {
-      setStoredAttr(removeAttrHeading.getAttribute('data-anchor'));
-    }
+useEffect(() => {
+  const root = document.querySelector(
+    '.wp-block-post-content-is-layout-constrained'
+  );
+  const selectorString = anchorsByTags.join(', ');
+  const headingElements = root?.querySelectorAll(`${selectorString}`);
+  const accordionTitle = document.querySelector('.accordion-title');
+  const removeAttrHeading = accordionTitle?.querySelector(`${titleTag}`);
+  if (removeAttrHeading.tagName.toLowerCase() !== 'div') {
+    setStoredAttr(removeAttrHeading.getAttribute('data-anchor'));
+  }
 
-    // console.log(accordionTitle.children[0].removeAttribute('data-anchor'));
-    if (headingElements?.length) {
-      for (let i = 0; i < headingElements.length; i++) {
-        const headingElement = headingElements[i];
-        const span = document.createElement('span');
-        span.setAttribute('id', `bppb-heading-anchor-${i}`);
-        headingElement.setAttribute('data-anchor', `bppb-heading-anchor-${i}`);
-        headingElement.setAttribute('data-idx', i);
-        // headingElement.parentNode.insertBefore(span, headingElement.nextSibling);
-        headingElement.insertAdjacentElement('afterbegin', span);
-      }
+  // console.log(accordionTitle.children[0].removeAttribute('data-anchor'));
+  if (headingElements?.length) {
+    for (let i = 0; i < headingElements.length; i++) {
+      const headingElement = headingElements[i];
+      const span = document.createElement('span');
+      span.setAttribute('id', `bppb-heading-anchor-${i}`);
+      headingElement.setAttribute('data-anchor', `bppb-heading-anchor-${i}`);
+      headingElement.setAttribute('data-idx', i);
+      // headingElement.parentNode.insertBefore(span, headingElement.nextSibling);
+      headingElement.insertAdjacentElement('afterbegin', span);
     }
-    if (removeAttrHeading.tagName.toLowerCase() !== 'div') {
-      removeAttrHeading.removeAttribute('data-anchor');
-      removeAttrHeading.removeAttribute('data-idx');
-      const removeSpan = removeAttrHeading.querySelector('span');
-      removeSpan && removeSpan.remove();
-    }
-    removeAttrHeading.innerHTML = tableTitle;
+  }
+  if (removeAttrHeading.tagName.toLowerCase() !== 'div') {
+    removeAttrHeading.removeAttribute('data-anchor');
+    removeAttrHeading.removeAttribute('data-idx');
+    const removeSpan = removeAttrHeading.querySelector('span');
+    removeSpan && removeSpan.remove();
+  }
+  removeAttrHeading.innerHTML = tableTitle;
 
-    setContent(headingElements);
-  }, [titleTag, tableTitle, anchorsByTags, markupView]);
+  setContent(headingElements);
+}, [titleTag, tableTitle, anchorsByTags, markupView]);
 
   const accordion = useRef();
   const title = useRef();
@@ -106,7 +106,7 @@ const TableContents = ({ attributes }) => {
         )}
       </div>
       <div ref={accordionPanel} className="panel">
-        {content?.length > 0 ? (
+        {content?.length > 1 ? (
           <ol className="panel-table-container-order-list">
             {Array.from(content).map((headingElement, idx) => (
               <>

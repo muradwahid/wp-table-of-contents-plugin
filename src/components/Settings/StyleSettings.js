@@ -44,7 +44,7 @@ const StyleSettings = ({ attributes, setAttributes }) => {
   } = attributes;
   return (
     <Fragment>
-      <PanelBody title="Box" initialOpen={false}>
+      <PanelBody title="Box" initialOpen={true}>
         <ColorsControl
           label="Background Color"
           value={backgroundColor}
@@ -123,7 +123,7 @@ const StyleSettings = ({ attributes, setAttributes }) => {
           ) : (
             <BoxControl
               label="Padding"
-              values={boxPaddingTablet}
+              values={boxPaddingMobile}
               resetValues={{
                 top: '0px',
                 left: '0px',
@@ -136,6 +136,7 @@ const StyleSettings = ({ attributes, setAttributes }) => {
           )}
         </div>
       </PanelBody>
+
       <PanelBody title="Header" initialOpen={false}>
         <PanelColorControl
           label="Background Color"
@@ -145,7 +146,9 @@ const StyleSettings = ({ attributes, setAttributes }) => {
             { name: 'white', color: '#fff' },
             { name: 'blue', color: '#00f' },
           ]}
-          renderFunction={(value) => setAttributes({ headerBgColor: value })}
+          renderFunction={(value) =>
+            setAttributes({ headerBgColor: value })
+          }
         />
         <PanelColorControl
           label="Text Color"
@@ -155,7 +158,9 @@ const StyleSettings = ({ attributes, setAttributes }) => {
             { name: 'white', color: '#fff' },
             { name: 'blue', color: '#00f' },
           ]}
-          renderFunction={(value) => setAttributes({ headerTxtColor: value })}
+          renderFunction={(value) =>
+            setAttributes({ headerTxtColor: value })
+          }
         />
         <PanelColorControl
           label="Icon Color"
@@ -165,7 +170,9 @@ const StyleSettings = ({ attributes, setAttributes }) => {
             { name: 'white', color: '#fff' },
             { name: 'blue', color: '#00f' },
           ]}
-          renderFunction={(value) => setAttributes({ headerIconColor: value })}
+          renderFunction={(value) =>
+            setAttributes({ headerIconColor: value })
+          }
         />
         <RangeControl
           label="Separator Width"
@@ -184,10 +191,12 @@ const StyleSettings = ({ attributes, setAttributes }) => {
             { name: 'white', color: '#fff' },
             { name: 'blue', color: '#00f' },
           ]}
-          renderFunction={(value) => setAttributes({ separatorColor: value })}
+          renderFunction={(value) =>
+            setAttributes({ separatorColor: value })
+          }
         />
       </PanelBody>
-      <PanelBody title="List Item" initialOpen={true}>
+      <PanelBody title="List Item" initialOpen={false}>
         <div
           className="box-padding-device-container"
           style={{ marginTop: '15px' }}
@@ -208,7 +217,9 @@ const StyleSettings = ({ attributes, setAttributes }) => {
                 right: '0px',
                 bottom: '0px',
               }}
-              onChange={(value) => setAttributes({ listPaddingDesktop: value })}
+              onChange={(value) =>
+                setAttributes({ listPaddingDesktop: value })
+              }
             />
           ) : listPaddingDevice === 'tablet' ? (
             <BoxControl
@@ -220,7 +231,9 @@ const StyleSettings = ({ attributes, setAttributes }) => {
                 right: '0px',
                 bottom: '0px',
               }}
-              onChange={(value) => setAttributes({ listPaddingTablet: value })}
+              onChange={(value) =>
+                setAttributes({ listPaddingTablet: value })
+              }
             />
           ) : (
             <BoxControl
@@ -232,7 +245,9 @@ const StyleSettings = ({ attributes, setAttributes }) => {
                 right: '0px',
                 bottom: '0px',
               }}
-              onChange={(value) => setAttributes({ listPaddingMobile: value })}
+              onChange={(value) =>
+                setAttributes({ listPaddingMobile: value })
+              }
             />
           )}
         </div>
@@ -243,7 +258,9 @@ const StyleSettings = ({ attributes, setAttributes }) => {
           <div className="box-padding-device" style={{ left: '30%' }}>
             <BDevice
               device={listMaxHeightDevice}
-              onChange={(val) => setAttributes({ listMaxHeightDevice: val })}
+              onChange={(val) =>
+                setAttributes({ listMaxHeightDevice: val })
+              }
             />
           </div>
           {listMaxHeightDevice === 'desktop' ? (
@@ -335,7 +352,13 @@ const StyleSettings = ({ attributes, setAttributes }) => {
             </div>
           </>
         )}
-        <div style={{ borderTop: '1px solid #ccc', margin: '15px 0', paddingTop:"10px" }}>
+        <div
+          style={{
+            borderTop: '1px solid #ccc',
+            margin: '15px 0',
+            paddingTop: '10px',
+          }}
+        >
           <strong>Marker</strong>
         </div>
         <PanelColorControl

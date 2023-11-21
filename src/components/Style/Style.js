@@ -18,7 +18,11 @@ const Style = ({ attributes }) => {
     rightAlignValueTablet,
     rightAlignValueMobile,
     topAlignUnitDesktop,
+    topAlignUnitTablet,
+    topAlignUnitMobile,
     topAlignValueDesktop,
+    topAlignValueTablet,
+    topAlignValueMobile,
     bottomAlignUnitMobile,
     bottomAlignUnitTablet,
     bottomAlignUnitDesktop,
@@ -57,18 +61,21 @@ const Style = ({ attributes }) => {
     markerFontUnitMobile,
     markerColor,
   } = attributes;
+
+  const listSl = `ol>li>.table-content-anchor-list`;
+
   return (
     <>
       <style>
         {`
-        ol>li>.table-content-anchor-list:hover{
+        ${listSl}:hover{
           color:${hoverTxtColor} !important; 
           text-decoration:${
             hoverTxtDecoration ? 'underline' : 'none'
           } !important;
         }
         
-        ol>li>.table-content-anchor-list{
+        ${listSl}{
           color:${normalTxtColor} !important;
           text-decoration:${normalTxtDecoration ? 'underline' : 'none'};
           margin-left:5px;
@@ -179,6 +186,9 @@ const Style = ({ attributes }) => {
           z-index: ${deskZindex};
           position:${stickyDevice.includes('Desktop') ? 'fixed' : 'initial'};
         }
+        .accordion.sticky.top{
+          top:${topAlignValueDesktop}${topAlignUnitDesktop};
+          }
         .accordion.sticky.left{
           left:${leftAlignValueDesktop}${leftAlignUnitDesktop};
         }
@@ -222,6 +232,9 @@ const Style = ({ attributes }) => {
           z-index: ${tabletZindex};
           position:${stickyDevice.includes('Tablet') ? 'fixed' : 'initial'};
         }
+        .accordion.sticky.top{
+          top:${topAlignValueTablet}${topAlignUnitTablet};
+          }
         .accordion.sticky.left{
           left:${leftAlignValueTablet}${leftAlignUnitTablet};
         }
@@ -266,6 +279,9 @@ const Style = ({ attributes }) => {
           z-index: ${mobileZindex};
           position:${stickyDevice.includes('Mobile') ? 'fixed' : 'initial'};
         }
+        .accordion.sticky.top{
+          top:${topAlignValueMobile}${topAlignUnitMobile};
+          }
         .accordion.sticky.left{
           left:${leftAlignValueMobile}${leftAlignUnitMobile};
         }

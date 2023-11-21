@@ -3,8 +3,10 @@ import Settings from './components/Settings/Settings';
 import SmoothScroll from './components/SmoothScroll';
 import TableContents from './components/TableContents/TableContents';
 import Style from './components/Style/Style';
+import Slide from './components/TableContents/Layout/Slide/Slide';
 const Edit = (props) => {
   const { className, setAttributes, clientId, attributes } = props;
+  const { customStyleToggle, customStyle } = attributes;
 
   useEffect(() => {
     clientId && setAttributes({ cId: clientId.substring(0, 10) });
@@ -15,7 +17,10 @@ const Edit = (props) => {
       <SmoothScroll />
       <Style attributes={attributes} />
       <Settings attributes={attributes} setAttributes={setAttributes} />
-      <TableContents attributes={attributes}/>
+      {!customStyleToggle ?  <TableContents attributes={attributes} />
+        :
+        customStyle==='slide'&& <Slide attributes={attributes}/>    
+    }
     </div>
   );
 };
