@@ -5,7 +5,7 @@ import {
   Popover,
 } from '@wordpress/components';
 import {useState} from 'react';
-const PanelColorControl = ({ label, value, colors,renderFunction,defaults }) => {
+const PanelColorControl = ({ label, value, colors,renderFunction }) => {
   const [isOpen, setIsOpen] = useState(false)
   return (
     <div>
@@ -16,7 +16,6 @@ const PanelColorControl = ({ label, value, colors,renderFunction,defaults }) => 
             height: 20px;
             border:1px solid #ccc;
             border-radius: 50%;
-            background-color: ${value};
           }
           `}
       </style>
@@ -29,7 +28,7 @@ const PanelColorControl = ({ label, value, colors,renderFunction,defaults }) => 
       >
         <p style={{ margin: '0' }}>{label}</p>
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px' }}>
-          <span className="custom-color-palette-style"></span>
+          <span style={{backgroundColor: value}} className="custom-color-palette-style"></span>
           <Button onClick={() => setIsOpen(!isOpen)}>
             <Dashicon icon="edit" />
           </Button>
@@ -39,7 +38,6 @@ const PanelColorControl = ({ label, value, colors,renderFunction,defaults }) => 
         <Popover>
           <div style={{ padding: '10px' }}>
             <ColorPalette
-              defaultValue={defaults}
               colors={colors}
               value={value}
               onChange={(val) => renderFunction(val)}

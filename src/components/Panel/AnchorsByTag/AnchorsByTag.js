@@ -1,8 +1,9 @@
 import { Popover } from '@wordpress/components';
-import {useRef,useEffect} from 'react';
+import {useRef,useEffect,useState} from 'react';
 
 const AnchorsByTag = ({ attributes, setAttributes }) => {
-  const { anchorsByTags, isPopoverVisible } = attributes;
+  const { anchorsByTags } = attributes;
+  const [visible,setVisible]=useState(false)
   const refHeadingTag = useRef()
   const addTag = (tag) => {
     const restTag = [...anchorsByTags];
@@ -14,7 +15,7 @@ const AnchorsByTag = ({ attributes, setAttributes }) => {
   useEffect(() => {
     const handle=(e)=>{
       if (!refHeadingTag?.current?.contains(e.target)) {
-        setAttributes({ isPopoverVisible: false })
+        setVisible(false)
         
       }
     }
@@ -42,22 +43,20 @@ const AnchorsByTag = ({ attributes, setAttributes }) => {
           ))}
         {anchorsByTags && anchorsByTags.length < 6 && (
           <li
-            onClick={() =>
-              setAttributes({ isPopoverVisible: !isPopoverVisible })
-            }
+            onClick={() => setVisible(!visible)}
             className="anchor-admin-panel-list-plus-icon"
           >
             <i className="fa-solid fa-square-plus"></i>
           </li>
         )}
         <input
-          onClick={() => setAttributes({ isPopoverVisible: !isPopoverVisible })}
+          onClick={() => setVisible(!visible)}
           type="search"
           autoCorrect="off"
           autoCapitalize="off"
         />
       </ul>
-      {isPopoverVisible && (
+      {visible && (
         <Popover ref={refHeadingTag} className="popover-anchor-admin-panel">
           <p
             onClick={() => addTag('h1')}

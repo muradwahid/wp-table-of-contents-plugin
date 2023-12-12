@@ -1,14 +1,13 @@
 import { Dashicon } from '@wordpress/components';
 import React from 'react';
 
-const TabPanel = ({ attributes, setAttributes }) => {
-  const { changeTab } = attributes;
+const TabPanel = ({ tab,setTab }) => {
   return (
     <div className="tab-panel-container">
       <div
-        onClick={() => setAttributes({ changeTab: 'tabone' })}
+        onClick={() => setTab('content')}
         className={`single-tab ${
-          changeTab === 'tabone'
+          tab === 'content'
             ? 'is-tab-active active-tab-color'
             : 'deActive-tab-color'
         }`}
@@ -17,9 +16,9 @@ const TabPanel = ({ attributes, setAttributes }) => {
         <span>Content</span>
       </div>
       <div
-        onClick={() => setAttributes({ changeTab: 'tabtwo' })}
+        onClick={() => setTab('style')}
         className={`single-tab ${
-          changeTab === 'tabtwo'
+          tab === 'style'
             ? 'is-tab-active active-tab-color'
             : 'deActive-tab-color'
         }`}

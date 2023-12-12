@@ -1,12 +1,10 @@
-const gulp = require('gulp');
-const zip = require('gulp-zip');
-const del = require('del');
+import gulp from 'gulp';
+import zip from 'gulp-zip';
+import { deleteAsync } from 'del';
 
-gulp.task('clean', () => {
-  return del(['languages', 'bundled']);
-});
+gulp.task('clean',async () => await deleteAsync(['languages', 'bundled']));
 
-exports.bundle = () =>
+export const bundle = () =>
   gulp
     .src([
       '**/*',
@@ -22,5 +20,5 @@ exports.bundle = () =>
       '!todo.txt',
       '!webpack.config.js',
     ])
-    .pipe(zip('table-of-contents.zip'))
-    .pipe(gulp.dest('bundled'));
+    .pipe(zip('table-of-content-block.zip'))
+    .pipe(gulp.dest('bundled')); 

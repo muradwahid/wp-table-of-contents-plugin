@@ -1,0 +1,71 @@
+# Copyright (C) 2023 bPlugins LLC
+# This file is distributed under the GPLv3.
+msgid ""
+msgstr ""
+"Project-Id-Version: Table of Content Block 2.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/table-of-content-block\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2023-12-10T11:47:32+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.8.1\n"
+"X-Domain: table-of-contents\n"
+
+#. Plugin Name of the plugin
+msgid "Table of Content Block"
+msgstr ""
+
+#. Description of the plugin
+msgid "Description of the Table Of Contents."
+msgstr ""
+
+#. Author of the plugin
+msgid "bPlugins LLC"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "http://bplugins.com"
+msgstr ""
+
+#: dist/editor.js:238
+#: dist/editor.js:7839
+msgid "title"
+msgstr ""
+
+#: dist/editor.js:238
+#: dist/editor.js:7848
+msgid "HTML Tag"
+msgstr ""
+
+#: dist/editor.js:238
+#: dist/editor.js:7859
+msgid "Anchors By Tags"
+msgstr ""
+
+#: inc/block.json
+msgctxt "block title"
+msgid "Table of Contents"
+msgstr ""
+
+#: inc/block.json
+msgctxt "block description"
+msgid "Description of Table of Contents."
+msgstr ""
+
+#: inc/block.json
+msgctxt "block keyword"
+msgid "hello"
+msgstr ""
+
+#: inc/block.json
+msgctxt "block keyword"
+msgid "block"
+msgstr ""
+
+#: inc/block.json
+msgctxt "block keyword"
+msgid "gutenberg"
+msgstr ""

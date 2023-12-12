@@ -1,8 +1,8 @@
 <?php
 /**
- * Plugin Name: TableOfContents
+ * Plugin Name: Table of Content Block
  * Description: Description of the Table Of Contents.
- * Version: 1.0.0
+ * Version: 2.0.0
  * Author: bPlugins LLC
  * Author URI: http://bplugins.com
  * License: GPLv3
@@ -14,7 +14,7 @@
 if ( !defined( 'ABSPATH' ) ) { exit; }
 
 // Constant
-define( 'BPPB_VERSION', isset( $_SERVER['HTTP_HOST'] ) && 'localhost' === $_SERVER['HTTP_HOST'] ? time() : '1.0.0' );
+define( 'BPPB_VERSION', isset( $_SERVER['HTTP_HOST'] ) && 'localhost' === $_SERVER['HTTP_HOST'] ? time() : '2.0.0' );
 define( 'BPPB_DIR_URL', plugin_dir_url( __FILE__ ) );
 define( 'BPPB_DIR_PATH', plugin_dir_path( __FILE__ ) );
 

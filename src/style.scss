@@ -1,5 +1,6 @@
 $primaryColor: #515962;
 $secondaryColor: #0c0d0e;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
 // Common CSS
 html {
   scroll-behavior: smooth !important;
@@ -19,7 +20,9 @@ html {
   .prefixBlockName {
     display: inline-block;
   }
-
+.poppinsFont{
+  font-family: 'Poppins', sans-serif !important;
+}
   .icon {
     font-style: inherit;
   }
@@ -31,16 +34,13 @@ html {
 }
 .wp-block-post-content-is-layout-constrained{
   position: relative;
-  .accordion{
-
-  }
 }
 .accordion {
   cursor: pointer;
   text-align: left;
   outline: none;
   font-size: 15px;
-  transition: 0.4s;
+  transition: 0.3s;
   .accordion-title {
     display: flex;
     justify-content: space-between;
@@ -48,7 +48,6 @@ html {
     padding: 20px 18px;
   }
   .panel {
-    overflow: hidden;
     transition: height 0.3s ease-out;
     p {
       padding: 0 18px;

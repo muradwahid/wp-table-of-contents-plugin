@@ -1,224 +1,125 @@
 import { InspectorControls } from '@wordpress/block-editor';
 import {
   PanelBody,
+  PanelRow,
   RangeControl,
   SelectControl,
   TextControl,
   ToggleControl,
 } from '@wordpress/components';
-import React from 'react';
-import { BDevice } from '../../../../Components';
+import { __ } from '@wordpress/i18n';
+import { useState } from 'react';
+
+import { BDevice, Label } from '../../../../Components';
+
+import { bullets, htmlTags, markups, themes } from '../../utils/options';
 import AnchorsByTag from '../Panel/AnchorsByTag/AnchorsByTag';
 import IconPicker from '../Panel/IconPicker/IconPicker';
 import PanelAlign from '../Panel/PanelAlign/PanelAlign';
 import PanelInputAdd from '../Panel/PanelInputAdd/PanelInputAdd';
 import PanelUnit from '../Panel/PanelUnit/PanelUnit';
 import TabPanel from '../Panel/TabPanel/TabPanel';
-import SlideSettings from './SlideSettings';
 import StyleSettings from './StyleSettings';
 const Settings = ({ attributes, setAttributes }) => {
-  const {
-    changeTab,
-    tableTitle,
-    titleTag,
-    customStyle,
-    customStyleToggle,
-    anchorsByTags,
-    markupView,
-    iconPopover,
-    markupViewIcon,
-    minimizeBox,
-    expandIcon,
-    expanIconIsOpen,
-    collapseIcon,
-    horizontalAlign,
-    sticky,
-    verticalAlign,
-    leftAlignDevice,
-    leftAlignUnitDesktop,
-    leftAlignUnitTablet,
-    leftAlignUnitMobile,
-    leftAlignValueDesktop,
-    leftAlignValueTablet,
-    leftAlignValueMobile,
-    rightAlignDevice,
-    rightAlignUnitDesktop,
-    rightAlignUnitTablet,
-    rightAlignUnitMobile,
-    rightAlignValueDesktop,
-    rightAlignValueTablet,
-    rightAlignValueMobile,
-    topAlignDevice,
-    topAlignUnitDesktop,
-    topAlignUnitTablet,
-    topAlignUnitMobile,
-    topAlignValueDesktop,
-    topAlignValueTablet,
-    topAlignValueMobile,
-    bottomAlignValueDesktop,
-    bottomAlignValueTablet,
-    bottomAlignValueMobile,
-    bottomAlignUnitDesktop,
-    bottomAlignUnitTablet,
-    bottomAlignUnitMobile,
-    bottomAlignDevice,
-    deskZindex,
-    mobileZindex,
-    tabletZindex,
-    zIndexDevice,
-  } = attributes;
-  const htmlTags = [
-    { label: 'H1', value: 'h1' },
-    { label: 'H2', value: 'h2' },
-    { label: 'H3', value: 'h3' },
-    { label: 'H4', value: 'h4' },
-    { label: 'H5', value: 'h5' },
-    { label: 'H6', value: 'h6' },
-    { label: 'div', value: 'div' },
-  ];
+  const { title, theme, markup, minimize, sticky } = attributes;
+
+  const [tab, setTab] = useState('content');
+
   return (
     <div>
       <InspectorControls>
-        <TabPanel attributes={attributes} setAttributes={setAttributes} />
-        {changeTab === 'tabone' ? (
+        <TabPanel tab={tab} setTab={setTab} />
+        {'content' === tab && (
           <>
-            <PanelBody title="Table of Contents" initialOpen={true}>
-              <div
-                style={{
-                  width: '100%',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}
-              >
-                <p style={{ width: '50%' }}>Title</p>
-                <TextControl
-                  style={{ width: '150px' }}
-                  value={tableTitle}
-                  onChange={(value) => setAttributes({ tableTitle: value })}
-                />
-              </div>
-              <div
-                style={{
-                  width: '100%',
-                  display: 'flex',
-                  justifyContent: 'space-between',
-                  alignItems: 'center',
-                }}
-              >
-                <p style={{ width: '50%' }}>HTML Tag</p>
-                <SelectControl
-                  style={{ width: '150px' }}
-                  value={titleTag}
-                  options={htmlTags}
-                  onChange={(value) => setAttributes({ titleTag: value })}
-                />
-              </div>
-              <div className="include-exclude-container">
-                <span>Anchors By Tags</span>
-                <AnchorsByTag
-                  attributes={attributes}
-                  setAttributes={setAttributes}
-                />
-              </div>
-              <ToggleControl
-                label="Custom Style"
-                checked={customStyleToggle}
+            <PanelBody
+              className="bPlPanelBody"
+              title="Table of Contents"
+              initialOpen={true}
+            >
+              <TextControl
+                label={__('title', 'table-of-contents')}
+                value={title.text}
                 onChange={(value) =>
-                  setAttributes({ customStyleToggle: value })
+                  setAttributes({ title: { ...title, text: value } })
                 }
               />
-              {!customStyleToggle && (
+
+              <PanelRow className="mt20">
+                <Label className="">
+                  {__('HTML Tag', 'table-of-contents')}
+                </Label>
+                <SelectControl
+                  value={title.tag}
+                  onChange={(value) =>
+                    setAttributes({ title: { ...title, tag: value } })
+                  }
+                  options={htmlTags}
+                />
+              </PanelRow>
+
+              <Label>{__('Anchors By Tags', 'table-of-contents')}</Label>
+              <AnchorsByTag
+                attributes={attributes}
+                setAttributes={setAttributes}
+              />
+
+              <PanelRow className="mt20">
+                <Label className="">Theme</Label>
+                <SelectControl
+                  value={theme}
+                  onChange={(value) => setAttributes({ theme: value })}
+                  options={themes}
+                />
+              </PanelRow>
+
+              {'default' === theme && (
                 <>
-                  <div
-                    style={{
-                      width: '100%',
-                      display: 'flex',
-                      justifyContent: 'space-between',
-                      alignItems: 'center',
-                    }}
-                  >
-                    <p style={{ width: '50%' }}>Markup view</p>
+                  <PanelRow className="mt20">
+                    <Label className="">Markup view</Label>
                     <SelectControl
-                      style={{ width: '150px' }}
-                      value={markupView}
-                      options={[
-                        { label: 'Numbers', value: 'decimal' },
-                        { label: 'Bullets', value: 'disc' },
-                      ]}
+                      value={markup.view}
+                      options={markups}
                       onChange={(value) =>
                         setAttributes({
-                          markupView: value,
-                          markupViewIcon:
-                            value === 'disc' && 'fa-solid fa-circle',
+                          markup: {
+                            ...markup,
+                            view: value,
+                            icon: value === 'disc' && 'fa-solid fa-circle',
+                          },
                         })
                       }
                     />
-                  </div>
-                  {markupView === 'disc' && (
+                  </PanelRow>
+
+                  {markup.view === 'disc' && (
                     <IconPicker
-                      icons={[
-                        { label: 'Circle', value: 'fa-solid fa-circle' },
-                        {
-                          label: 'Dot Circle',
-                          value: 'fa-solid fa-circle-dot',
-                        },
-                        {
-                          label: 'Squire',
-                          value: 'fa-solid fa-square-full',
-                        },
-                        {
-                          label: 'Circle',
-                          value: 'fa-regular fa-circle',
-                        },
-                        {
-                          label: 'Dot Circle',
-                          value: 'fa-regular fa-circle-dot',
-                        },
-                      ]}
+                      icons={bullets}
                       label={'Icon'}
                       renderFunction={(value) =>
                         setAttributes({
-                          markupViewIcon: value,
-                          markupView: value === 'decimal' ? 'decimal' : 'disc',
+                          markup: {
+                            ...markup,
+                            icon: value,
+                            view: value === 'decimal' ? 'decimal' : 'disc',
+                          },
                         })
                       }
-                      value={markupViewIcon}
-                      checked={iconPopover}
+                      value={markup.icon}
                       default={'decimal'}
                     />
                   )}
                 </>
               )}
-              {customStyleToggle && (
-                <div
-                  style={{
-                    width: '100%',
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    alignItems: 'center',
-                  }}
-                >
-                  <p style={{ width: '50%' }}>Select Style</p>
-                  <SelectControl
-                    style={{ width: '150px' }}
-                    value={customStyle}
-                    options={[
-                      { label: 'List', value: 'list' },
-                      { label: 'Timeline', value: 'timeline' },
-                      { label: 'Slide', value: 'slide' },
-                    ]}
-                    onChange={(value) => setAttributes({ customStyle: value })}
-                  />
-                </div>
-              )}
             </PanelBody>
-            {!customStyleToggle && (
+
+            {'default' === theme && (
               <PanelBody title="Settings" initialOpen={false}>
                 <ToggleControl
                   label="Minimize Box"
-                  checked={minimizeBox}
-                  onChange={(value) => setAttributes({ minimizeBox: value })}
+                  checked={minimize.toggle}
+                  onChange={(value) =>
+                    setAttributes({ minimize: { ...minimize, toggle: value } })
+                  }
                 />
                 <IconPicker
                   icons={[
@@ -247,10 +148,11 @@ const Settings = ({ attributes, setAttributes }) => {
                   ]}
                   default={'fa-solid fa-chevron-down'}
                   label={'Expand Icon'}
-                  value={expandIcon}
-                  checked={expanIconIsOpen}
+                  value={minimize.expandIcon}
                   renderFunction={(value) =>
-                    setAttributes({ expandIcon: value })
+                    setAttributes({
+                      minimize: { ...minimize, expandIcon: value },
+                    })
                   }
                 />
                 <div style={{ marginTop: '10px' }}>
@@ -278,9 +180,11 @@ const Settings = ({ attributes, setAttributes }) => {
                     ]}
                     default={'fa-solid fa-chevron-up'}
                     label={'Collapse Icon'}
-                    value={collapseIcon}
+                    value={minimize.collapseIcon}
                     renderFunction={(value) =>
-                      setAttributes({ collapseIcon: value })
+                      setAttributes({
+                        minimize: { ...minimize, collapseIcon: value },
+                      })
                     }
                   />
                 </div>
@@ -289,10 +193,12 @@ const Settings = ({ attributes, setAttributes }) => {
             <PanelBody title="Sticky" initialOpen={false}>
               <ToggleControl
                 label="Sticky"
-                checked={sticky}
-                onChange={(value) => setAttributes({ sticky: value })}
+                checked={sticky.toggle}
+                onChange={(value) =>
+                  setAttributes({ sticky: { ...sticky, toggle: value } })
+                }
               />
-              {sticky && (
+              {sticky.toggle && (
                 <>
                   <p>Sticky on</p>
                   <PanelInputAdd
@@ -306,9 +212,11 @@ const Settings = ({ attributes, setAttributes }) => {
                         { label: 'Left', value: 'fa-solid fa-arrow-left' },
                         { label: 'Right', value: 'fa-solid fa-arrow-right' },
                       ]}
-                      value={horizontalAlign}
+                      value={sticky.horizonAlign}
                       renderFunction={(value) =>
-                        setAttributes({ horizontalAlign: value })
+                        setAttributes({
+                          sticky: { ...sticky, horizonAlign: value },
+                        })
                       }
                     />
                   </div>
@@ -323,13 +231,15 @@ const Settings = ({ attributes, setAttributes }) => {
                         },
                         { label: 'Bottom', value: 'fa-solid fa-arrow-down' },
                       ]}
-                      value={verticalAlign}
+                      value={sticky.verticalAlign}
                       renderFunction={(value) =>
-                        setAttributes({ verticalAlign: value })
+                        setAttributes({
+                          sticky: { ...sticky, verticalAlign: value },
+                        })
                       }
                     />
                   </div>
-                  {horizontalAlign === 1 ? (
+                  {sticky.horizonAlign === 1 ? (
                     <div style={{ marginTop: '10px' }}>
                       <div
                         style={{
@@ -347,63 +257,104 @@ const Settings = ({ attributes, setAttributes }) => {
                         >
                           <span>Left</span>
                           <BDevice
-                            device={leftAlignDevice}
+                            device={sticky.leftDevice}
                             onChange={(val) =>
-                              setAttributes({ leftAlignDevice: val })
+                              setAttributes({
+                                sticky: { ...sticky, leftDevice: val },
+                              })
                             }
                           />
                         </div>
-                        {leftAlignDevice === 'desktop' ? (
+                        {sticky.leftDevice === 'desktop' ? (
                           <PanelUnit
-                            value={leftAlignUnitDesktop}
+                            value={sticky.leftUnit.desktop}
                             units={['px', '%']}
                             renderFunction={(value) =>
-                              setAttributes({ leftAlignUnitDesktop: value })
+                              setAttributes({
+                                sticky: {
+                                  ...sticky,
+                                  leftUnit: {
+                                    ...sticky.leftUnit,
+                                    desktop: value,
+                                  },
+                                },
+                              })
                             }
                           />
-                        ) : leftAlignDevice == 'tablet' ? (
+                        ) : sticky.leftDevice == 'tablet' ? (
                           <PanelUnit
-                            value={leftAlignUnitTablet}
+                            value={sticky.leftUnit.tablet}
                             units={['px', '%']}
                             renderFunction={(value) =>
-                              setAttributes({ leftAlignUnitTablet: value })
+                              setAttributes({
+                                sticky: {
+                                  ...sticky,
+                                  leftUnit: {
+                                    ...sticky.leftUnit,
+                                    tablet: value,
+                                  },
+                                },
+                              })
                             }
                           />
                         ) : (
                           <PanelUnit
-                            value={leftAlignUnitMobile}
+                            value={sticky.leftUnit.mobile}
                             units={['px', '%']}
                             renderFunction={(value) =>
-                              setAttributes({ leftAlignUnitMobile: value })
+                              setAttributes({
+                                sticky: {
+                                  ...sticky,
+                                  leftUnit: {
+                                    ...sticky.leftUnit,
+                                    mobile: value,
+                                  },
+                                },
+                              })
                             }
                           />
                         )}
                       </div>
-                      {leftAlignDevice === 'desktop' ? (
+                      {sticky.leftDevice === 'desktop' ? (
                         <RangeControl
-                          value={leftAlignValueDesktop}
+                          value={sticky.left.desktop}
                           min={0}
-                          max={leftAlignUnitDesktop === 'px' ? 1000 : 100}
+                          max={sticky.leftUnit.desktop === 'px' ? 1000 : 100}
                           onChange={(value) =>
-                            setAttributes({ leftAlignValueDesktop: value })
+                            setAttributes({
+                              sticky: {
+                                ...sticky,
+                                left: { ...sticky.left, desktop: value },
+                              },
+                            })
                           }
                         />
-                      ) : leftAlignDevice == 'tablet' ? (
+                      ) : sticky.leftDevice == 'tablet' ? (
                         <RangeControl
-                          value={leftAlignValueTablet}
+                          value={sticky.left.tablet}
                           min={0}
-                          max={leftAlignUnitTablet === 'px' ? 1000 : 100}
+                          max={sticky.leftUnit.tablet === 'px' ? 1000 : 100}
                           onChange={(value) =>
-                            setAttributes({ leftAlignValueTablet: value })
+                            setAttributes({
+                              sticky: {
+                                ...sticky,
+                                left: { ...sticky.left, tablet: value },
+                              },
+                            })
                           }
                         />
                       ) : (
                         <RangeControl
-                          value={leftAlignValueMobile}
+                          value={sticky.left.mobile}
                           min={0}
-                          max={leftAlignUnitMobile === 'px' ? 1000 : 100}
+                          max={sticky.leftUnit.mobile === 'px' ? 1000 : 100}
                           onChange={(value) =>
-                            setAttributes({ leftAlignValueMobile: value })
+                            setAttributes({
+                              sticky: {
+                                ...sticky,
+                                left: { ...sticky.left, mobile: value },
+                              },
+                            })
                           }
                         />
                       )}
@@ -426,69 +377,110 @@ const Settings = ({ attributes, setAttributes }) => {
                         >
                           <span>Right</span>
                           <BDevice
-                            device={rightAlignDevice}
+                            device={sticky.rightDevice}
                             onChange={(val) =>
-                              setAttributes({ rightAlignDevice: val })
+                              setAttributes({
+                                sticky: { ...sticky, rightDevice: val },
+                              })
                             }
                           />
                         </div>
-                        {rightAlignDevice === 'desktop' ? (
+                        {sticky.rightDevice === 'desktop' ? (
                           <PanelUnit
-                            value={rightAlignUnitDesktop}
+                            value={sticky.rightUnit.desktop}
                             units={['px', '%']}
                             renderFunction={(value) =>
-                              setAttributes({ rightAlignUnitDesktop: value })
+                              setAttributes({
+                                sticky: {
+                                  ...sticky,
+                                  rightUnit: {
+                                    ...sticky.rightUnit,
+                                    desktop: value,
+                                  },
+                                },
+                              })
                             }
                           />
-                        ) : rightAlignDevice === 'tablet' ? (
+                        ) : sticky.rightDevice === 'tablet' ? (
                           <PanelUnit
-                            value={rightAlignUnitTablet}
+                            value={sticky.rightUnit.tablet}
                             units={['px', '%']}
                             renderFunction={(value) =>
-                              setAttributes({ rightAlignUnitTablet: value })
+                              setAttributes({
+                                sticky: {
+                                  ...sticky,
+                                  rightUnit: {
+                                    ...sticky.rightUnit,
+                                    tablet: value,
+                                  },
+                                },
+                              })
                             }
                           />
                         ) : (
                           <PanelUnit
-                            value={rightAlignUnitMobile}
+                            value={sticky.rightUnit.mobile}
                             units={['px', '%']}
                             renderFunction={(value) =>
-                              setAttributes({ rightAlignUnitMobile: value })
+                              setAttributes({
+                                sticky: {
+                                  ...sticky,
+                                  rightUnit: {
+                                    ...sticky.rightUnit,
+                                    mobile: value,
+                                  },
+                                },
+                              })
                             }
                           />
                         )}
                       </div>
-                      {rightAlignDevice === 'desktop' ? (
+                      {sticky.rightDevice === 'desktop' ? (
                         <RangeControl
-                          value={rightAlignValueDesktop}
+                          value={sticky.right.desktop}
                           min={0}
-                          max={rightAlignUnitDesktop === 'px' ? 1000 : 100}
+                          max={sticky.rightUnit.desktop === 'px' ? 1000 : 100}
                           onChange={(value) =>
-                            setAttributes({ rightAlignValueDesktop: value })
+                            setAttributes({
+                              sticky: {
+                                ...sticky,
+                                right: { ...sticky.right, desktop: value },
+                              },
+                            })
                           }
                         />
-                      ) : rightAlignDevice === 'tablet' ? (
+                      ) : sticky.rightDevice === 'tablet' ? (
                         <RangeControl
-                          value={rightAlignValueTablet}
+                          value={sticky.right.tablet}
                           min={0}
-                          max={rightAlignUnitTablet === 'px' ? 1000 : 100}
+                          max={sticky.rightUnit.tablet === 'px' ? 1000 : 100}
                           onChange={(value) =>
-                            setAttributes({ rightAlignValueTablet: value })
+                            setAttributes({
+                              sticky: {
+                                ...sticky,
+                                right: { ...sticky.right, tablet: value },
+                              },
+                            })
                           }
                         />
                       ) : (
                         <RangeControl
-                          value={rightAlignValueMobile}
+                          value={sticky.right.mobile}
                           min={0}
-                          max={rightAlignUnitMobile === 'px' ? 1000 : 100}
+                          max={sticky.rightUnit.mobile === 'px' ? 1000 : 100}
                           onChange={(value) =>
-                            setAttributes({ rightAlignValueMobile: value })
+                            setAttributes({
+                              sticky: {
+                                ...sticky,
+                                right: { ...sticky.right, mobile: value },
+                              },
+                            })
                           }
                         />
                       )}
                     </div>
                   )}
-                  {verticalAlign === 1 && (
+                  {sticky.verticalAlign === 1 && (
                     <div style={{ marginTop: '10px' }}>
                       <div
                         style={{
@@ -506,69 +498,104 @@ const Settings = ({ attributes, setAttributes }) => {
                         >
                           <span>Top</span>
                           <BDevice
-                            device={topAlignDevice}
+                            device={sticky.topDevice}
                             onChange={(val) =>
-                              setAttributes({ topAlignDevice: val })
+                              setAttributes({
+                                sticky: { ...sticky, topDevice: val },
+                              })
                             }
                           />
                         </div>
-                        {topAlignDevice === 'desktop' ? (
+                        {sticky.topDevice === 'desktop' ? (
                           <PanelUnit
-                            value={topAlignUnitDesktop}
+                            value={sticky.topUnit.desktop}
                             units={['px', '%']}
                             renderFunction={(value) =>
-                              setAttributes({ topAlignUnitDesktop: value })
+                              setAttributes({
+                                sticky: {
+                                  ...sticky,
+                                  topUnit: {
+                                    ...sticky.topUnit,
+                                    desktop: value,
+                                  },
+                                },
+                              })
                             }
                           />
-                        ) : topAlignDevice === 'tablet' ? (
+                        ) : sticky.topDevice === 'tablet' ? (
                           <PanelUnit
-                            value={topAlignUnitTablet}
+                            value={sticky.topUnit.tablet}
                             units={['px', '%']}
                             renderFunction={(value) =>
-                              setAttributes({ topAlignUnitTablet: value })
+                              setAttributes({
+                                sticky: {
+                                  ...sticky,
+                                  topUnit: { ...sticky.topUnit, tablet: value },
+                                },
+                              })
                             }
                           />
                         ) : (
                           <PanelUnit
-                            value={topAlignUnitMobile}
+                            value={sticky.topUnit.mobile}
                             units={['px', '%']}
                             renderFunction={(value) =>
-                              setAttributes({ topAlignUnitMobile: value })
+                              setAttributes({
+                                sticky: {
+                                  ...sticky,
+                                  topUnit: { ...sticky.topUnit, mobile: value },
+                                },
+                              })
                             }
                           />
                         )}
                       </div>
-                      {topAlignDevice === 'desktop' ? (
+                      {sticky.topDevice === 'desktop' ? (
                         <RangeControl
-                          value={topAlignValueDesktop}
+                          value={sticky.top.desktop}
                           min={0}
-                          max={topAlignUnitDesktop === 'px' ? 1000 : 100}
+                          max={sticky.topUnit.desktop === 'px' ? 1000 : 100}
                           onChange={(value) =>
-                            setAttributes({ topAlignValueDesktop: value })
+                            setAttributes({
+                              sticky: {
+                                ...sticky,
+                                top: { ...sticky.top, desktop: value },
+                              },
+                            })
                           }
                         />
-                      ) : topAlignDevice === 'tablet' ? (
+                      ) : sticky.topDevice === 'tablet' ? (
                         <RangeControl
-                          value={topAlignValueTablet}
+                          value={sticky.top.tablet}
                           min={0}
-                          max={topAlignUnitTablet === 'px' ? 1000 : 100}
+                          max={sticky.topUnit.tablet === 'px' ? 1000 : 100}
                           onChange={(value) =>
-                            setAttributes({ topAlignValueTablet: value })
+                            setAttributes({
+                              sticky: {
+                                ...sticky,
+                                top: { ...sticky.top, tablet: value },
+                              },
+                            })
                           }
                         />
                       ) : (
                         <RangeControl
-                          value={topAlignValueMobile}
+                          value={sticky.top.mobile}
                           min={0}
-                          max={topAlignUnitMobile === 'px' ? 1000 : 100}
+                          max={sticky.topUnit.mobile === 'px' ? 1000 : 100}
                           onChange={(value) =>
-                            setAttributes({ topAlignValueMobile: value })
+                            setAttributes({
+                              sticky: {
+                                ...sticky,
+                                top: { ...sticky.top, mobile: value },
+                              },
+                            })
                           }
                         />
                       )}
                     </div>
                   )}
-                  {verticalAlign === 3 && (
+                  {sticky.verticalAlign === 3 && (
                     <div style={{ marginTop: '10px' }}>
                       <div
                         style={{
@@ -586,63 +613,104 @@ const Settings = ({ attributes, setAttributes }) => {
                         >
                           <span>Bottom</span>
                           <BDevice
-                            device={bottomAlignDevice}
+                            device={sticky.bottomDevice}
                             onChange={(val) =>
-                              setAttributes({ bottomAlignDevice: val })
+                              setAttributes({
+                                sticky: { ...sticky, bottomDevice: val },
+                              })
                             }
                           />
                         </div>
-                        {bottomAlignDevice === 'desktop' ? (
+                        {sticky.bottomDevice === 'desktop' ? (
                           <PanelUnit
-                            value={bottomAlignUnitDesktop}
+                            value={sticky.bottomUnit.desktop}
                             units={['px', '%']}
                             renderFunction={(value) =>
-                              setAttributes({ bottomAlignUnitDesktop: value })
+                              setAttributes({
+                                sticky: {
+                                  ...sticky,
+                                  bottomUnit: {
+                                    ...sticky.bottomUnit,
+                                    desktop: value,
+                                  },
+                                },
+                              })
                             }
                           />
-                        ) : bottomAlignDevice === 'tablet' ? (
+                        ) : sticky.bottomDevice === 'tablet' ? (
                           <PanelUnit
-                            value={bottomAlignUnitTablet}
+                            value={sticky.bottomUnit.tablet}
                             units={['px', '%']}
                             renderFunction={(value) =>
-                              setAttributes({ bottomAlignUnitTablet: value })
+                              setAttributes({
+                                sticky: {
+                                  ...sticky,
+                                  bottomUnit: {
+                                    ...sticky.bottomUnit,
+                                    tablet: value,
+                                  },
+                                },
+                              })
                             }
                           />
                         ) : (
                           <PanelUnit
-                            value={bottomAlignUnitMobile}
+                            value={sticky.bottomUnit.mobile}
                             units={['px', '%']}
                             renderFunction={(value) =>
-                              setAttributes({ bottomAlignUnitMobile: value })
+                              setAttributes({
+                                sticky: {
+                                  ...sticky,
+                                  bottomUnit: {
+                                    ...sticky.bottomUnit,
+                                    desktop: value,
+                                  },
+                                },
+                              })
                             }
                           />
                         )}
                       </div>
-                      {bottomAlignDevice === 'desktop' ? (
+                      {sticky.bottomDevice === 'desktop' ? (
                         <RangeControl
-                          value={bottomAlignValueDesktop}
+                          value={sticky.bottom.desktop}
                           min={0}
-                          max={bottomAlignUnitDesktop === 'px' ? 1000 : 100}
+                          max={sticky.bottomUnit.desktop === 'px' ? 1000 : 100}
                           onChange={(value) =>
-                            setAttributes({ bottomAlignValueDesktop: value })
+                            setAttributes({
+                              sticky: {
+                                ...sticky,
+                                bottom: { ...sticky.bottom, desktop: value },
+                              },
+                            })
                           }
                         />
-                      ) : bottomAlignDevice === 'tablet' ? (
+                      ) : sticky.bottomDevice === 'tablet' ? (
                         <RangeControl
-                          value={bottomAlignValueTablet}
+                          value={sticky.bottom.tablet}
                           min={0}
-                          max={bottomAlignUnitTablet === 'px' ? 1000 : 100}
+                          max={sticky.bottomUnit.tablet === 'px' ? 1000 : 100}
                           onChange={(value) =>
-                            setAttributes({ bottomAlignValueTablet: value })
+                            setAttributes({
+                              sticky: {
+                                ...sticky,
+                                bottom: { ...sticky.bottom, tablet: value },
+                              },
+                            })
                           }
                         />
                       ) : (
                         <RangeControl
-                          value={bottomAlignValueMobile}
+                          value={sticky.bottom.mobile}
                           min={0}
-                          max={bottomAlignUnitMobile === 'px' ? 1000 : 100}
+                          max={sticky.bottomUnit.mobile === 'px' ? 1000 : 100}
                           onChange={(value) =>
-                            setAttributes({ bottomAlignValueMobile: value })
+                            setAttributes({
+                              sticky: {
+                                ...sticky,
+                                bottom: { ...sticky.bottom, desktop: value },
+                              },
+                            })
                           }
                         />
                       )}
@@ -665,38 +733,55 @@ const Settings = ({ attributes, setAttributes }) => {
                       >
                         <span>Z-Index</span>
                         <BDevice
-                          device={zIndexDevice}
+                          device={sticky.zIndexDevice}
                           onChange={(val) =>
-                            setAttributes({ zIndexDevice: val })
+                            setAttributes({
+                              sticky: { ...sticky, zIndexDevice: val },
+                            })
                           }
                         />
                       </div>
                     </div>
-                    {zIndexDevice === 'desktop' ? (
+                    {sticky.zIndexDevice === 'desktop' ? (
                       <RangeControl
-                        value={deskZindex}
+                        value={sticky.zIndex.desktop}
                         min={0}
                         max={10000}
                         onChange={(value) =>
-                          setAttributes({ deskZindex: value })
+                          setAttributes({
+                            sticky: {
+                              ...sticky,
+                              zIndex: { ...sticky.zIndex, desktop: value },
+                            },
+                          })
                         }
                       />
-                    ) : zIndexDevice === 'tablet' ? (
+                    ) : sticky.zIndexDevice === 'tablet' ? (
                       <RangeControl
-                        value={tabletZindex}
+                        value={sticky.zIndex.tablet}
                         min={0}
                         max={10000}
                         onChange={(value) =>
-                          setAttributes({ tabletZindex: value })
+                          setAttributes({
+                            sticky: {
+                              ...sticky,
+                              zIndex: { ...sticky.zIndex, tablet: value },
+                            },
+                          })
                         }
                       />
                     ) : (
                       <RangeControl
-                        value={mobileZindex}
+                        value={sticky.zIndex.tablet}
                         min={0}
                         max={10000}
                         onChange={(value) =>
-                          setAttributes({ mobileZindex: value })
+                          setAttributes({
+                            sticky: {
+                              ...sticky,
+                              zIndex: { ...sticky.zIndex, mobile: value },
+                            },
+                          })
                         }
                       />
                     )}
@@ -705,16 +790,15 @@ const Settings = ({ attributes, setAttributes }) => {
               )}
             </PanelBody>
           </>
-        ) : customStyleToggle ? (
-          <SlideSettings
-            attributes={attributes}
-            setAttributes={setAttributes}
-          />
-        ) : (
-          <StyleSettings
-            attributes={attributes}
-            setAttributes={setAttributes}
-          />
+        )}
+
+        {'style' === tab && (
+          <>
+            <StyleSettings
+              attributes={attributes}
+              setAttributes={setAttributes}
+            />
+          </>
         )}
       </InspectorControls>
     </div>

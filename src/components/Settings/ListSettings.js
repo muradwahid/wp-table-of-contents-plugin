@@ -1,22 +1,14 @@
-import {
-  PanelBody,
-  RangeControl,
-} from '@wordpress/components';
+import { PanelBody, RangeControl } from '@wordpress/components';
 import { Fragment } from 'react';
-import { BDevice } from '../../../../Components';
-import IncludeExClude from '../Panel/IncludeExClude/IncludeExClude';
 import PanelColorControl from '../Panel/PanelColorControl/PanelColorControl';
+import { BDevice } from '../../../../Components';
 import PanelUnit from '../Panel/PanelUnit/PanelUnit';
-
-const SlideSettings = ({ attributes, setAttributes }) => {
-  const {
-    slideTitle,
-    slideList,
-    boxList,
-  } = attributes;
+import IncludeExClude from '../Panel/IncludeExClude/IncludeExClude';
+const ListSettings = ({attributes,setAttributes}) => {
+  const { slideTitle, slideList, boxList } = attributes;
   return (
     <Fragment>
-      <PanelBody title="Slide">
+      <PanelBody title="List">
         <strong style={{ marginBottom: '15px', color: 'gray' }}>Heading</strong>
         <PanelColorControl
           label="Title Color"
@@ -34,24 +26,6 @@ const SlideSettings = ({ attributes, setAttributes }) => {
             setAttributes({ slideTitle: { ...slideTitle, titleColor: value } })
           }
         />
-        <PanelColorControl
-          label="Bar Color"
-          value={slideTitle.slideBarColor}
-          colors={[
-            { name: 'Purple', color: '#9C27B0' },
-            { name: 'Gray', color: '#9E9E9E' },
-            { name: 'Pink', color: '#E91E63' },
-            { name: 'Orange', color: '#F57C00' },
-            { name: 'Lime', color: '#CDDC39' },
-            { name: 'Brown', color: '#795548' },
-          ]}
-          renderFunction={(value) =>
-            setAttributes({
-              slideTitle: { ...slideTitle, slideBarColor: value },
-            })
-          }
-        />
-
         <div style={{ marginTop: '10px' }}>
           <div
             style={{
@@ -598,4 +572,4 @@ const SlideSettings = ({ attributes, setAttributes }) => {
   );
 };
 
-export default SlideSettings;
+export default ListSettings;

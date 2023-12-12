@@ -1,140 +1,74 @@
+import { getBackgroundCSS, getMultiShadowCSS } from '../../../../Components/utils/getCSS';
+
 const Style = ({ attributes }) => {
   const {
-    markupView,
-    sticky,
-    stickyDevice,
-    horizontalAlign,
-    verticalAlign,
-    leftAlignValueDesktop,
-    leftAlignUnitDesktop,
-    leftAlignUnitTablet,
-    leftAlignUnitMobile,
-    leftAlignValueTablet,
-    leftAlignValueMobile,
-    rightAlignUnitDesktop,
-    rightAlignValueDesktop,
-    rightAlignUnitTablet,
-    rightAlignUnitMobile,
-    rightAlignValueTablet,
-    rightAlignValueMobile,
-    topAlignUnitDesktop,
-    topAlignUnitTablet,
-    topAlignUnitMobile,
-    topAlignValueDesktop,
-    topAlignValueTablet,
-    topAlignValueMobile,
-    bottomAlignUnitMobile,
-    bottomAlignUnitTablet,
-    bottomAlignUnitDesktop,
-    bottomAlignValueMobile,
-    bottomAlignValueTablet,
-    bottomAlignValueDesktop,
-    deskZindex,
-    mobileZindex,
-    tabletZindex,
-    backgroundColor,
-    boxBColor,
-    boxBWidth,
-    boxBRadius,
-    boxShadow,
-    boxPaddingDesktop,
-    boxPaddingTablet,
-    boxPaddingMobile,
-    headerBgColor,
-    separatorColor,
-    separatorWidth,
-    listPaddingDesktop,
-    listPaddingTablet,
-    listPaddingMobile,
-    listMaxHeightDesktop,
-    listMaxHeightTablet,
-    listMaxHeightMobile,
-    normalTxtColor,
-    normalTxtDecoration,
-    hoverTxtDecoration,
-    hoverTxtColor,
-    markerFontSizeDesktop,
-    markerFontSizeTablet,
-    markerFontSizeMobile,
-    markerFontUnitDesktop,
-    markerFontUnitTablet,
-    markerFontUnitMobile,
-    markerColor,
+    table,
+    header,
+    boxList,
+    markup,
+    sticky
   } = attributes;
-
-  const listSl = `ol>li>.table-content-anchor-list`;
-
+  const listSl = `ol>li>a.table-content-anchor-list`;
   return (
     <>
       <style>
         {`
         ${listSl}:hover{
-          color:${hoverTxtColor} !important; 
+          color:${boxList.hTxtColor} !important; 
           text-decoration:${
-            hoverTxtDecoration ? 'underline' : 'none'
+            boxList.hTxtDecoration ? 'underline' : 'none'
           } !important;
         }
-        
         ${listSl}{
-          color:${normalTxtColor} !important;
-          text-decoration:${normalTxtDecoration ? 'underline' : 'none'};
+          color:${boxList.nTxtColor} !important;
+          text-decoration:${boxList.nTxtDecoration ? 'underline' : 'none'};
           margin-left:5px;
         }
         .accordion{
-          border: ${boxBWidth}px solid ${boxBColor};
-          border-radius: ${boxBRadius}px;
-          background:${
-            backgroundColor?.bgType === 'gradient'
-              ? backgroundColor?.gradient
-              : backgroundColor?.bg
-          } !important;
-          box-shadow: ${boxShadow?.color} ${boxShadow?.hOffset} ${
-          boxShadow?.vOffset
-        } ${boxShadow?.blur} ${boxShadow?.spreed} ${
-          boxShadow?.isInset ? 'inset' : ''
-        };
+          border: ${table.boxBWidth}px solid ${table.boxBColor};
+          border-radius: ${table.boxBRadius}px;
+          ${getBackgroundCSS(table?.bgColor)};
+          box-shadow: ${getMultiShadowCSS(table.shadow)};
+          overflow:hidden;
         }
         .accordion.sticky {
-          background:${
-            backgroundColor?.bgType === 'gradient'
-              ? backgroundColor?.gradient
-              : backgroundColor?.bg
-          } !important;
-          z-index: ${deskZindex};
-          width:617px;
+          ${getBackgroundCSS(table.bgColor)};
+          z-index: ${sticky.zIndex.desktop};
+
           position:fixed;
         }
         ${
-          horizontalAlign === 1
+          sticky.horizonAlign === 1
             ? `.accordion.sticky.left{
-          left:${leftAlignValueDesktop}${leftAlignUnitDesktop};
+          left:${sticky.left.desktop}${sticky.leftUnit.desktop};
         }`
             : `.accordion.sticky.right{
-          right:${rightAlignValueDesktop}${rightAlignUnitDesktop};
+          right:${sticky.right.desktop}${sticky.rightUnit.desktop};
         }`
         }
         ${
-          verticalAlign === 1
+          sticky.verticalAlign === 1
             ? `.accordion.sticky.top{
-          top:${topAlignValueDesktop}${topAlignUnitDesktop};
+          top:${sticky.top.desktop}${sticky.topUnit.desktop};
           }`
-            : verticalAlign === 2
+            : sticky.verticalAlign === 2
             ? `.accordion.sticky.center{top:50%;  transform: translateY(-50%)}`
             : `.accordion.sticky.bottom{
-            bottom:${bottomAlignValueDesktop}${bottomAlignUnitDesktop};
+            bottom:${sticky.bottom.desktop}${sticky.bottomUnit.desktop};
           }`
         }
       ${
-        markupView === 'decimal'
+        markup.view === 'decimal'
           ? `
           
         .panel-table-container-order-list{
           list-style-type:decimal;
-          margin-left:22px;
+          margin:0px;
+          margin-left:${boxList.padding.desktop?.left};
         }
         .panel-table-container-order-list>.panel-table-list-items::marker{
-          color:${markerColor};
-          font-size:${markerFontSizeDesktop}${markerFontUnitDesktop};
+          color:${markup.color};
+          font-size:${markup.markupSize.desktop}${markup.markupUnit.desktop};
         }
         `
           : `
@@ -147,177 +81,177 @@ const Style = ({ attributes }) => {
           gap:5px;
         }
         .panel-table-container-order-list>.panel-table-list-items>span>i{
-          color:${markerColor};
-          font-size:${markerFontSizeDesktop}${markerFontUnitDesktop} !important;
+          color:${markup.color};
+          font-size:${markup.markupSize.desktop}${markup.markupUnit.desktop} !important;
         }
         `
       }
       .accordion>.accordion-title{
-        background:${headerBgColor};
-        border-bottom: ${separatorWidth}px solid ${separatorColor};
+        background:${header.bgColor};
+        border-bottom: ${header.separatorWidth}px solid ${
+          header.separatorColor
+        };
+        margin-bottom:-2px;
       }
       .accordion>.panel{
-        padding-top:${boxPaddingDesktop?.top};
-        padding-bottom:${boxPaddingDesktop?.bottom};
-        padding-left:${boxPaddingDesktop?.left};
-        padding-right:${boxPaddingDesktop?.right};
         ${
-          listMaxHeightDesktop > 0
-            ? 'max-height:' + listMaxHeightDesktop + 'px;'
+          boxList.maxHeight.desktop > 0
+            ? 'max-height:' + boxList.maxHeight.desktop + 'px;'
             : ''
         }
-        ${listMaxHeightDesktop > 0 ? 'overflow-y:auto;' : ''}
+        ${boxList.maxHeight.desktop > 0 ? 'overflow-y:auto;' : ''}
         
         
+      }
+      a.table-content-anchor-list.item-active{
+        color:${boxList.hTxtColor} !important;
       }
       .panel>.panel-table-container-order-list>.panel-table-list-items{
-        padding-top:${listPaddingDesktop?.top};
-        padding-bottom:${listPaddingDesktop?.bottom};
-        padding-right:${listPaddingDesktop?.right};
+        padding-top:${boxList.padding.desktop?.top};
+        padding-bottom:${boxList.padding.desktop?.bottom};
+        padding-right:${boxList.padding.desktop?.right};
       }
       .panel>.panel-table-container-order-list{
-        padding-left:${listPaddingDesktop?.left};
+        padding-left:${boxList.padding.desktop?.left};
+        padding-top:10px;
       }
       .panel-table-list-items::marker{
           font-size: 40px;
         }
       @media screen and (min-width: 1024px) {
         .accordion.sticky {
-          z-index: ${deskZindex};
-          position:${stickyDevice.includes('Desktop') ? 'fixed' : 'initial'};
+            width:617px;
+          z-index: ${sticky.zIndex.desktop};
+          position:${sticky?.device.includes('Desktop') ? 'fixed' : 'initial'};
         }
         .accordion.sticky.top{
-          top:${topAlignValueDesktop}${topAlignUnitDesktop};
+          top:${sticky.top.desktop}${sticky.topUnit.desktop};
           }
         .accordion.sticky.left{
-          left:${leftAlignValueDesktop}${leftAlignUnitDesktop};
+          left:${sticky.left.desktop}${sticky.leftUnit.desktop};
         }
         .accordion.sticky.right{
-          right:${rightAlignValueDesktop}${rightAlignUnitDesktop};
+          right:${sticky.right.desktop}${sticky.rightUnit.desktop};
         }
         .accordion.sticky.bottom{
-            bottom:${bottomAlignValueDesktop}${bottomAlignUnitDesktop};
+            bottom:${sticky.bottom.desktop}${sticky.bottomUnit.desktop};
           }
         .accordion>.panel{
-          padding-top:${boxPaddingDesktop?.top};
-          padding-bottom:${boxPaddingDesktop?.bottom};
-          padding-left:${boxPaddingDesktop?.left};
-          padding-right:${boxPaddingDesktop?.right};
           ${
-            listMaxHeightDesktop > 0
-              ? 'max-height:' + listMaxHeightDesktop + 'px;'
+            boxList.maxHeight.desktop > 0
+              ? 'max-height:' + boxList.maxHeight.desktop + 'px;'
               : ''
           }
-          ${listMaxHeightDesktop > 0 ? 'overflow-y:auto;' : ''}
+          ${boxList.maxHeight.desktop > 0 ? 'overflow-y:auto;' : ''}
       }
       .panel>.panel-table-container-order-list>.panel-table-list-items{
-        padding-top:${listPaddingDesktop?.top};
-        padding-bottom:${listPaddingDesktop?.bottom};
-        padding-right:${listPaddingDesktop?.right};
+        padding-top:${boxList.padding.desktop?.top};
+        padding-bottom:${boxList.padding.desktop?.bottom};
+        padding-right:${boxList.padding.desktop?.right};
       }
       .panel>.panel-table-container-order-list{
-        padding-left:${listPaddingDesktop?.left};
+        padding-left:${boxList.padding.desktop?.left};
       }
       .panel-table-container-order-list>.panel-table-list-items::marker{
-          color:${markerColor};
-          font-size:${markerFontSizeDesktop}${markerFontUnitDesktop};
+          color:${markup.color};
+          font-size:${markup.markupSize.desktop}${markup.markupUnit.desktop};
         }
       .panel-table-container-order-list>.panel-table-list-items>span>i{
-          color:${markerColor};
-          font-size:${markerFontSizeDesktop}${markerFontUnitDesktop} !important;
+          color:${markup.color};
+          font-size:${markup.markupSize.desktop}${
+          markup.markupUnit.desktop
+        } !important;
         }
       }
       @media (min-width: 768px) and (max-width: 1023px) {
         .accordion.sticky {
-          z-index: ${tabletZindex};
-          position:${stickyDevice.includes('Tablet') ? 'fixed' : 'initial'};
+          width:100%;
+          z-index: ${sticky.zIndex.tablet};
+          position:${sticky.device.includes('Tablet') ? 'fixed' : 'initial'};
         }
         .accordion.sticky.top{
-          top:${topAlignValueTablet}${topAlignUnitTablet};
+          top:${sticky.top.tablet}${sticky.topUnit.tablet};
           }
         .accordion.sticky.left{
-          left:${leftAlignValueTablet}${leftAlignUnitTablet};
+          left:${sticky.left.tablet}${sticky.leftUnit.tablet};
         }
         .accordion.sticky.right{
-          right:${rightAlignValueTablet}${rightAlignUnitTablet};
+          right:${sticky.right.tablet}${sticky.rightUnit.tablet};
         }
         .accordion.sticky.bottom{
-            bottom:${bottomAlignValueTablet}${bottomAlignUnitTablet};
+            bottom:${sticky.bottom.tablet}${sticky.bottomUnit.tablet};
           }
         .accordion>.panel{
-          padding-top:${boxPaddingTablet?.top};
-          padding-bottom:${boxPaddingTablet?.bottom};
-          padding-left:${boxPaddingTablet?.left};
-          padding-right:${boxPaddingTablet?.right};
                     ${
-                      listMaxHeightTablet > 0
-                        ? 'max-height:' + listMaxHeightTablet + 'px;'
+                      boxList.maxHeight.tablet > 0
+                        ? 'max-height:' + boxList.maxHeight.tablet + 'px;'
                         : ''
                     }
-          ${listMaxHeightTablet > 0 ? 'overflow-y:auto;' : ''}
+          ${boxList.maxHeight.tablet > 0 ? 'overflow-y:auto;' : ''}
         }
       .panel>.panel-table-container-order-list>.panel-table-list-items{
-        padding-top:${listPaddingTablet?.top};
-        padding-bottom:${listPaddingTablet?.bottom};
-        padding-right:${listPaddingTablet?.right};
+        padding-top:${boxList.padding.tablet?.top};
+        padding-bottom:${boxList.padding.tablet?.bottom};
+        padding-right:${boxList.padding.tablet?.right};
       }
       .panel>.panel-table-container-order-list{
-        padding-left:${listPaddingTablet?.left};
+        padding-left:${boxList.padding.tablet?.left};
       }
     .panel-table-container-order-list>.panel-table-list-items::marker{
-          color:${markerColor};
-          font-size:${markerFontSizeTablet}${markerFontUnitTablet};
+          color:${markup.color};
+          font-size:${markup.markupSize.tablet}${markup.markupUnit.tablet};
         }
     .panel-table-container-order-list>.panel-table-list-items>span>i{
-          color:${markerColor};
-          font-size:${markerFontSizeTablet}${markerFontUnitTablet} !important;
+          color:${markup.color};
+          font-size:${markup.markupSize.tablet}${
+          markup.markupUnit.tablet
+        } !important;
         }
 
       }
       @media screen and (max-width: 767px) {
         .accordion.sticky {
-          z-index: ${mobileZindex};
-          position:${stickyDevice.includes('Mobile') ? 'fixed' : 'initial'};
+          width:100%;
+          z-index: ${sticky.zIndex.mobile};
+          position:${sticky.device.includes('Mobile') ? 'fixed' : 'initial'};
         }
         .accordion.sticky.top{
-          top:${topAlignValueMobile}${topAlignUnitMobile};
+          top:${sticky.top.mobile}${sticky.topUnit.mobile};
           }
         .accordion.sticky.left{
-          left:${leftAlignValueMobile}${leftAlignUnitMobile};
+          left:${sticky.left.mobile}${sticky.leftUnit.mobile};
         }
         .accordion.sticky.right{
-          right:${rightAlignValueMobile}${rightAlignUnitMobile};
+          right:${sticky.right.mobile}${sticky.rightUnit.mobile};
         }
         .accordion.sticky.bottom{
-            bottom:${bottomAlignValueMobile}${bottomAlignUnitMobile};
+            bottom:${sticky.bottom.mobile}${sticky.bottomUnit.mobile};
           }
         .accordion>.panel{
-          padding-top:${boxPaddingMobile?.top};
-          padding-bottom:${boxPaddingMobile?.bottom};
-          padding-left:${boxPaddingMobile?.left};
-          padding-right:${boxPaddingMobile?.right};
                     ${
-                      listMaxHeightMobile > 0
-                        ? 'max-height:' + listMaxHeightMobile + 'px;'
+                      boxList.maxHeight.mobile > 0
+                        ? 'max-height:' + boxList.maxHeight.mobile + 'px;'
                         : ''
                     }
-          ${listMaxHeightMobile > 0 ? 'overflow-y:auto;' : ''}
+          ${boxList.maxHeight.mobile > 0 ? 'overflow-y:auto;' : ''}
         }
       .panel>.panel-table-container-order-list>.panel-table-list-items{
-        padding-top:${listPaddingMobile?.top};
-        padding-bottom:${listPaddingMobile?.bottom};
-        padding-right:${listPaddingMobile?.right};
+        padding-top:${boxList.padding.mobile?.top};
+        padding-bottom:${boxList.padding.mobile?.bottom};
+        padding-right:${boxList.padding.mobile?.right};
       }
       .panel>.panel-table-container-order-list{
-        padding-left:${listPaddingMobile?.left};
+        padding-left:${boxList.padding.mobile?.left};
       }
       .panel-table-container-order-list>.panel-table-list-items::marker{
-          color:${markerColor};
-          font-size:${markerFontSizeMobile}${markerFontUnitMobile};
+          color:${markup.color};
+          font-size:${markup.markupSize.mobile}${markup.markupUnit.mobile};
         }
       .panel-table-container-order-list>.panel-table-list-items>span>i{
-          color:${markerColor};
-          font-size:${markerFontSizeMobile}${markerFontUnitMobile} !important;
+          color:${markup.color};
+          font-size:${markup.markupSize.mobile}${
+          markup.markupUnit.mobile
+        } !important;
         }
       }
       `}

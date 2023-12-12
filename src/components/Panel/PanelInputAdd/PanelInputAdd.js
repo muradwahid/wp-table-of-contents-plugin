@@ -2,14 +2,15 @@ import { Popover } from '@wordpress/components';
 import { useEffect, useRef, useState } from '@wordpress/element';
 
 const PanelInputAdd = ({attributes,setAttributes }) => {
-  const { stickyDevice } = attributes;
+  const { sticky } = attributes;
+  const { device } = sticky;
   const [isPopoverVisible, setPopoverVisible] = useState(false);
   const refHeadingTag = useRef();
   const addTag = (val) => {
-    const restVal = [...stickyDevice];
+    const restVal = [...sticky.device];
     if (!restVal.includes(val)) {
       restVal.push(val);
-      setAttributes({ stickyDevice: restVal });
+      setAttributes({ sticky:{...sticky,device: restVal} });
     }
   };
   useEffect(() => {
@@ -26,13 +27,16 @@ const PanelInputAdd = ({attributes,setAttributes }) => {
   return (
     <div>
       <ul className="anchor-list-admin-panel">
-        {stickyDevice &&
-          stickyDevice.sort().map((tag, idx) => (
+        {sticky.device &&
+          sticky.device.sort().map((tag, idx) => (
             <li key={idx} className="anchor-admin-panel-list">
               <i
                 onClick={() =>
                   setAttributes({
-                    stickyDevice: stickyDevice.filter((val, i) => i !== idx),
+                    sticky: {
+                      ...sticky,
+                      device: device.filter((val, i) => i !== idx),
+                    },
                   })
                 }
                 className="fa-solid fa-xmark"
@@ -40,7 +44,7 @@ const PanelInputAdd = ({attributes,setAttributes }) => {
               {tag.toUpperCase()}
             </li>
           ))}
-        {stickyDevice && stickyDevice.length < 3 && (
+        {sticky.device && sticky.device.length < 3 && (
           <li
             onClick={() => setPopoverVisible(!isPopoverVisible)}
             className="anchor-admin-panel-list-plus-icon"
@@ -59,25 +63,19 @@ const PanelInputAdd = ({attributes,setAttributes }) => {
         <Popover ref={refHeadingTag} className="popover-anchor-admin-panel">
           <p
             onClick={() => addTag('Desktop')}
-            className={`${
-              stickyDevice.includes('Desktop') ? 'isActiveTag' : ''
-            }`}
+            className={`${sticky.device.includes('Desktop') ? 'isActiveTag' : ''}`}
           >
             Desktop
           </p>
           <p
             onClick={() => addTag('Tablet')}
-            className={`${
-              stickyDevice.includes('Tablet') ? 'isActiveTag' : ''
-            }`}
+            className={`${sticky.device.includes('Tablet') ? 'isActiveTag' : ''}`}
           >
             Tablet
           </p>
           <p
             onClick={() => addTag('Mobile')}
-            className={`${
-              stickyDevice.includes('Mobile') ? 'isActiveTag' : ''
-            }`}
+            className={`${sticky.device.includes('Mobile') ? 'isActiveTag' : ''}`}
           >
             Mobile
           </p>

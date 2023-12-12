@@ -1,10 +1,10 @@
-=== Table of Contents ===
+=== Table of Content Block ===
 Contributors: abuhayat
 Donate link: https://gum.co/wpdonate/
 Tags: block, key1, key2, key3, Gutenberg block
-Requires at least: 5.0+
-Tested up to: 6.3.1
-Stable tag: 1.0.0
+Requires at least: 6.2+
+Tested up to: 6.4.1
+Stable tag: 2.0.0
 Requires PHP: 7.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html

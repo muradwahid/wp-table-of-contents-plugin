@@ -1,146 +1,175 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useRef, useState } from 'react';
 import DynamicTag from '../DynamicTag/DynamicTag';
-const TableContents = ({ attributes }) => {
+import SmoothScroll from '../SmoothScroll';
+import Style from '../Style/Style';
+const TableContents = ({ attributes, setAttributes }) => {
   const [toggle, setToggle] = useState(true);
   const [content, setContent] = useState([]);
-  const [storedAttr, setStoredAttr] = useState('');
   const [contentsAttr, setContentsAttr] = useState();
   const {
-    tableTitle,
-    titleTag,
+    boxList,
+    header,
+    title,
     anchorsByTags,
-    markupView,
-    markupViewIcon,
-    expandIcon,
-    minimizeBox,
-    collapseIcon,
+    minimize,
+    markup,
     sticky,
-    horizontalAlign,
-    verticalAlign,
-    headerTxtColor,
-    headerIconColor,
+    headings,
   } = attributes;
-useEffect(() => {
-  const root = document.querySelector(
-    '.wp-block-post-content-is-layout-constrained'
-  );
-  const selectorString = anchorsByTags.join(', ');
-  const headingElements = root?.querySelectorAll(`${selectorString}`);
-  const accordionTitle = document.querySelector('.accordion-title');
-  const removeAttrHeading = accordionTitle?.querySelector(`${titleTag}`);
-  if (removeAttrHeading.tagName.toLowerCase() !== 'div') {
-    setStoredAttr(removeAttrHeading.getAttribute('data-anchor'));
-  }
-
-  // console.log(accordionTitle.children[0].removeAttribute('data-anchor'));
-  if (headingElements?.length) {
-    for (let i = 0; i < headingElements.length; i++) {
-      const headingElement = headingElements[i];
-      const span = document.createElement('span');
-      span.setAttribute('id', `bppb-heading-anchor-${i}`);
-      headingElement.setAttribute('data-anchor', `bppb-heading-anchor-${i}`);
-      headingElement.setAttribute('data-idx', i);
-      // headingElement.parentNode.insertBefore(span, headingElement.nextSibling);
-      headingElement.insertAdjacentElement('afterbegin', span);
+  const [rendered, setRendered] = useState(boxList.padding.desktop.bottom||false);
+  useEffect(() => {
+    const root = document.querySelector('.wp-block-post-content');
+    const selectorString = anchorsByTags.join(', ');
+    const headingElements = root?.querySelectorAll(`${selectorString}`);
+    const accordionTitle = document.querySelector('.accordion-title');
+    const removeAttrHeading = accordionTitle?.querySelector(`${title?.tag}`);
+    const savedElements = [];
+    Array.from(headingElements).forEach((headingElement) => {
+      if (headingElement.className !== 'content-table-title') {
+        for (let index = 0; index < headingElement.children.length; index++) {
+          if (index + 1 !== 1) {
+            headingElement.children[index].remove();
+          }
+        }
+        savedElements.push({
+          contents: headingElement.textContent,
+          tag: headingElement.tagName,
+          id: headingElement.children[0]?.getAttribute('id'),
+        });
+      }
+    });
+    setAttributes({ headings: savedElements });
+    if (headingElements?.length) {
+      for (let i = 0; i < headingElements.length; i++) {
+        const headingElement = headingElements[i];
+        const span = document.createElement('span');
+        span.setAttribute('id', `bppb-heading-anchor-${i}`);
+        headingElement.insertAdjacentElement('afterbegin', span);
+      }
     }
-  }
-  if (removeAttrHeading.tagName.toLowerCase() !== 'div') {
-    removeAttrHeading.removeAttribute('data-anchor');
-    removeAttrHeading.removeAttribute('data-idx');
-    const removeSpan = removeAttrHeading.querySelector('span');
-    removeSpan && removeSpan.remove();
-  }
-  removeAttrHeading.innerHTML = tableTitle;
-
-  setContent(headingElements);
-}, [titleTag, tableTitle, anchorsByTags, markupView]);
-
+    if (removeAttrHeading?.tagName.toLowerCase() !== 'div') {
+      const removeSpan = removeAttrHeading?.querySelector('span');
+      removeSpan && removeSpan.remove();
+    }
+    removeAttrHeading ? (removeAttrHeading.innerHTML = title?.text) : '';
+    setContent(headingElements);
+  }, [rendered, title.tag, anchorsByTags, markup.view]);
   const accordion = useRef();
-  const title = useRef();
+  const titleRef = useRef();
   const accordionPanel = useRef();
 
   useEffect(() => {
-    title.current.addEventListener('click', function () {
-      let panel = accordionPanel.current;
+    let panel = accordionPanel.current;
+    titleRef.current.addEventListener('click', function () {
       if (
         parseInt(panel.style.height.substring(0, panel.style.height.length - 2))
       ) {
-        panel.style.height = '0px';
-        if (minimizeBox) {
+        if (minimize.toggle) {
           panel.style.height = panel.scrollHeight + 'px';
         }
         panel.style.height = '0px';
         setToggle(false);
       } else {
         panel.style.height = panel.scrollHeight + 'px';
+        if (minimize.toggle) {
+          panel.style.height = panel.scrollHeight + 'px';
+        }
         setToggle(true);
       }
     });
-  }, [titleTag, anchorsByTags, markupView, minimizeBox]);
+  }, [
+    boxList.maxHeight,
+    title.tag,
+    anchorsByTags,
+    markup.view,
+    minimize.toggle
+  ]);
+
   return (
-    <div
-      ref={accordion}
-      className={`accordion ${sticky ? 'sticky' : ''} ${
-        horizontalAlign === 1 ? 'left' : 'right'
-      } ${
-        verticalAlign === 1 ? 'top' : verticalAlign === 2 ? 'center' : 'bottom'
-      }  `}
-    >
-      <div ref={title} className="accordion-title">
-        <DynamicTag
-          style={{ margin: '0', color: headerTxtColor }}
-          tagName={titleTag}
-          value={tableTitle}
-        />
-        {minimizeBox && (
-          <>
-            {toggle ? (
-              <i
-                style={{ color: headerIconColor }}
-                className={collapseIcon}
-              ></i>
-            ) : (
-              <i style={{ color: headerIconColor }} className={expandIcon}></i>
-            )}
-          </>
-        )}
+    <>
+      <Style attributes={attributes} />
+      <SmoothScroll />
+      <div
+        onClick={() => setRendered(!rendered)}
+        ref={accordion}
+        className={`accordion poppinsFont ${sticky.toggle ? 'sticky' : ''} ${
+          sticky.horizonAlign === 1 ? 'left' : 'right'
+        } ${
+          sticky.verticalAlign === 1
+            ? 'top'
+            : sticky.verticalAlign === 2
+            ? 'center'
+            : 'bottom'
+        }  `}
+      >
+        <div ref={titleRef} className="accordion-title">
+          <DynamicTag
+            className="content-table-title"
+            style={{ margin: '0', color: header.txtColor }}
+            tagName={title?.tag}
+            value={title?.text}
+          />
+          {minimize.toggle && (
+            <>
+              {toggle ? (
+                <i
+                  style={{ color: header.iconColor }}
+                  className={minimize.collapseIcon}
+                ></i>
+              ) : (
+                <i
+                  style={{ color: header.iconColor }}
+                  className={minimize.expandIcon}
+                ></i>
+              )}
+            </>
+          )}
+        </div>
+        <div ref={accordionPanel} className="panel">
+          {content?.length > 1 ? (
+            <ol className="panel-table-container-order-list">
+              {Array.from(content).map(
+                (headingElement, idx) =>
+                  headingElement.className !== 'content-table-title' &&
+                  headingElement.textContent.length > 1 && (
+                    <>
+                      <li
+                        className="panel-table-list-items"
+                        onClick={() => setContentsAttr(idx)}
+                        key={idx}
+                      >
+                        {markup.view !== 'decimal' && (
+                          <span>
+                            <i
+                              style={{ fontSize: '10px' }}
+                              className={`${markup.icon}`}
+                            ></i>
+                          </span>
+                        )}
+                        <a
+                          className={`table-content-anchor-list ${
+                            idx === contentsAttr ? 'item-active' : ''
+                          }`}
+                          href={`#bppb-heading-anchor-${idx}`}
+                        >
+                          {headingElement.textContent}
+                        </a>
+                      </li>
+                    </>
+                  )
+              )}
+            </ol>
+          ) : (
+            <div style={{ padding: '14px 0px' }}>
+              <p style={{ margin: '0px' }}>
+                No headings were found on this page
+              </p>
+            </div>
+          )}
+        </div>
       </div>
-      <div ref={accordionPanel} className="panel">
-        {content?.length > 1 ? (
-          <ol className="panel-table-container-order-list">
-            {Array.from(content).map((headingElement, idx) => (
-              <>
-                {storedAttr !== headingElement.getAttribute('data-anchor') && (
-                  <li className='panel-table-list-items' onClick={() => setContentsAttr(idx)} key={idx}>
-                    <span>
-                      {markupView !== 'decimal' && (
-                        <i
-                          style={{ fontSize: '10px' }}
-                          className={`${markupViewIcon}`}
-                        ></i>
-                      )}
-                    </span>
-                    <a
-                      className={`table-content-anchor-list ${
-                        Number(headingElement.getAttribute('data-idx')) ===
-                        Number(contentsAttr)
-                          ? 'item-active'
-                          : ''
-                      }`}
-                      href={`#${headingElement.getAttribute('data-anchor')}`}
-                    >
-                      {headingElement.textContent}
-                    </a>
-                  </li>
-                )}
-              </>
-            ))}
-          </ol>
-        ) : (
-          <p>No headings were found on this page</p>
-        )}
-      </div>
-    </div>
+    </>
   );
 };
 

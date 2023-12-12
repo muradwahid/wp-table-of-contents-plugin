@@ -1,70 +1,59 @@
-import { PanelBody, RangeControl,__experimentalBoxControl as BoxControl, ToggleControl } from '@wordpress/components';
-import {Fragment} from 'react';
-import {BDevice, ColorsControl, ShadowControl} from '../../../../Components'
-import PanelColorControl from '../Panel/PanelColorControl/PanelColorControl';
+import {
+  __experimentalBoxControl as BoxControl,
+  PanelBody,
+  RangeControl,
+  ToggleControl,
+} from '@wordpress/components';
+import { Fragment } from 'react';
+import {
+  BDevice,
+  Background,
+  MultiShadowControl,
+} from '../../../../Components';
 import IncludeExClude from '../Panel/IncludeExClude/IncludeExClude';
+import PanelColorControl from '../Panel/PanelColorControl/PanelColorControl';
 import PanelUnit from '../Panel/PanelUnit/PanelUnit';
+import ListSettings from './ListSettings';
+import SlideSettings from './SlideSettings';
+import TimelineSettings from './TimelineSettings';
+
+const units = [
+  { value: 'px', label: 'px', default: 0 },
+  { value: '%', label: '%', default: 0 },
+  { value: 'em', label: 'em', default: 0 },
+];
 const StyleSettings = ({ attributes, setAttributes }) => {
-  const {
-    backgroundColor,
-    boxBWidth,
-    boxBRadius,
-    boxBColor,
-    boxShadow,
-    boxPaddingDesktop,
-    boxPaddingTablet,
-    boxPaddingMobile,
-    boxPaddingDevice,
-    headerBgColor,
-    headerTxtColor,
-    headerIconColor,
-    separatorColor,
-    separatorWidth,
-    listPaddingDevice,
-    listPaddingDesktop,
-    listPaddingTablet,
-    listPaddingMobile,
-    listMaxHeightDesktop,
-    listMaxHeightTablet,
-    listMaxHeightMobile,
-    listMaxHeightDevice,
-    listTextStyle,
-    normalTxtColor,
-    normalTxtDecoration,
-    hoverTxtDecoration,
-    hoverTxtColor,
-    markerColor,
-    markerFontDevice,
-    markerFontSizeDesktop,
-    markerFontSizeTablet,
-    markerFontSizeMobile,
-    markerFontUnitDesktop,
-    markerFontUnitTablet,
-    markerFontUnitMobile,
-  } = attributes;
+  const { table, header, boxList, markup, theme } = attributes;
   return (
     <Fragment>
       <PanelBody title="Box" initialOpen={true}>
-        <ColorsControl
+        <Background
           label="Background Color"
-          value={backgroundColor}
-          onChange={(value) => setAttributes({ backgroundColor: value })}
+          value={table.bgColor}
+          defaults="#fff"
+          onChange={(value) =>
+            setAttributes({ table: { ...table, bgColor: value } })
+          }
         />
         <PanelColorControl
           label="Border Color"
-          value={boxBColor}
+          value={table.boxBColor}
           colors={[
             { name: 'red', color: '#f00' },
             { name: 'white', color: '#fff' },
             { name: 'blue', color: '#00f' },
           ]}
-          renderFunction={(value) => setAttributes({ boxBColor: value })}
+          renderFunction={(value) =>
+            setAttributes({ table: { ...table, boxBColor: value } })
+          }
         />
         <RangeControl
           className="box-border-width-container"
           label="Border Width"
-          value={boxBWidth}
-          onChange={(value) => setAttributes({ boxBWidth: value })}
+          value={table.boxBWidth}
+          onChange={(value) =>
+            setAttributes({ table: { ...table, boxBWidth: value } })
+          }
           min={0}
           max={100}
           step={1}
@@ -72,382 +61,518 @@ const StyleSettings = ({ attributes, setAttributes }) => {
         <RangeControl
           className="box-border-width-container"
           label="Border Radius"
-          value={boxBRadius}
-          onChange={(value) => setAttributes({ boxBRadius: value })}
+          value={table.boxBRadius}
+          onChange={(value) =>
+            setAttributes({ table: { ...table, boxBRadius: value } })
+          }
           min={0}
           max={100}
           step={1}
         />
-        <ShadowControl
+        <MultiShadowControl
           label="Box Shadow"
-          value={boxShadow}
-          onChange={(value) => setAttributes({ boxShadow: value })}
-          defaults={{ shadow: '1px 1px 5px 1px #b3b3b3' }}
-        />
-        <div
-          className="box-padding-device-container"
-          style={{ marginTop: '15px' }}
-        >
-          <div className="box-padding-device">
-            <BDevice
-              device={boxPaddingDevice}
-              onChange={(val) => setAttributes({ boxPaddingDevice: val })}
-            />
-          </div>
-          {boxPaddingDevice === 'desktop' ? (
-            <BoxControl
-              label="Padding"
-              values={boxPaddingDesktop}
-              resetValues={{
-                top: '0px',
-                left: '0px',
-                right: '0px',
-                bottom: '0px',
-              }}
-              units={['px', '%']}
-              onChange={(value) => setAttributes({ boxPaddingDesktop: value })}
-            />
-          ) : boxPaddingDevice === 'tablet' ? (
-            <BoxControl
-              label="Padding"
-              values={boxPaddingTablet}
-              resetValues={{
-                top: '0px',
-                left: '0px',
-                right: '0px',
-                bottom: '0px',
-              }}
-              units={['px', '%']}
-              onChange={(value) => setAttributes({ boxPaddingTablet: value })}
-            />
-          ) : (
-            <BoxControl
-              label="Padding"
-              values={boxPaddingMobile}
-              resetValues={{
-                top: '0px',
-                left: '0px',
-                right: '0px',
-                bottom: '0px',
-              }}
-              units={['px', '%']}
-              onChange={(value) => setAttributes({ boxPaddingMobile: value })}
-            />
-          )}
-        </div>
-      </PanelBody>
-
-      <PanelBody title="Header" initialOpen={false}>
-        <PanelColorControl
-          label="Background Color"
-          value={headerBgColor}
-          colors={[
-            { name: 'red', color: '#f00' },
-            { name: 'white', color: '#fff' },
-            { name: 'blue', color: '#00f' },
-          ]}
-          renderFunction={(value) =>
-            setAttributes({ headerBgColor: value })
+          value={table.shadow}
+          onChange={(value) =>
+            setAttributes({ table: { ...table, shadow: value } })
           }
-        />
-        <PanelColorControl
-          label="Text Color"
-          value={headerTxtColor}
-          colors={[
-            { name: 'red', color: '#f00' },
-            { name: 'white', color: '#fff' },
-            { name: 'blue', color: '#00f' },
+          defaults={[
+            {
+              hOffset: '1px',
+              vOffset: '1px',
+              blur: '5px',
+              spread: '1px',
+              color: '#b3b3b3',
+            },
           ]}
-          renderFunction={(value) =>
-            setAttributes({ headerTxtColor: value })
-          }
         />
-        <PanelColorControl
-          label="Icon Color"
-          value={headerIconColor}
-          colors={[
-            { name: 'red', color: '#f00' },
-            { name: 'white', color: '#fff' },
-            { name: 'blue', color: '#00f' },
-          ]}
-          renderFunction={(value) =>
-            setAttributes({ headerIconColor: value })
-          }
-        />
-        <RangeControl
-          label="Separator Width"
-          value={separatorWidth}
-          onChange={(value) => setAttributes({ separatorWidth: value })}
-          min={0}
-          max={100}
-          step={1}
-        />
-        <PanelColorControl
-          label="Separator Color"
-          value={separatorColor}
-          defaults="#ccc"
-          colors={[
-            { name: 'red', color: '#f00' },
-            { name: 'white', color: '#fff' },
-            { name: 'blue', color: '#00f' },
-          ]}
-          renderFunction={(value) =>
-            setAttributes({ separatorColor: value })
-          }
-        />
-      </PanelBody>
-      <PanelBody title="List Item" initialOpen={false}>
-        <div
-          className="box-padding-device-container"
-          style={{ marginTop: '15px' }}
-        >
-          <div className="box-padding-device">
-            <BDevice
-              device={listPaddingDevice}
-              onChange={(val) => setAttributes({ listPaddingDevice: val })}
-            />
-          </div>
-          {listPaddingDevice === 'desktop' ? (
-            <BoxControl
-              label="Padding"
-              values={listPaddingDesktop}
-              resetValues={{
-                top: '0px',
-                left: '0px',
-                right: '0px',
-                bottom: '0px',
-              }}
-              onChange={(value) =>
-                setAttributes({ listPaddingDesktop: value })
-              }
-            />
-          ) : listPaddingDevice === 'tablet' ? (
-            <BoxControl
-              label="Padding"
-              values={listPaddingTablet}
-              resetValues={{
-                top: '0px',
-                left: '0px',
-                right: '0px',
-                bottom: '0px',
-              }}
-              onChange={(value) =>
-                setAttributes({ listPaddingTablet: value })
-              }
-            />
-          ) : (
-            <BoxControl
-              label="Padding"
-              values={listPaddingMobile}
-              resetValues={{
-                top: '0px',
-                left: '0px',
-                right: '0px',
-                bottom: '0px',
-              }}
-              onChange={(value) =>
-                setAttributes({ listPaddingMobile: value })
-              }
-            />
-          )}
-        </div>
-        <div
-          className="box-padding-device-container"
-          style={{ marginTop: '15px' }}
-        >
-          <div className="box-padding-device" style={{ left: '30%' }}>
-            <BDevice
-              device={listMaxHeightDevice}
-              onChange={(val) =>
-                setAttributes({ listMaxHeightDevice: val })
-              }
-            />
-          </div>
-          {listMaxHeightDevice === 'desktop' ? (
-            <RangeControl
-              label="Max Height"
-              value={listMaxHeightDesktop}
-              onChange={(value) =>
-                setAttributes({ listMaxHeightDesktop: value })
-              }
-              min={0}
-              max={1000}
-              step={1}
-            />
-          ) : listMaxHeightDevice === 'tablet' ? (
-            <RangeControl
-              label="Max Height"
-              value={listMaxHeightTablet}
-              onChange={(value) =>
-                setAttributes({ listMaxHeightTablet: value })
-              }
-              min={0}
-              max={1000}
-              step={1}
-            />
-          ) : (
-            <RangeControl
-              label="Max Height"
-              value={listMaxHeightMobile}
-              onChange={(value) =>
-                setAttributes({ listMaxHeightMobile: value })
-              }
-              min={0}
-              max={1000}
-              step={1}
-            />
-          )}
-        </div>
-        <IncludeExClude
-          options={['normal', 'hover']}
-          value={listTextStyle}
-          renderFunction={(val) => setAttributes({ listTextStyle: val })}
-        />
-        {listTextStyle === 'normal' ? (
-          <>
-            <PanelColorControl
-              label="Text Color"
-              value={normalTxtColor}
-              colors={[
-                { name: 'red', color: '#f00' },
-                { name: 'white', color: '#fff' },
-                { name: 'blue', color: '#00f' },
-              ]}
-              renderFunction={(value) =>
-                setAttributes({ normalTxtColor: value })
-              }
-            />
-            <div style={{ marginTop: '10px' }}>
-              <ToggleControl
-                label="Underline"
-                checked={normalTxtDecoration}
-                onChange={(value) =>
-                  setAttributes({ normalTxtDecoration: value })
-                }
-              />
-            </div>
-          </>
-        ) : (
-          <>
-            <PanelColorControl
-              label="Text Color"
-              value={hoverTxtColor}
-              colors={[
-                { name: 'red', color: '#f00' },
-                { name: 'white', color: '#fff' },
-                { name: 'blue', color: '#00f' },
-              ]}
-              renderFunction={(value) =>
-                setAttributes({ hoverTxtColor: value })
-              }
-            />
-            <div style={{ marginTop: '10px' }}>
-              <ToggleControl
-                label="Underline"
-                checked={hoverTxtDecoration}
-                onChange={(value) =>
-                  setAttributes({ hoverTxtDecoration: value })
-                }
-              />
-            </div>
-          </>
-        )}
-        <div
-          style={{
-            borderTop: '1px solid #ccc',
-            margin: '15px 0',
-            paddingTop: '10px',
-          }}
-        >
-          <strong>Marker</strong>
-        </div>
-        <PanelColorControl
-          label="Color"
-          value={markerColor}
-          colors={[
-            { name: 'red', color: '#f00' },
-            { name: 'white', color: '#fff' },
-            { name: 'blue', color: '#00f' },
-          ]}
-          renderFunction={(value) => setAttributes({ markerColor: value })}
-        />
-        <div style={{ marginTop: '10px' }}>
+        {'default' !== theme && (
           <div
-            style={{
-              display: 'flex',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}
+            className="box-padding-device-container"
+            style={{ marginTop: '15px' }}
           >
-            <div
-              style={{
-                display: 'flex',
-                gap: '15px',
-                alignItems: 'center',
-              }}
-            >
-              <span>Left</span>
+            <div className="box-padding-device">
               <BDevice
-                device={markerFontDevice}
-                onChange={(val) => setAttributes({ markerFontDevice: val })}
-              />
-            </div>
-            {markerFontDevice === 'desktop' ? (
-              <PanelUnit
-                value={markerFontUnitDesktop}
-                units={['px', '%']}
-                renderFunction={(value) =>
-                  setAttributes({ markerFontUnitDesktop: value })
+                device={table.paddingDevice}
+                onChange={(val) =>
+                  setAttributes({ table: { ...table, paddingDevice: val } })
                 }
               />
-            ) : markerFontDevice == 'tablet' ? (
-              <PanelUnit
-                value={markerFontUnitTablet}
-                units={['px', '%']}
-                renderFunction={(value) =>
-                  setAttributes({ markerFontUnitTablet: value })
+            </div>
+            {table.paddingDevice === 'desktop' ? (
+              <BoxControl
+                label="Padding"
+                values={table.padding.desktop}
+                resetValues={{
+                  top: '0px',
+                  left: '0px',
+                  right: '0px',
+                  bottom: '0px',
+                }}
+                units={units}
+                onChange={(value) =>
+                  setAttributes({
+                    table: {
+                      ...table,
+                      padding: { ...table.padding, desktop: value },
+                    },
+                  })
+                }
+              />
+            ) : table.paddingDevice === 'tablet' ? (
+              <BoxControl
+                label="Padding"
+                values={table.padding.tablet}
+                resetValues={{
+                  top: '0px',
+                  left: '0px',
+                  right: '0px',
+                  bottom: '0px',
+                }}
+                units={units}
+                onChange={(value) =>
+                  setAttributes({
+                    table: {
+                      ...table,
+                      padding: { ...table.padding, tablet: value },
+                    },
+                  })
                 }
               />
             ) : (
-              <PanelUnit
-                value={markerFontUnitMobile}
-                units={['px', '%']}
-                renderFunction={(value) =>
-                  setAttributes({ markerFontUnitMobile: value })
+              <BoxControl
+                label="Padding"
+                values={table.padding.mobile}
+                resetValues={{
+                  top: '0px',
+                  left: '0px',
+                  right: '0px',
+                  bottom: '0px',
+                }}
+                units={units}
+                onChange={(value) =>
+                  setAttributes({
+                    table: {
+                      ...table,
+                      padding: { ...table.padding, mobile: value },
+                    },
+                  })
                 }
               />
             )}
           </div>
-          {markerFontDevice === 'desktop' ? (
-            <RangeControl
-              value={markerFontSizeDesktop}
-              min={0}
-              max={markerFontSizeDesktop === 'px' ? 1000 : 100}
-              onChange={(value) =>
-                setAttributes({ markerFontSizeDesktop: value })
-              }
-            />
-          ) : markerFontDevice == 'tablet' ? (
-            <RangeControl
-              value={markerFontSizeTablet}
-              min={0}
-              max={markerFontSizeTablet === 'px' ? 1000 : 100}
-              onChange={(value) =>
-                setAttributes({ markerFontSizeTablet: value })
-              }
-            />
-          ) : (
-            <RangeControl
-              value={markerFontSizeMobile}
-              min={0}
-              max={markerFontSizeMobile === 'px' ? 1000 : 100}
-              onChange={(value) =>
-                setAttributes({ markerFontSizeMobile: value })
-              }
-            />
-          )}
-        </div>
+        )}
       </PanelBody>
+      {'default' === theme && (
+        <>
+          <PanelBody title="Header" initialOpen={false}>
+            <PanelColorControl
+              label="Background Color"
+              value={header.bgColor}
+              colors={[
+                { name: 'red', color: '#f00' },
+                { name: 'white', color: '#fff' },
+                { name: 'blue', color: '#00f' },
+              ]}
+              renderFunction={(value) =>
+                setAttributes({ header: { ...header, bgColor: value } })
+              }
+            />
+            <PanelColorControl
+              label="Text Color"
+              value={header.txtColor}
+              colors={[
+                { name: 'red', color: '#f00' },
+                { name: 'white', color: '#fff' },
+                { name: 'blue', color: '#00f' },
+              ]}
+              renderFunction={(value) =>
+                setAttributes({ header: { ...header, txtColor: value } })
+              }
+            />
+            <PanelColorControl
+              label="Icon Color"
+              value={header.iconColor}
+              colors={[
+                { name: 'red', color: '#f00' },
+                { name: 'white', color: '#fff' },
+                { name: 'blue', color: '#00f' },
+              ]}
+              renderFunction={(value) =>
+                setAttributes({ header: { ...header, iconColor: value } })
+              }
+            />
+            <RangeControl
+              label="Separator Width"
+              value={header.separatorWidth}
+              onChange={(value) =>
+                setAttributes({ header: { ...header, separatorWidth: value } })
+              }
+              min={0}
+              max={100}
+              step={1}
+            />
+            <PanelColorControl
+              label="Separator Color"
+              value={header.separatorColor}
+              defaults="#ccc"
+              colors={[
+                { name: 'red', color: '#f00' },
+                { name: 'white', color: '#fff' },
+                { name: 'blue', color: '#00f' },
+              ]}
+              renderFunction={(value) =>
+                setAttributes({ header: { ...header, separatorColor: value } })
+              }
+            />
+          </PanelBody>
+          <PanelBody title="List Item" initialOpen={false}>
+            <div
+              className="box-padding-device-container"
+              style={{ marginTop: '15px' }}
+            >
+              <div className="box-padding-device">
+                <BDevice
+                  device={boxList.paddingDevice}
+                  onChange={(val) =>
+                    setAttributes({
+                      boxList: { ...boxList, paddingDevice: val },
+                    })
+                  }
+                />
+              </div>
+              {boxList.paddingDevice === 'desktop' ? (
+                <BoxControl
+                  label="Padding"
+                  values={boxList.padding.desktop}
+                  resetValues={{
+                    top: '0px',
+                    left: '0px',
+                    right: '0px',
+                    bottom: '0px',
+                  }}
+                  onChange={(value) =>
+                    setAttributes({
+                      boxList: {
+                        ...boxList,
+                        padding: { ...boxList.padding, desktop: value },
+                      },
+                    })
+                  }
+                />
+              ) : boxList.paddingDevice === 'tablet' ? (
+                <BoxControl
+                  label="Padding"
+                  values={boxList.padding.tablet}
+                  resetValues={{
+                    top: '0px',
+                    left: '0px',
+                    right: '0px',
+                    bottom: '0px',
+                  }}
+                  onChange={(value) =>
+                    setAttributes({
+                      boxList: {
+                        ...boxList,
+                        padding: { ...boxList.padding, tablet: value },
+                      },
+                    })
+                  }
+                />
+              ) : (
+                <BoxControl
+                  label="Padding"
+                  values={boxList.padding.mobile}
+                  resetValues={{
+                    top: '0px',
+                    left: '0px',
+                    right: '0px',
+                    bottom: '0px',
+                  }}
+                  onChange={(value) =>
+                    setAttributes({
+                      boxList: {
+                        ...boxList,
+                        padding: { ...boxList.padding, mobile: value },
+                      },
+                    })
+                  }
+                />
+              )}
+            </div>
+            <div
+              className="box-padding-device-container"
+              style={{ marginTop: '15px' }}
+            >
+              <div className="box-padding-device" style={{ left: '30%' }}>
+                <BDevice
+                  device={boxList.maxHeightDevice}
+                  onChange={(val) =>
+                    setAttributes({
+                      boxList: { ...boxList, maxHeightDevice: val },
+                    })
+                  }
+                />
+              </div>
+              {boxList.maxHeightDevice === 'desktop' ? (
+                <RangeControl
+                  label="Max Height"
+                  value={boxList.maxHeight.desktop}
+                  onChange={(value) =>
+                    setAttributes({
+                      boxList: {
+                        ...boxList,
+                        maxHeight: { ...boxList.maxHeight, desktop: value },
+                      },
+                    })
+                  }
+                  min={0}
+                  max={1000}
+                  step={1}
+                />
+              ) : boxList.maxHeightDevice === 'tablet' ? (
+                <RangeControl
+                  label="Max Height"
+                  value={boxList.maxHeight.tablet}
+                  onChange={(value) =>
+                    setAttributes({
+                      boxList: {
+                        ...boxList,
+                        maxHeight: { ...boxList.maxHeight, tablet: value },
+                      },
+                    })
+                  }
+                  min={0}
+                  max={1000}
+                  step={1}
+                />
+              ) : (
+                <RangeControl
+                  label="Max Height"
+                  value={boxList.maxHeight.mobile}
+                  onChange={(value) =>
+                    setAttributes({
+                      boxList: {
+                        ...boxList,
+                        maxHeight: { ...boxList.maxHeight, mobile: value },
+                      },
+                    })
+                  }
+                  min={0}
+                  max={1000}
+                  step={1}
+                />
+              )}
+            </div>
+            <IncludeExClude
+              options={['normal', 'hover']}
+              value={boxList.txtStyle}
+              renderFunction={(val) =>
+                setAttributes({ boxList: { ...boxList, txtStyle: val } })
+              }
+            />
+            {boxList.txtStyle === 'normal' ? (
+              <>
+                <PanelColorControl
+                  label="Text Color"
+                  value={boxList.nTxtColor}
+                  colors={[
+                    { name: 'red', color: '#f00' },
+                    { name: 'white', color: '#fff' },
+                    { name: 'blue', color: '#00f' },
+                  ]}
+                  renderFunction={(value) =>
+                    setAttributes({ boxList: { ...boxList, nTxtColor: value } })
+                  }
+                />
+                <div style={{ marginTop: '10px' }}>
+                  <ToggleControl
+                    label="Underline"
+                    checked={boxList.nTxtDecoration}
+                    onChange={(value) =>
+                      setAttributes({
+                        boxList: { ...boxList, nTxtDecoration: value },
+                      })
+                    }
+                  />
+                </div>
+              </>
+            ) : (
+              <>
+                <PanelColorControl
+                  label="Text Color"
+                  value={boxList.hTxtColor}
+                  colors={[
+                    { name: 'red', color: '#f00' },
+                    { name: 'white', color: '#fff' },
+                    { name: 'blue', color: '#00f' },
+                  ]}
+                  renderFunction={(value) =>
+                    setAttributes({ boxList: { ...boxList, hTxtColor: value } })
+                  }
+                />
+                <div style={{ marginTop: '10px' }}>
+                  <ToggleControl
+                    label="Underline"
+                    checked={boxList.hTxtDecoration}
+                    onChange={(value) =>
+                      setAttributes({
+                        boxList: { ...boxList, hTxtDecoration: value },
+                      })
+                    }
+                  />
+                </div>
+              </>
+            )}
+            <div
+              style={{
+                borderTop: '1px solid #ccc',
+                margin: '15px 0',
+                paddingTop: '10px',
+              }}
+            >
+              <strong>Marker</strong>
+            </div>
+            <PanelColorControl
+              label="Color"
+              value={markup.color}
+              colors={[
+                { name: 'red', color: '#f00' },
+                { name: 'white', color: '#fff' },
+                { name: 'blue', color: '#00f' },
+              ]}
+              renderFunction={(value) =>
+                setAttributes({ markup: { ...markup, color: value } })
+              }
+            />
+            <div style={{ marginTop: '10px' }}>
+              <div
+                style={{
+                  display: 'flex',
+                  justifyContent: 'space-between',
+                  alignItems: 'center',
+                }}
+              >
+                <div
+                  style={{
+                    display: 'flex',
+                    gap: '15px',
+                    alignItems: 'center',
+                  }}
+                >
+                  <span>Size</span>
+                  <BDevice
+                    device={markup.markupDevice}
+                    onChange={(val) =>
+                      setAttributes({
+                        markup: { ...markup, markupDevice: val },
+                      })
+                    }
+                  />
+                </div>
+                {markup.markupDevice === 'desktop' ? (
+                  <PanelUnit
+                    value={markup.markupUnit.desktop}
+                    units={['px', '%']}
+                    renderFunction={(value) =>
+                      setAttributes({
+                        markup: {
+                          ...markup,
+                          markupUnit: { ...markup.markupUnit, desktop: value },
+                        },
+                      })
+                    }
+                  />
+                ) : markup.markupDevice == 'tablet' ? (
+                  <PanelUnit
+                    value={markup.markupUnit.tablet}
+                    units={['px', '%']}
+                    renderFunction={(value) =>
+                      setAttributes({
+                        markup: {
+                          ...markup,
+                          markupUnit: { ...markup.markupUnit, tablet: value },
+                        },
+                      })
+                    }
+                  />
+                ) : (
+                  <PanelUnit
+                    value={markup.markupUnit.mobile}
+                    units={['px', '%']}
+                    renderFunction={(value) =>
+                      setAttributes({
+                        markup: {
+                          ...markup,
+                          markupUnit: { ...markup.markupUnit, mobile: value },
+                        },
+                      })
+                    }
+                  />
+                )}
+              </div>
+              {markup.markupDevice === 'desktop' ? (
+                <RangeControl
+                  value={markup.markupSize.desktop}
+                  min={0}
+                  step={1}
+                  max={markup.markupUnit.desktop === 'px' ? 50 : 100}
+                  onChange={(value) =>
+                    setAttributes({
+                      markup: {
+                        ...markup,
+                        markupSize: { ...markup.markupSize, desktop: value },
+                      },
+                    })
+                  }
+                />
+              ) : markup.markupDevice == 'tablet' ? (
+                <RangeControl
+                  value={markup.markupSize.tablet}
+                  min={0}
+                  step={1}
+                  max={markup.markupUnit.tablet === 'px' ? 50 : 100}
+                  onChange={(value) =>
+                    setAttributes({
+                      markup: {
+                        ...markup,
+                        markupSize: { ...markup.markupSize, tablet: value },
+                      },
+                    })
+                  }
+                />
+              ) : (
+                <RangeControl
+                  value={markup.markupSize.mobile}
+                  min={0}
+                  step={1}
+                  max={markup.markupUnit.mobile === 'px' ? 50 : 100}
+                  onChange={(value) =>
+                    setAttributes({
+                      markup: {
+                        ...markup,
+                        markupSize: { ...markup.markupSize, mobile: value },
+                      },
+                    })
+                  }
+                />
+              )}
+            </div>
+          </PanelBody>
+        </>
+      )}
+
+      {'slide' === theme && (
+        <SlideSettings attributes={attributes} setAttributes={setAttributes} />
+      )}
+      {'timeline' === theme && (
+        <TimelineSettings
+          attributes={attributes}
+          setAttributes={setAttributes}
+        />
+      )}
+      {'list' === theme && (
+        <ListSettings attributes={attributes} setAttributes={setAttributes} />
+      )}
     </Fragment>
   );
 };
