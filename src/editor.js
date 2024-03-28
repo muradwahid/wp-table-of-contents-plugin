@@ -6,7 +6,7 @@ import './editor.scss';
 registerBlockType(metadata, {
   icon: {
     src: 'list-view',
-    foreground: '#ed34dd',
+    foreground: '#4527a4',
   },
 
   // Build in Functions
