@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import TimelineStyle from '../../../Style/TimelineStyle';
 import DynamicTag from '../../../DynamicTag/DynamicTag';
+import NoHeading from '../../../NoHeading/NoHeading';
 
 const Timeline = ({ attributes, setAttributes }) => {
   const { title, slideTitle, anchorsByTags, sticky, headings } = attributes;
@@ -53,13 +54,7 @@ const Timeline = ({ attributes, setAttributes }) => {
         onClick={() => setRendered(!rendered)}
         className={`timeline-container poppinsFont ${
           sticky.toggle ? 'sticky' : ''
-        } ${sticky.horizonAlign === 1 ? 'left' : 'right'} ${
-          sticky.verticalAlign === 1
-            ? 'top'
-            : sticky.verticalAlign === 2
-            ? 'center'
-            : 'bottom'
-        }  `}
+          } ${sticky.horizonAlign} ${sticky.verticalAlign}`}
       >
         <div className="timeline-title-container">
           <DynamicTag
@@ -70,7 +65,7 @@ const Timeline = ({ attributes, setAttributes }) => {
           />
         </div>
         <>
-          {content?.length > 1 ? (
+          {content?.length > 0 ? (
             <ul className="timeline-list-items">
               {Array.from(content).map(
                 (headingElement, idx) =>
@@ -91,13 +86,7 @@ const Timeline = ({ attributes, setAttributes }) => {
                   )
               )}
             </ul>
-          ) : (
-            <div className="slide-list-items">
-              <p className="slide-list">
-                <a href="">No headings were found on this page</a>
-              </p>
-            </div>
-          )}
+          ) : <NoHeading/>}
         </>
       </div>
     </>

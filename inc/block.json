@@ -1,11 +1,11 @@
 {
   "apiVersion": "1",
-  "name": "bppb/table-of-contents",
-  "title": "Table of Contents",
-  "description": "Description of Table of Contents.",
+  "name": "b-blocks/table-of-content-block",
+  "title": "Table of Content Block",
+  "description": "The Table of Contents block automatically generates a table of contents for your WordPress post or page.",
   "category": "widgets",
-  "keywords": ["hello", "block", "gutenberg"],
-  "textdomain": "table-of-contents",
+  "keywords": ["table", "content", "table of contents"],
+  "textdomain": "b-blocks",
   "attributes": {
     "align": {
       "type": "string",
@@ -19,14 +19,13 @@
     "table": {
       "type": "object",
       "default": {
+        "width":{"desktop":"617px","tablet":"90%","mobile":"100%"},
+        "border":{"color":"#000"},
         "bgColor": { "bg": "#ffffff" },
-        "boxBWidth": 1,
-        "boxBColor": "#ccc",
-        "boxBRadius": 0,
         "shadow": [
           {
-            "hOffset": "1px",
-            "vOffset": "1px",
+            "hOffset": "0px",
+            "vOffset": "0px",
             "blur": "5px",
             "spreed": "1px",
             "color": "#b3b3b3",
@@ -139,9 +138,7 @@
         "view": "decimal",
         "icon": "fa-solid fa-circle",
         "color": "#000",
-        "markupDevice": "desktop",
-        "markupSize": { "desktop": 16, "tablet": 16, "mobile": 16 },
-        "markupUnit": { "desktop": "px", "tablet": "px", "mobile": "px" }
+        "markupSize": { "desktop": "16px", "tablet": "16px", "mobile": "16px" }
       }
     },
     "minimize": {
@@ -161,22 +158,13 @@
       "default": {
         "toggle": false,
         "device": ["Desktop"],
-        "horizonAlign": 1,
-        "verticalAlign": 1,
-        "right": { "desktop": 0, "tablet": 0, "mobile": 0 },
-        "rightUnit": { "desktop": "px", "mobile": "px", "tablet": "px" },
-        "rightDevice": "desktop",
-        "left": { "desktop": 0, "tablet": 0, "mobile": 0 },
-        "leftUnit": { "desktop": "px", "mobile": "px", "tablet": "px" },
-        "leftDevice": "desktop",
-        "top": { "desktop": 0, "tablet": 0, "mobile": 0 },
-        "topUnit": { "desktop": "px", "mobile": "px", "tablet": "px" },
-        "topDevice": "desktop",
-        "bottom": { "desktop": 0, "tablet": 0, "mobile": 0 },
-        "bottomUnit": { "desktop": "px", "mobile": "px", "tablet": "px" },
-        "bottomDevice": "desktop",
-        "zIndex": { "desktop": 100, "tablet": 100, "mobile": 100 },
-        "zIndexDevice": "desktop"
+        "horizonAlign": "left",
+        "verticalAlign": "top",
+        "right": { "desktop": "0px", "tablet": "0px", "mobile": "0px" },
+        "left": { "desktop": "0px", "tablet": "0px", "mobile": "0px" },
+        "top": { "desktop": "0px", "tablet": "0px", "mobile": "0px" },
+        "bottom": { "desktop": "0px", "tablet": "0px", "mobile": "0px" },
+        "zIndex": { "desktop": 100, "tablet": 100, "mobile": 100 }
       }
     },
     "slideTitle": {
@@ -185,10 +173,10 @@
         "titleColor": "#2e2e2e",
         "slideBarColor": "#abababbf",
         "spaceDevice": "desktop",
-        "space": { "desktop": 15, "tablet": 15, "mobile": 15 },
+        "space": {"desktop": "15px", "tablet": "15px", "mobile": "15px"},
         "spaceUnit": { "desktop": "px", "tablet": "px", "mobile": "px" },
         "spaceBottomDevice": "desktop",
-        "spaceBottom": { "desktop": 15, "tablet": 15, "mobile": 15 },
+        "spaceBottom": { "desktop": "15px", "tablet": "15px", "mobile": "15px" },
         "spaceBottomUnit": { "desktop": "px", "tablet": "px", "mobile": "px" }
       }
     },
@@ -196,10 +184,10 @@
       "type": "object",
       "default": {
         "spaceDevice": "desktop",
-        "space": { "desktop": 15, "tablet": 15, "mobile": 15 },
+        "space": { "desktop": "15px", "tablet": "15px", "mobile": "15px" },
         "spaceUnit": { "desktop": "px", "tablet": "px", "mobile": "px" },
         "fontDevice": "desktop",
-        "fontSize": { "desktop": 16, "tablet": 16, "mobile": 16 },
+        "fontSize": { "desktop":"16px", "tablet":"16px", "mobile":"16px" },
         "fontUnit": { "desktop": "px", "tablet": "px", "mobile": "px" }
       }
     }

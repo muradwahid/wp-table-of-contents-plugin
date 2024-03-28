@@ -1,4 +1,4 @@
-import { getBackgroundCSS, getMultiShadowCSS } from '../../../../Components/utils/getCSS';
+import { getBackgroundCSS, getBorderCSS, getMultiShadowCSS } from '../../../../Components/utils/getCSS';
 
 const Style = ({ attributes }) => {
   const {
@@ -6,9 +6,20 @@ const Style = ({ attributes }) => {
     header,
     boxList,
     markup,
-    sticky
+    sticky,
+    cId
   } = attributes;
-  const listSl = `ol>li>a.table-content-anchor-list`;
+  const blockWrapper = `#bppb-table-of-contents-${cId}`;
+  const accordion = `${blockWrapper} .accordion`;
+  const titleWrapper = `${accordion} .accordion-title`;
+  // eslint-disable-next-line no-unused-vars
+  const title = `${titleWrapper} .content-table-title`;
+  const panelWrapper = `${accordion} .panel`;
+  const panelLists = `${panelWrapper} .panel-table-container-order-list`;
+  const panelItem = `${panelLists} .panel-table-list-items`;
+
+
+  const listSl = `${blockWrapper} ol>li>a.table-content-anchor-list`;
   return (
     <>
       <style>
@@ -24,76 +35,68 @@ const Style = ({ attributes }) => {
           text-decoration:${boxList.nTxtDecoration ? 'underline' : 'none'};
           margin-left:5px;
         }
-        .accordion{
-          border: ${table.boxBWidth}px solid ${table.boxBColor};
-          border-radius: ${table.boxBRadius}px;
+        ${accordion}{
           ${getBackgroundCSS(table?.bgColor)};
           box-shadow: ${getMultiShadowCSS(table.shadow)};
           overflow:hidden;
+          ${getBorderCSS(table.border)}
         }
-        .accordion.sticky {
+        ${accordion}.sticky {
+          width:${table.width.desktop};
           ${getBackgroundCSS(table.bgColor)};
-          z-index: ${sticky.zIndex.desktop};
+          z-index: ${sticky.zIndex.desktop} !important;
 
           position:fixed;
         }
         ${
-          sticky.horizonAlign === 1
-            ? `.accordion.sticky.left{
-          left:${sticky.left.desktop}${sticky.leftUnit.desktop};
-        }`
-            : `.accordion.sticky.right{
-          right:${sticky.right.desktop}${sticky.rightUnit.desktop};
-        }`
+          ["left", "right"].map(val => `${accordion}.sticky.${val}{
+            ${val}:${sticky[val].desktop};
+          }`).join("")
         }
-        ${
-          sticky.verticalAlign === 1
-            ? `.accordion.sticky.top{
-          top:${sticky.top.desktop}${sticky.topUnit.desktop};
-          }`
-            : sticky.verticalAlign === 2
-            ? `.accordion.sticky.center{top:50%;  transform: translateY(-50%)}`
-            : `.accordion.sticky.bottom{
-            bottom:${sticky.bottom.desktop}${sticky.bottomUnit.desktop};
-          }`
+
+      ${["top", "bottom"].map(val => `${accordion}.sticky.${val}{
+        ${val}:${sticky[val]?.desktop}
+        }`).join("")
+                  }
+        ${sticky.verticalAlign === "center" ? `${accordion}.sticky.center{top:50%;  transform: translateY(-50%)}` : null
         }
       ${
         markup.view === 'decimal'
           ? `
           
-        .panel-table-container-order-list{
+        ${panelLists}{
           list-style-type:decimal;
           margin:0px;
           margin-left:${boxList.padding.desktop?.left};
         }
-        .panel-table-container-order-list>.panel-table-list-items::marker{
+        ${panelItem}::marker{
           color:${markup.color};
-          font-size:${markup.markupSize.desktop}${markup.markupUnit.desktop};
+          font-size:${markup.markupSize.desktop};
         }
         `
           : `
-        .panel-table-container-order-list{
+        ${panelLists}{
           list-style-type:none;
         }
-        .panel-table-container-order-list>li{
+        ${panelLists}>li{
           display:flex;
           align-items:center;
           gap:5px;
         }
-        .panel-table-container-order-list>.panel-table-list-items>span>i{
+        ${panelItem}>span>i{
           color:${markup.color};
-          font-size:${markup.markupSize.desktop}${markup.markupUnit.desktop} !important;
+          font-size:${markup.markupSize.desktop} !important;
         }
         `
       }
-      .accordion>.accordion-title{
+      ${titleWrapper}{
         background:${header.bgColor};
         border-bottom: ${header.separatorWidth}px solid ${
           header.separatorColor
         };
         margin-bottom:-2px;
       }
-      .accordion>.panel{
+      ${accordion}>.panel{
         ${
           boxList.maxHeight.desktop > 0
             ? 'max-height:' + boxList.maxHeight.desktop + 'px;'
@@ -106,37 +109,36 @@ const Style = ({ attributes }) => {
       a.table-content-anchor-list.item-active{
         color:${boxList.hTxtColor} !important;
       }
-      .panel>.panel-table-container-order-list>.panel-table-list-items{
+      ${panelItem}{
         padding-top:${boxList.padding.desktop?.top};
         padding-bottom:${boxList.padding.desktop?.bottom};
         padding-right:${boxList.padding.desktop?.right};
       }
-      .panel>.panel-table-container-order-list{
+      ${panelLists}{
         padding-left:${boxList.padding.desktop?.left};
         padding-top:10px;
       }
-      .panel-table-list-items::marker{
+      ${panelItem}::marker{
           font-size: 40px;
         }
       @media screen and (min-width: 1024px) {
-        .accordion.sticky {
-            width:617px;
-          z-index: ${sticky.zIndex.desktop};
+        ${accordion}.sticky {
+          width:${table.width.desktop};
+          z-index: ${sticky.zIndex.desktop} !important;
           position:${sticky?.device.includes('Desktop') ? 'fixed' : 'initial'};
         }
-        .accordion.sticky.top{
-          top:${sticky.top.desktop}${sticky.topUnit.desktop};
-          }
-        .accordion.sticky.left{
-          left:${sticky.left.desktop}${sticky.leftUnit.desktop};
+        ${
+          ["left", "right"].map(val => `${accordion}.sticky.${val}{
+            ${val}:${sticky[val].desktop};
+          }`).join("")
         }
-        .accordion.sticky.right{
-          right:${sticky.right.desktop}${sticky.rightUnit.desktop};
+        ${["top", "bottom"].map(val => `${accordion}.sticky.${val}{
+        ${val}:${sticky[val].desktop}
+        }`).join("")
+                  }
+        ${sticky.verticalAlign === "center" ? `${accordion}.sticky.center{top:50%;  transform: translateY(-50%)}` : null
         }
-        .accordion.sticky.bottom{
-            bottom:${sticky.bottom.desktop}${sticky.bottomUnit.desktop};
-          }
-        .accordion>.panel{
+        ${panelWrapper}{
           ${
             boxList.maxHeight.desktop > 0
               ? 'max-height:' + boxList.maxHeight.desktop + 'px;'
@@ -144,115 +146,168 @@ const Style = ({ attributes }) => {
           }
           ${boxList.maxHeight.desktop > 0 ? 'overflow-y:auto;' : ''}
       }
-      .panel>.panel-table-container-order-list>.panel-table-list-items{
+      ${panelItem}{
         padding-top:${boxList.padding.desktop?.top};
         padding-bottom:${boxList.padding.desktop?.bottom};
         padding-right:${boxList.padding.desktop?.right};
       }
-      .panel>.panel-table-container-order-list{
+      ${panelLists}{
         padding-left:${boxList.padding.desktop?.left};
       }
-      .panel-table-container-order-list>.panel-table-list-items::marker{
-          color:${markup.color};
-          font-size:${markup.markupSize.desktop}${markup.markupUnit.desktop};
+      ${
+          markup.view === 'decimal'
+            ? `
+          
+        ${panelLists}{
+          list-style-type:decimal;
+          margin:0px;
+          margin-left:${boxList.padding.desktop?.left};
         }
-      .panel-table-container-order-list>.panel-table-list-items>span>i{
+        ${panelItem}::marker{
           color:${markup.color};
-          font-size:${markup.markupSize.desktop}${
-          markup.markupUnit.desktop
-        } !important;
+          font-size:${markup.markupSize.desktop};
         }
+        `
+            : `
+        ${panelLists}{
+          list-style-type:none;
+        }
+        ${panelLists}>li{
+          display:flex;
+          align-items:center;
+          gap:5px;
+        }
+        ${panelItem}>span>i{
+          color:${markup.color};
+          font-size:${markup.markupSize.desktop} !important;
+        }
+        `
+      }
       }
       @media (min-width: 768px) and (max-width: 1023px) {
-        .accordion.sticky {
-          width:100%;
-          z-index: ${sticky.zIndex.tablet};
+        ${accordion}.sticky {
+          width:${table.width.tablet};
+          z-index: ${sticky.zIndex.tablet} !important;
           position:${sticky.device.includes('Tablet') ? 'fixed' : 'initial'};
         }
-        .accordion.sticky.top{
-          top:${sticky.top.tablet}${sticky.topUnit.tablet};
-          }
-        .accordion.sticky.left{
-          left:${sticky.left.tablet}${sticky.leftUnit.tablet};
+      ${
+          ["left", "right"].map(val => `${accordion}.sticky.${val}{
+          ${val}:${sticky[val].tablet};
+        }`).join("")
         }
-        .accordion.sticky.right{
-          right:${sticky.right.tablet}${sticky.rightUnit.tablet};
+        ${["top", "bottom"].map(val => `${accordion}.sticky.${val}{
+        ${val}:${sticky[val].tablet}
+        }`).join("")
         }
-        .accordion.sticky.bottom{
-            bottom:${sticky.bottom.tablet}${sticky.bottomUnit.tablet};
+        ${sticky.verticalAlign === "center" ? `${accordion}.sticky.center{top:50%;  transform: translateY(-50%)}` : null
+        }
+        ${panelWrapper}{
+          ${
+            boxList.maxHeight.tablet > 0
+              ? 'max-height:' + boxList.maxHeight.tablet + 'px;'
+              : ''
           }
-        .accordion>.panel{
-                    ${
-                      boxList.maxHeight.tablet > 0
-                        ? 'max-height:' + boxList.maxHeight.tablet + 'px;'
-                        : ''
-                    }
           ${boxList.maxHeight.tablet > 0 ? 'overflow-y:auto;' : ''}
         }
-      .panel>.panel-table-container-order-list>.panel-table-list-items{
+      ${panelItem}{
         padding-top:${boxList.padding.tablet?.top};
         padding-bottom:${boxList.padding.tablet?.bottom};
         padding-right:${boxList.padding.tablet?.right};
       }
-      .panel>.panel-table-container-order-list{
+      ${panelLists}{
         padding-left:${boxList.padding.tablet?.left};
       }
-    .panel-table-container-order-list>.panel-table-list-items::marker{
-          color:${markup.color};
-          font-size:${markup.markupSize.tablet}${markup.markupUnit.tablet};
+      ${
+          markup.view === 'decimal'
+            ? `
+          
+        ${panelLists}{
+          list-style-type:decimal;
+          margin:0px;
+          margin-left:${boxList.padding.tablet?.left};
         }
-    .panel-table-container-order-list>.panel-table-list-items>span>i{
+        ${panelItem}::marker{
           color:${markup.color};
-          font-size:${markup.markupSize.tablet}${
-          markup.markupUnit.tablet
-        } !important;
+          font-size:${markup.markupSize.tablet};
         }
+        `
+        : `
+        ${panelLists}{
+          list-style-type:none;
+        }
+        ${panelLists}>li{
+          display:flex;
+          align-items:center;
+          gap:5px;
+        }
+        ${panelItem}>span>i{
+          color:${markup.color};
+          font-size:${markup.markupSize.tablet} !important;
+        }
+        `
+      }
 
       }
       @media screen and (max-width: 767px) {
-        .accordion.sticky {
-          width:100%;
-          z-index: ${sticky.zIndex.mobile};
+        ${accordion}.sticky {
+          width:${table.width.mobile};
+          z-index: ${sticky.zIndex.mobile} !important;
           position:${sticky.device.includes('Mobile') ? 'fixed' : 'initial'};
         }
-        .accordion.sticky.top{
-          top:${sticky.top.mobile}${sticky.topUnit.mobile};
-          }
-        .accordion.sticky.left{
-          left:${sticky.left.mobile}${sticky.leftUnit.mobile};
+        ${
+          ["left", "right"].map(val => `${accordion}.sticky.${val}{
+          ${val}:${sticky[val].mobile};
+        }`).join("")
         }
-        .accordion.sticky.right{
-          right:${sticky.right.mobile}${sticky.rightUnit.mobile};
+        ${["top", "bottom"].map(val => `${accordion}.sticky.${val}{
+          ${val}:${sticky[val].mobile}
+          }`).join("")
         }
-        .accordion.sticky.bottom{
-            bottom:${sticky.bottom.mobile}${sticky.bottomUnit.mobile};
+          ${sticky.verticalAlign === "center" ? `${accordion}.sticky.center{top:50%;  transform: translateY(-50%)}` : null
           }
-        .accordion>.panel{
-                    ${
-                      boxList.maxHeight.mobile > 0
-                        ? 'max-height:' + boxList.maxHeight.mobile + 'px;'
-                        : ''
-                    }
+        ${panelWrapper}{
+          ${
+            boxList.maxHeight.mobile > 0
+              ? 'max-height:' + boxList.maxHeight.mobile + 'px;'
+              : ''
+          }
           ${boxList.maxHeight.mobile > 0 ? 'overflow-y:auto;' : ''}
         }
-      .panel>.panel-table-container-order-list>.panel-table-list-items{
+      ${panelItem}{
         padding-top:${boxList.padding.mobile?.top};
         padding-bottom:${boxList.padding.mobile?.bottom};
         padding-right:${boxList.padding.mobile?.right};
       }
-      .panel>.panel-table-container-order-list{
+      ${panelLists}{
         padding-left:${boxList.padding.mobile?.left};
       }
-      .panel-table-container-order-list>.panel-table-list-items::marker{
-          color:${markup.color};
-          font-size:${markup.markupSize.mobile}${markup.markupUnit.mobile};
+      ${
+          markup.view === 'decimal'? `
+        ${panelLists}{
+          list-style-type:decimal;
+          margin:0px;
+          margin-left:${boxList.padding.mobile?.left};
         }
-      .panel-table-container-order-list>.panel-table-list-items>span>i{
+        ${panelItem}::marker{
           color:${markup.color};
-          font-size:${markup.markupSize.mobile}${
-          markup.markupUnit.mobile
-        } !important;
+          font-size:${markup.markupSize.mobile};
         }
+        `
+        : `
+        ${panelLists}{
+          list-style-type:none;
+        }
+        ${panelLists}>li{
+          display:flex;
+          align-items:center;
+          gap:5px;
+        }
+        ${panelItem}>span>i{
+          color:${markup.color};
+          font-size:${markup.markupSize.mobile} !important;
+        }
+        `
+      }
       }
       `}
       </style>

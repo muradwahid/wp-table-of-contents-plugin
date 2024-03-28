@@ -1,25 +1,25 @@
-# Copyright (C) 2023 bPlugins LLC
+# Copyright (C) 2024 bPlugins LLC
 # This file is distributed under the GPLv3.
 msgid ""
 msgstr ""
-"Project-Id-Version: Table of Content Block 2.0.0\n"
+"Project-Id-Version: Table of Content Block 1.0.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/table-of-content-block\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-12-10T11:47:32+00:00\n"
+"POT-Creation-Date: 2024-03-28T10:14:21+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.8.1\n"
-"X-Domain: table-of-contents\n"
+"X-Domain: b-blocks\n"
 
 #. Plugin Name of the plugin
 msgid "Table of Content Block"
 msgstr ""
 
 #. Description of the plugin
-msgid "Description of the Table Of Contents."
+msgid "The Table of Contents block automatically generates a table of contents for your WordPress post or page."
 msgstr ""
 
 #. Author of the plugin
@@ -30,42 +30,245 @@ msgstr ""
 msgid "http://bplugins.com"
 msgstr ""
 
-#: dist/editor.js:238
-#: dist/editor.js:7839
-msgid "title"
+#: dist/editor.js:1
+#: dist/editor.js:4390
+msgid "Table of Contents"
 msgstr ""
 
-#: dist/editor.js:238
-#: dist/editor.js:7848
+#: dist/editor.js:1
+#: dist/editor.js:4395
+msgid "Title"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:4404
 msgid "HTML Tag"
 msgstr ""
 
-#: dist/editor.js:238
-#: dist/editor.js:7859
+#: dist/editor.js:1
+#: dist/editor.js:4415
 msgid "Anchors By Tags"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:4481
+msgid "Settings"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:4483
+msgid "Minimize Box"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:4515
+msgid "Expand Icon"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:4547
+msgid "Collapse Icon"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6212
+#: dist/editor.js:6214
+msgid "Sticky"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6227
+msgid "Horizontal Align"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6242
+msgid "Vertical Align"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6292
+msgid "Z-Index"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6344
+msgid "Box"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6347
+msgid "Width"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6353
+#: dist/editor.js:6526
+msgid "Background Color"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6360
+msgid "Border"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6363
+#: dist/editor.js:7100
+msgid "Box Shadow"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6383
+#: dist/editor.js:6590
+msgid "Padding"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6524
+msgid "Header"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6538
+#: dist/editor.js:6632
+#: dist/editor.js:6658
+#: dist/editor.js:6856
+#: dist/editor.js:6890
+#: dist/editor.js:7045
+#: dist/editor.js:7063
+#: dist/editor.js:7255
+#: dist/editor.js:7289
+msgid "Text Color"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6550
+msgid "Icon Color"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6562
+msgid "Separator Width"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6572
+msgid "Separator Color"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6586
+msgid "List Item"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6609
+msgid "Max Height"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6645
+#: dist/editor.js:6671
+msgid "Underline"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6692
+msgid "Color"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6708
+#: dist/editor.js:7090
+msgid "Size"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6747
+msgid "Slide"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6750
+#: dist/editor.js:6946
+#: dist/editor.js:7154
+msgid "Title Color"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6758
+#: dist/editor.js:6871
+#: dist/editor.js:6905
+#: dist/editor.js:7270
+#: dist/editor.js:7304
+msgid "Bar Color"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6773
+#: dist/editor.js:6965
+#: dist/editor.js:7173
+msgid "Space Top"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6788
+#: dist/editor.js:6980
+#: dist/editor.js:7188
+msgid "Space Bottom"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6816
+#: dist/editor.js:7006
+#: dist/editor.js:7214
+msgid "List Space Bottom"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6830
+#: dist/editor.js:7020
+#: dist/editor.js:7229
+msgid "List Font Size"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:6943
+msgid "Timeline"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:7116
+msgid "Tree Color"
+msgstr ""
+
+#: dist/editor.js:1
+#: dist/editor.js:7151
+msgid "List"
 msgstr ""
 
 #: inc/block.json
 msgctxt "block title"
-msgid "Table of Contents"
+msgid "Table of Content Block"
 msgstr ""
 
 #: inc/block.json
 msgctxt "block description"
-msgid "Description of Table of Contents."
+msgid "The Table of Contents block automatically generates a table of contents for your WordPress post or page."
 msgstr ""
 
 #: inc/block.json
 msgctxt "block keyword"
-msgid "hello"
+msgid "table"
 msgstr ""
 
 #: inc/block.json
 msgctxt "block keyword"
-msgid "block"
+msgid "content"
 msgstr ""
 
 #: inc/block.json
 msgctxt "block keyword"
-msgid "gutenberg"
+msgid "table of contents"
 msgstr ""

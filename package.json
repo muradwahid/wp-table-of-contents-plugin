@@ -1,7 +1,7 @@
 {
   "name": "table-of-contents",
   "version": "1.0.0",
-  "description": "Discription of Table of Contents",
+  "description": "Description of Table of Contents",
   "main": "index.js",
   "scripts": {
     "lint": "eslint src",
@@ -18,6 +18,7 @@
   "author": "Wasek Billah",
   "license": "ISC",
   "dependencies": {
+    "immer": "^10.0.4",
     "react-icons": "^4.12.0",
     "swiper": "^11.0.5"
   },

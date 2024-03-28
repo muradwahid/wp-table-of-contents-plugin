@@ -1,23 +1,32 @@
-import { useEffect,Fragment } from 'react';
-import Settings from './components/Settings/Settings';
+import { InspectorControls } from '@wordpress/block-editor';
+import { Fragment, useEffect, useState } from 'react';
+import TabPanel from './components/Panel/TabPanel/TabPanel';
+import ContentSettings from './components/Settings/ContentSettings/ContentSettings';
+import StyleSettings from './components/Settings/StyleSettings/StyleSettings';
+import SmoothScroll from './components/SmoothScroll';
 import TableContents from './components/TableContents/TableContents';
 import List from './components/TableContents/Themes/List/List';
 import Slide from './components/TableContents/Themes/Slide/Slide';
 import Timeline from './components/TableContents/Themes/Timeline/Timeline';
-import SmoothScroll from './components/SmoothScroll';
 const Edit = (props) => {
   const { className, setAttributes, clientId, attributes } = props;
-  const { theme } = attributes;
-
+  const { theme,cId } = attributes;
+  const [tab, setTab] = useState("content");
   useEffect(() => {
     clientId && setAttributes({ cId: clientId.substring(0, 10) });
   }, [clientId]); // Set & Update clientId to cId
 
   return (
     <Fragment>
+      <InspectorControls>
+        <TabPanel tab={tab} setTab={setTab} />
+        {tab === "content" && <ContentSettings attributes={attributes} setAttributes={setAttributes} />}
+        {
+          tab === "style" && <StyleSettings attributes={attributes} setAttributes={setAttributes} />
+        }
+      </InspectorControls>
       <SmoothScroll />
-      <div className={className} id={`bppb-table-of-contents-${clientId}`}>
-        <Settings attributes={attributes} setAttributes={setAttributes} />
+      <div className={className} id={`bppb-table-of-contents-${cId}`}>
         {(() => {
           switch (theme) {
             case 'slide':

@@ -1,9 +1,9 @@
 === Table of Content Block ===
 Contributors: abuhayat
 Donate link: https://gum.co/wpdonate/
-Tags: block, key1, key2, key3, Gutenberg block
+Tags: block, table, content, table of contents, Gutenberg block
 Requires at least: 6.2+
-Tested up to: 6.4.1
+Tested up to: 6.4.3
 Stable tag: 2.0.0
 Requires PHP: 7.1
 License: GPLv3 or later
@@ -13,15 +13,37 @@ Description of the Table of Contents
 
 == Description ==
 
-Large Description
+The Table of Contents block allows you to automatically generate a table of contents for your WordPress post or page. It helps visitors easily navigate your content, especially on long-form articles.
 
 
-**[Demos](https://bblockswp.com/demo/block-name)**
+**[Demos](https://bblockswp.com/demo/table-of-content-block)**
 
 
 = Features =
-- **Fully Customizable**: All the options you need to arrange the showcase to your liking are available here.
 
+- **Automatic Generation**: The block automatically generates a table of contents based on the headings in your post or page.
+
+- **Customizable Styles**: You can customize the appearance of the table of contents, including font, size, and colors.
+
+- **Multiple Levels**: The block supports multiple levels of headings, allowing you to create a hierarchical table of contents.
+
+- **Smooth Scrolling**: Clicking on a table of contents entry smoothly scrolls the page to the corresponding heading.
+
+- **Anchor Links**: The table of contents entries are linked to the corresponding headings using anchor links.
+
+- **Gutenberg Integration**: The block seamlessly integrates with the Gutenberg editor, making it easy to add a table of contents to your content.
+
+- **Responsive Design**: The table of contents is designed to be responsive and adapt to different screen sizes.
+
+
+
+Benefits:
+
+- **Improved Navigation**: Provides an easy way for visitors to navigate long-form content.
+
+- **Enhanced User Experience**: Makes it easier for visitors to find the information they are looking for.
+
+- **SEO Optimization**: Helps search engines understand the structure of your content, which can improve your SEO rankings.
 
 = How to use =
 - First, install the Table of Contents plugin
@@ -38,20 +60,22 @@ Large Description
 
 = ⭐ Check out the Parent Plugin of this plugin- =
 
-🔥 **[b Blocks](https://bblockswp.com/)** – Best gutenberg blocks collections for WordPress.
+🔥 **[b Blocks](https://bblockswp.com)** – Best gutenberg blocks collections for WordPress.
 
 
 = ⭐ Check out our other WordPress Plugins- =
 
-🔥 **[Html5 Audio Player](https://audioplayerwp.com/)** – Best audio player plugin for WordPress.
+🔥 **[Html5 Audio Player](https://bplugins.com/products/html5-audio-player/)** – Play .mp3, .wav, and .ogg audio files in WordPress.
 
-🔥 **[Html5 Video Player](https://wpvideoplayer.com/)** – Best video player plugin for WordPress.
+🔥 **[Html5 Video Player](https://bplugins.com/products/html5-video-player/)** – Best video player plugin for WordPress.
 
-🔥 **[PDF Poster](http://pdfposter.com/)** – A fully-featured PDF Viewer Plugin for WordPress.
+🔥 **[PDF Poster](https://bplugins.com/products/pdf-poster/)** – A fully-featured PDF Viewer Plugin for WordPress.
 
-🔥 **[StreamCast](https://wordpress.org/plugins/streamcast)** – A fully-featured Radio Player Plugin for WordPress.
+🔥 **[Document Embedder](https://bplugins.com/products/document-embedder/)** – Embed Word, Excel, PowerPoint, Apple Pages, Psd, Pdf and more.
 
-🔥 **[3D Viewer](https://3d-viewer.bplugins.com/)** – Display interactive 3D models on the webs.
+🔥 **[3D Viewer](https://bplugins.com/products/3d-viewer/)** – Display interactive 3D models on the webs.
+
+🔥 **[Advanced Post Block](https://bplugins.com/products/advanced-post-block/)** – Display your Posts, Custom Post Content and Blogs in a professional way!
 
 
 == Installation ==
@@ -92,7 +116,7 @@ You can use unlimited times as you want.
 
 = Where can I get support? =
 
-You can post your questions on the [support forum here](https://wordpress.org/support/plugin/block-directory/)
+You can post your questions on the [support forum here](https://wordpress.org/support/plugin/table-of-content-block/)
 
 
 == Screenshots ==

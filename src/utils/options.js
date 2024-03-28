@@ -39,3 +39,13 @@ export const markups = [
   { label: 'Numbers', value: 'decimal' },
   { label: 'Bullets', value: 'disc' },
 ];
+
+export const colorOptions = [
+  { name: 'Orange', color: '#F57C00' },
+  { name: 'Purple', color: '#9C27B0' },
+  { name: 'Gray', color: '#9E9E9E' },
+  { name: 'Cyan', color: '#00BCD4' },
+  { name: 'Pink', color: '#E91E63' },
+  { name: 'Lime', color: '#CDDC39' },
+  { name: 'Brown', color: '#795548' },
+]

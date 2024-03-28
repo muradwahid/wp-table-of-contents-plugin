@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import DynamicTag from '../DynamicTag/DynamicTag';
 import Style from '../Style/Style';
+import NoHeading from '../NoHeading/NoHeading';
 
 const TableFront = ({ attributes }) => {
   const accordion = useRef();
@@ -46,15 +47,7 @@ const TableFront = ({ attributes }) => {
       <div
         onClick={() => setRendered(!rendered)}
         ref={accordion}
-        className={`accordion poppinsFont ${sticky.toggle ? 'sticky' : ''} ${
-          sticky.horizonAlign === 1 ? 'left' : 'right'
-        } ${
-          sticky.verticalAlign === 1
-            ? 'top'
-            : sticky.verticalAlign === 2
-            ? 'center'
-            : 'bottom'
-        }  `}
+        className={`accordion poppinsFont ${sticky.toggle ? 'sticky' : ''} ${sticky.horizonAlign} ${sticky.verticalAlign}`}
       >
         <div
           ref={titleRef}
@@ -98,7 +91,7 @@ const TableFront = ({ attributes }) => {
             <ol className="panel-table-container-order-list">
               {headings.map(
                 (headingElement, idx) =>
-                  headingElement.contents.length > 1 && (
+                  headingElement.contents.length > 0 && (
                     <>
                       <li
                         className="panel-table-list-items"
@@ -126,9 +119,7 @@ const TableFront = ({ attributes }) => {
                   )
               )}
             </ol>
-          ) : (
-            <p>No headings were found on this page</p>
-          )}
+          ) : <NoHeading/>}
         </div>
       </div>
     </>

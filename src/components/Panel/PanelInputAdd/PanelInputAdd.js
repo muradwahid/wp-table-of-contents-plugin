@@ -1,5 +1,6 @@
 import { Popover } from '@wordpress/components';
 import { useEffect, useRef, useState } from '@wordpress/element';
+import { BiPlus } from '../../../utils/icons';
 
 const PanelInputAdd = ({attributes,setAttributes }) => {
   const { sticky } = attributes;
@@ -28,7 +29,7 @@ const PanelInputAdd = ({attributes,setAttributes }) => {
     <div>
       <ul className="anchor-list-admin-panel">
         {sticky.device &&
-          sticky.device.sort().map((tag, idx) => (
+          sticky?.device?.sort()?.map((tag, idx) => (
             <li key={idx} className="anchor-admin-panel-list">
               <i
                 onClick={() =>
@@ -47,9 +48,11 @@ const PanelInputAdd = ({attributes,setAttributes }) => {
         {sticky.device && sticky.device.length < 3 && (
           <li
             onClick={() => setPopoverVisible(!isPopoverVisible)}
-            className="anchor-admin-panel-list-plus-icon"
+            className="anchor-admin-panel-list"
+            style={{cursor:"pointer"}}
           >
-            <i className="fa-solid fa-square-plus"></i>
+            {/* <i className="fa-solid fa-plus"></i> */}
+            <BiPlus/>
           </li>
         )}
         <input

@@ -1,6 +1,7 @@
 import {useState,useEffect} from 'react';
 import TimelineStyle from '../Style/TimelineStyle';
 import DynamicTag from '../DynamicTag/DynamicTag';
+import NoHeading from '../NoHeading/NoHeading';
 
 const TimelineFront = ({attributes}) => {
     const { title, slideTitle, anchorsByTags, sticky,headings } = attributes;
@@ -35,13 +36,7 @@ const TimelineFront = ({attributes}) => {
         onClick={() => setRendered(!rendered)}
         className={`timeline-container poppinsFont ${
           sticky.toggle ? 'sticky' : ''
-        } ${sticky.horizonAlign === 1 ? 'left' : 'right'} ${
-          sticky.verticalAlign === 1
-            ? 'top'
-            : sticky.verticalAlign === 2
-            ? 'center'
-            : 'bottom'
-        }  `}
+          } ${sticky.horizonAlign} ${sticky.verticalAlign}  `}
       >
         <div className="timeline-title-container">
           <DynamicTag
@@ -52,7 +47,7 @@ const TimelineFront = ({attributes}) => {
           />
         </div>
         <>
-          {headings?.length > 1 ? (
+          {headings?.length > 0 ? (
             <ul className="timeline-list-items">
               {Array.from(headings).map((headingElement, idx) => (
                 <>
@@ -70,13 +65,7 @@ const TimelineFront = ({attributes}) => {
                 </>
               ))}
             </ul>
-          ) : (
-            <div className="slide-list-items">
-              <p className="slide-list">
-                <a href="">No headings were found on this page</a>
-              </p>
-            </div>
-          )}
+          ) : <NoHeading/>}
         </>
       </div>
     </>

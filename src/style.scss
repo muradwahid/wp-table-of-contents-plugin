@@ -16,7 +16,7 @@ html {
   * {
     box-sizing: border-box;
   }
-
+ 
   .prefixBlockName {
     display: inline-block;
   }
@@ -53,4 +53,8 @@ html {
       padding: 0 18px;
     }
   }
+}
+
+.panel-table-container-order-list{
+  margin: 0;
 }

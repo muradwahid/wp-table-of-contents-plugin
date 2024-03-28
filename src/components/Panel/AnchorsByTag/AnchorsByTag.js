@@ -1,9 +1,10 @@
 import { Popover } from '@wordpress/components';
-import {useRef,useEffect,useState} from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { BiPlus } from '../../../utils/icons';
 
 const AnchorsByTag = ({ attributes, setAttributes }) => {
   const { anchorsByTags } = attributes;
-  const [visible,setVisible]=useState(false)
+  const [visible, setVisible] = useState(false)
   const refHeadingTag = useRef()
   const addTag = (tag) => {
     const restTag = [...anchorsByTags];
@@ -13,10 +14,9 @@ const AnchorsByTag = ({ attributes, setAttributes }) => {
     }
   }
   useEffect(() => {
-    const handle=(e)=>{
+    const handle = (e) => {
       if (!refHeadingTag?.current?.contains(e.target)) {
         setVisible(false)
-        
       }
     }
     document.addEventListener('mousedown', handle)
@@ -44,9 +44,12 @@ const AnchorsByTag = ({ attributes, setAttributes }) => {
         {anchorsByTags && anchorsByTags.length < 6 && (
           <li
             onClick={() => setVisible(!visible)}
-            className="anchor-admin-panel-list-plus-icon"
+            style={{ cursor: "pointer" }}
+            className="anchor-admin-panel-list"
           >
-            <i className="fa-solid fa-square-plus"></i>
+            {/* <i className="fa-solid fa-square-plus"></i> */}
+            {/* <i className="fa-solid fa-plus"></i> */}
+            <BiPlus/>
           </li>
         )}
         <input

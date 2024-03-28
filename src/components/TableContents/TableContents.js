@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useRef, useState } from 'react';
 import DynamicTag from '../DynamicTag/DynamicTag';
+import NoHeading from '../NoHeading/NoHeading';
 import SmoothScroll from '../SmoothScroll';
 import Style from '../Style/Style';
 const TableContents = ({ attributes, setAttributes }) => {
@@ -17,7 +18,7 @@ const TableContents = ({ attributes, setAttributes }) => {
     sticky,
     headings,
   } = attributes;
-  const [rendered, setRendered] = useState(boxList.padding.desktop.bottom||false);
+  const [rendered, setRendered] = useState(boxList.padding.desktop.bottom || false);
   useEffect(() => {
     const root = document.querySelector('.wp-block-post-content');
     const selectorString = anchorsByTags.join(', ');
@@ -46,6 +47,7 @@ const TableContents = ({ attributes, setAttributes }) => {
         const span = document.createElement('span');
         span.setAttribute('id', `bppb-heading-anchor-${i}`);
         headingElement.insertAdjacentElement('afterbegin', span);
+
       }
     }
     if (removeAttrHeading?.tagName.toLowerCase() !== 'div') {
@@ -62,6 +64,7 @@ const TableContents = ({ attributes, setAttributes }) => {
   useEffect(() => {
     let panel = accordionPanel.current;
     titleRef.current.addEventListener('click', function () {
+      
       if (
         parseInt(panel.style.height.substring(0, panel.style.height.length - 2))
       ) {
@@ -83,9 +86,8 @@ const TableContents = ({ attributes, setAttributes }) => {
     title.tag,
     anchorsByTags,
     markup.view,
-    minimize.toggle
+    minimize.toggle,
   ]);
-
   return (
     <>
       <Style attributes={attributes} />
@@ -93,15 +95,7 @@ const TableContents = ({ attributes, setAttributes }) => {
       <div
         onClick={() => setRendered(!rendered)}
         ref={accordion}
-        className={`accordion poppinsFont ${sticky.toggle ? 'sticky' : ''} ${
-          sticky.horizonAlign === 1 ? 'left' : 'right'
-        } ${
-          sticky.verticalAlign === 1
-            ? 'top'
-            : sticky.verticalAlign === 2
-            ? 'center'
-            : 'bottom'
-        }  `}
+        className={`accordion poppinsFont ${sticky.toggle ? 'sticky' : ''} ${sticky.horizonAlign} ${sticky.verticalAlign}  `}
       >
         <div ref={titleRef} className="accordion-title">
           <DynamicTag
@@ -148,9 +142,8 @@ const TableContents = ({ attributes, setAttributes }) => {
                           </span>
                         )}
                         <a
-                          className={`table-content-anchor-list ${
-                            idx === contentsAttr ? 'item-active' : ''
-                          }`}
+                          className={`table-content-anchor-list ${idx === contentsAttr ? 'item-active' : ''
+                            }`}
                           href={`#bppb-heading-anchor-${idx}`}
                         >
                           {headingElement.textContent}
@@ -160,13 +153,8 @@ const TableContents = ({ attributes, setAttributes }) => {
                   )
               )}
             </ol>
-          ) : (
-            <div style={{ padding: '14px 0px' }}>
-              <p style={{ margin: '0px' }}>
-                No headings were found on this page
-              </p>
-            </div>
-          )}
+          ) : <NoHeading />
+          }
         </div>
       </div>
     </>

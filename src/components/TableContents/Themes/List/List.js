@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import DynamicTag from '../../../DynamicTag/DynamicTag';
 import ListStyle from '../../../Style/ListStyle';
+import NoHeading from '../../../NoHeading/NoHeading';
 
 const List = ({ attributes, setAttributes }) => {
   const { title, slideTitle, anchorsByTags, sticky } = attributes;
@@ -52,13 +53,7 @@ const List = ({ attributes, setAttributes }) => {
         onClick={() => setRendered(!rendered)}
         className={`list-container poppinsFont ${
           sticky.toggle ? 'sticky' : ''
-        } ${sticky.horizonAlign === 1 ? 'left' : 'right'} ${
-          sticky.verticalAlign === 1
-            ? 'top'
-            : sticky.verticalAlign === 2
-            ? 'center'
-            : 'bottom'
-        }`}
+          } ${sticky.horizonAlign} ${sticky.verticalAlign}`}
       >
         <div className="list-title">
           <DynamicTag
@@ -69,7 +64,7 @@ const List = ({ attributes, setAttributes }) => {
           />
         </div>
         <>
-          {content?.length > 1 ? (
+          {content?.length > 0 ? (
             <div className="list-items">
               {Array.from(content).map(
                 (headingElement, idx) =>
@@ -90,13 +85,7 @@ const List = ({ attributes, setAttributes }) => {
                   )
               )}
             </div>
-          ) : (
-            <div className="slide-list-items">
-              <p className="slide-list">
-                <a href="">No headings were found on this page</a>
-              </p>
-            </div>
-          )}
+          ) : <NoHeading/>}
         </>
       </div>
     </>

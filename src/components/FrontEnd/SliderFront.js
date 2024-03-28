@@ -1,6 +1,7 @@
 import {useEffect,useState} from 'react';
 import DynamicTag from '../DynamicTag/DynamicTag';
 import SlideStyle from '../Style/SlideStyle';
+import NoHeading from '../NoHeading/NoHeading';
 
 const SliderFront = ({attributes}) => {
     const [contentsAttr, setContentsAttr] = useState();
@@ -41,13 +42,7 @@ const SliderFront = ({attributes}) => {
         onClick={() => setRendered(!rendered)}
         className={`slide-container poppinsFont ${
           sticky.toggle ? 'sticky' : ''
-        } ${sticky.horizonAlign === 1 ? 'left' : 'right'} ${
-          sticky.verticalAlign === 1
-            ? 'top'
-            : sticky.verticalAlign === 2
-            ? 'center'
-            : 'bottom'
-        }  `}
+          } ${sticky.horizonAlign} ${sticky.verticalAlign} `}
       >
         <div className="slide-title">
           <DynamicTag
@@ -58,7 +53,7 @@ const SliderFront = ({attributes}) => {
           />
         </div>
         <>
-          {headings?.length > 1 ? (
+          {headings?.length > 0 ? (
             <div className="slide-list-items">
               {Array.from(headings).map((headingElement, idx) => (
                 <>
@@ -79,13 +74,7 @@ const SliderFront = ({attributes}) => {
                 </>
               ))}
             </div>
-          ) : (
-            <div className="slide-list-items">
-              <p className="slide-list">
-                <a href="">No headings were found on this page</a>
-              </p>
-            </div>
-          )}
+          ) : <NoHeading/>}
         </>
       </div>
     </>

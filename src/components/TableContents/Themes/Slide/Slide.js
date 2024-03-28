@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import DynamicTag from '../../../DynamicTag/DynamicTag';
 import SlideStyle from '../../../Style/SlideStyle';
+import NoHeading from '../../../NoHeading/NoHeading';
 
 const Slide = ({ attributes,setAttributes }) => {
   const { title, slideTitle, anchorsByTags, sticky,headings } = attributes;
@@ -53,24 +54,20 @@ const Slide = ({ attributes,setAttributes }) => {
         onClick={() => setRendered(!rendered)}
         className={`slide-container poppinsFont ${
           sticky.toggle ? 'sticky' : ''
-        } ${sticky.horizonAlign === 1 ? 'left' : 'right'} ${
-          sticky.verticalAlign === 1
-            ? 'top'
-            : sticky.verticalAlign === 2
-            ? 'center'
-            : 'bottom'
-        }  `}
+          } ${sticky.horizonAlign} ${sticky.verticalAlign}`}
       >
+          <div className="slide-titleSubWrapper">
         <div className="slide-title">
-          <DynamicTag
-            className="slide-title-heading"
-            style={{ color: slideTitle.titleColor }}
-            tagName={title.tag}
-            value={title.text}
-          />
+            <DynamicTag
+              className="slide-title-heading"
+              style={{ color: slideTitle.titleColor }}
+              tagName={title.tag}
+              value={title.text}
+            />
+          </div>
         </div>
         <>
-          {content?.length > 1 ? (
+          {content?.length > 0 ? (
             <div className="slide-list-items">
               {Array.from(content).map(
                 (headingElement, idx) =>
@@ -94,13 +91,7 @@ const Slide = ({ attributes,setAttributes }) => {
                   )
               )}
             </div>
-          ) : (
-            <div className="slide-list-items">
-              <p className="slide-list">
-                <a href="">No headings were found on this page</a>
-              </p>
-            </div>
-          )}
+          ) : <NoHeading/>}
         </>
       </div>
     </>

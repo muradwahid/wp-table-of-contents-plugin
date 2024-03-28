@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import DynamicTag from '../DynamicTag/DynamicTag';
 import ListStyle from '../Style/ListStyle';
+import NoHeading from '../NoHeading/NoHeading';
 
 const ListFront = ({ attributes }) => {
   const { title, slideTitle, anchorsByTags, sticky, headings } = attributes;
@@ -33,15 +34,8 @@ const ListFront = ({ attributes }) => {
       <ListStyle attributes={attributes} />
       <div
         onClick={() => setRendered(!rendered)}
-        className={`list-container poppinsFont ${
-          sticky.toggle ? 'sticky' : ''
-        } ${sticky.horizonAlign === 1 ? 'left' : 'right'} ${
-          sticky.verticalAlign === 1
-            ? 'top'
-            : sticky.verticalAlign === 2
-            ? 'center'
-            : 'bottom'
-        }`}
+        className={`list-container poppinsFont ${sticky.toggle ? 'sticky' : ''
+          } ${sticky.horizonAlign} ${sticky.verticalAlign}`}
       >
         <div className="list-title">
           <DynamicTag
@@ -52,16 +46,15 @@ const ListFront = ({ attributes }) => {
           />
         </div>
         <>
-          {headings?.length > 1 ? (
+          {headings?.length > 0 ? (
             <div className="list-items">
               {Array.from(headings).map((headingElement, idx) => (
                 <>
                   <p className="list-item" key={idx}>
                     <a
                       onClick={() => setContentsAttr(idx)}
-                      className={`${
-                        idx === Number(contentsAttr) ? 'item-active' : ''
-                      }`}
+                      className={`${idx === Number(contentsAttr) ? 'item-active' : ''
+                        }`}
                       href={`#${headingElement.id}`}
                     >
                       {headingElement.contents}
@@ -70,13 +63,7 @@ const ListFront = ({ attributes }) => {
                 </>
               ))}
             </div>
-          ) : (
-            <div className="slide-list-items">
-              <p className="slide-list">
-                <a href="">No headings were found on this page</a>
-              </p>
-            </div>
-          )}
+          ) : <NoHeading/>}
         </>
       </div>
     </>

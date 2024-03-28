@@ -1,32 +1,44 @@
+/* eslint-disable no-unused-vars */
 import React from 'react';
 import {
   getBackgroundCSS,
+  getBorderCSS,
   getMultiShadowCSS,
 } from '../../../../Components/utils/getCSS';
+import { boxCss } from '../../utils/functions';
 
 const SlideStyle = ({ attributes }) => {
-  const { table, slideTitle, slideList, sticky, boxList } = attributes;
+  const { table, slideTitle, slideList, sticky, boxList, cId } = attributes;
+  const blockWrapper = `#bppb-table-of-contents-${cId}`;
+  const slideContainer = `${blockWrapper} .slide-container`;
+  const titleWrapper = `${slideContainer} .slide-titleSubWrapper`;
+  const subTitleWrapper = `${titleWrapper} .slide-title`;
+  const title = `${subTitleWrapper} .slide-title-heading`;
+  const slideListWrapper = `${slideContainer} .slide-list-items`;
+  const list = `${slideListWrapper} .slide-list`;
   return (
     <>
       <style>
         {`
 .slide-title {
   position: relative;
+  margin-top:${slideTitle.space.desktop};
+  margin-bottom: ${slideTitle.spaceBottom.desktop};
   margin-left: 8px;
+}
+.slide-titleSubWrapper{
   transition: all 0.3s ease-in;
+  display: flex;
 }
 
 .slide-title-heading {
-  margin-left: 30px;
+  margin:0px;
+  margin-left: 30px !important;
   transition: all 0.3s ease-in;
   opacity: 0;
-  margin-top:${slideTitle.space.desktop}${slideTitle.spaceUnit.desktop};
-  margin-bottom: ${slideTitle.spaceBottom.desktop}${
-          slideTitle.spaceBottomUnit.desktop
-        };
 }
-.slide-container:hover>.slide-title>.slide-title-heading {
-  margin-left: 8px;
+.slide-container:hover>.slide-titleSubWrapper>.slide-title>.slide-title-heading {
+  margin-left: 8px !important;
   opacity: 1;
 }
 .slide-title::after {
@@ -55,7 +67,7 @@ const SlideStyle = ({ attributes }) => {
   position: relative;
   margin: 0;
   margin-left: 0px;
-  margin-bottom:${slideList.space.desktop}${slideList.spaceUnit.desktop};
+  margin-bottom:${slideList.space.desktop};
 }
 .slide-list>a{
   margin-left: 30px;
@@ -69,7 +81,7 @@ const SlideStyle = ({ attributes }) => {
 }
 .slide-list-items>.slide-list>a{
   color:${boxList.nTxtColor};
-  font-size:${slideList.fontSize.desktop}${slideList.fontUnit.desktop};
+  font-size:${slideList.fontSize.desktop};
 }
 .slide-list-items>.slide-list>a:hover{
     color:${boxList.hTxtColor};
@@ -95,165 +107,127 @@ const SlideStyle = ({ attributes }) => {
 
 
 .slide-container{
-  border: ${table.boxBWidth}px solid ${table.boxBColor};
-  border-radius: ${table.boxBRadius}px;
   ${getBackgroundCSS(table.bgColor)};
   box-shadow: ${getMultiShadowCSS(table.shadow)};
-  padding-top:${table.padding.desktop?.top};
-  padding-bottom:${table.padding.desktop?.bottom};
-  padding-left:${table.padding.desktop?.left};
-  padding-right:${table.padding.desktop?.right};
+padding:${boxCss(table.padding.desktop)};
+  ${getBorderCSS(table.border)}
 }
 
 
 
 .slide-container.sticky {
-  border: ${table.boxBWidth}px solid ${table.boxBColor};
-  border-radius: ${table.boxBRadius}px;
+  width:${table.width.desktop};
   ${getBackgroundCSS(table.bgColor)};
   box-shadow: ${getMultiShadowCSS(table.shadow)};
-  padding-top:${table.padding.desktop?.top};
-  padding-bottom:${table.padding.desktop?.bottom};
-  padding-left:${table.padding.desktop?.left};
-  padding-right:${table.padding.desktop?.right};
-          z-index: ${sticky.zIndex.desktop};
-          position:fixed;
-        }
-        ${
-          sticky.horizonAlign === 1
-            ? `.slide-container.sticky.left{
-          left:${sticky.left.desktop}${sticky.leftUnit.desktop};
-        }`
-            : `.slide-container.sticky.right{
-          right:${sticky.right.desktop}${sticky.rightUnit.desktop};
-        }`
-        }
-        ${
-          sticky.verticalAlign === 1
-            ? `.slide-container.sticky.top{
-          top:${sticky.top.desktop}${sticky.topUnit.desktop};
-          }`
-            : sticky.verticalAlign === 2
-            ? `.slide-container.sticky.center{top:50%;  transform: translateY(-50%)}`
-            : `.slide-container.sticky.bottom{
-            bottom:${sticky.bottom.desktop}${sticky.bottomUnit.desktop};
-          }`
-        }
-        
-@media screen and (min-width: 1024px) {
-          .slide-container{
-            padding-top:${table.padding.desktop?.top};
-            padding-bottom:${table.padding.desktop?.bottom};
-            padding-left:${table.padding.desktop?.left};
-            padding-right:${table.padding.desktop?.right};
+padding:${boxCss(table.padding.desktop)};
+  z-index: ${sticky.zIndex.desktop} !important;
+  position:fixed;
+}
+${["left", "right"].map(val => `.slide-container.sticky.${val}{
+${val}:${sticky[val].desktop};
+}`).join("")
           }
-        .slide-container.sticky {
-          width:617px;
-          z-index: ${sticky.zIndex.desktop};
-          position:${sticky.device.includes('Desktop') ? 'fixed' : 'initial'};
-        }
-        .slide-container.sticky.top{
-          top:${sticky.top.desktop}${sticky.topUnit.desktop};
+${["top", "bottom"].map(val => `.slide-container.sticky.${val}{
+${val}:${sticky[val].desktop}
+}`).join("")
           }
-        .slide-container.sticky.left{
-          left:${sticky.left.desktop}${sticky.leftUnit.desktop};
-        }
-        .slide-container.sticky.right{
-          right:${sticky.right.desktop}${sticky.rightUnit.desktop};
-        }
-        .slide-container.sticky.bottom{
-            bottom:${sticky.bottom.desktop}${sticky.bottomUnit.desktop};
+${sticky.verticalAlign === "center" ? `.slide-container.sticky.center{top:50%;  transform: translateY(-50%)}` : null
           }
 
-        .slide-title-heading {
-          margin-top:${slideTitle.space.desktop}${slideTitle.spaceUnit.desktop};
-          margin-bottom: ${slideTitle.spaceBottom.desktop}${
-          slideTitle.spaceBottomUnit.dekstop
-        };
-        }
+        
+@media screen and (min-width: 1024px) {
+.slide-container{
+padding:${boxCss(table.padding.desktop)}
+}
+.slide-container.sticky {
+  width:${table.width.desktop};
+  z-index: ${sticky.zIndex.desktop} !important;
+  position:${sticky.device.includes('Desktop') ? 'fixed' : 'initial'};
+}
+
+${["left", "right"].map(val => `.slide-container.sticky.${val}{
+  ${val}:${sticky[val].desktop};
+}`).join("")
+          }
+${["top", "bottom"].map(val => `.slide-container.sticky.${val}{
+${val}:${sticky[val].desktop}
+}`).join("")
+          }
+        ${sticky.verticalAlign === "center" ? `.slide-container.sticky.center{top:50%;  transform: translateY(-50%)}` : null
+          }
+
+        .slide-title {
+  margin-top:${slideTitle.space.desktop};
+  margin-bottom: ${slideTitle.spaceBottom.desktop};
+}
         .slide-list {
-          margin-bottom:${slideList.space.desktop}${
-          slideList.spaceUnit.desktop
-        };
+          margin-bottom:${slideList.space.desktop};
         }
         .slide-list-items>.slide-list>a{
-          font-size:${slideList.fontSize.desktop}${slideList.fontUnit.desktop};
+          font-size:${slideList.fontSize.desktop};
         }
         }
 
 @media (min-width: 768px) and (max-width: 1023px) {
           .slide-container{
-            padding-top:${table.padding.tablet?.top};
-            padding-bottom:${table.padding.tablet?.bottom};
-            padding-left:${table.padding.tablet?.left};
-            padding-right:${table.padding.tablet?.right};
+  padding:${boxCss(table.padding.tablet)}
           }
         .slide-container.sticky {
-          width:100%;
-          z-index: ${sticky.zIndex.tablet};
+          width:${table.width.tablet};
+          z-index: ${sticky.zIndex.tablet} !important;
           position:${sticky.device.includes('Tablet') ? 'fixed' : 'initial'};
         }
-        .slide-container.sticky.top{
-          top:${sticky.top.tablet}${sticky.topUnit.tablet};
+        ${["left", "right"].map(val => `.slide-container.sticky.${val}{
+            ${val}:${sticky[val].tablet};
+          }`).join("")
           }
-        .slide-container.sticky.left{
-          left:${sticky.left.tablet}${sticky.leftUnit.tablet};
-        }
-        .slide-container.sticky.right{
-          right:${sticky.right.tablet}${sticky.rightUnit.tablet};
-        }
-        .slide-container.sticky.bottom{
-            bottom:${sticky.bottom.tablet}${sticky.bottomUnit.tablet};
+        ${["top", "bottom"].map(val => `.slide-container.sticky.${val}{
+        ${val}:${sticky[val].tablet}
+        }`).join("")
           }
-        .slide-title-heading {
-          margin-top:${slideTitle.space.tablet}${slideTitle.spaceUnit.tablet};
-          margin-bottom: ${slideTitle.spaceBottom.tablet}${
-          slideTitle.spaceBottomUnit.tablet
-        };
+        ${sticky.verticalAlign === "center" ? `.slide-container.sticky.center{top:50%;  transform: translateY(-50%)}` : null
+          }
+        .slide-title {
+          margin-top:${slideTitle.space.tablet};
+          margin-bottom: ${slideTitle.spaceBottom.tablet};
         }
         .slide-list {
-          margin-bottom:${slideList.space.tablet}${slideList.spaceUnit.tablet};
+          margin-bottom:${slideList.space.tablet};
         }
         .slide-list-items>.slide-list>a{
-          font-size:${slideList.fontSize.tablet}${slideList.fontUnit.tablet};
+          font-size:${slideList.fontSize.tablet};
         }
         }
 
         @media screen and (max-width: 767px) {
           .slide-container{
-            padding-top:${table.padding.mobile?.top};
-            padding-bottom:${table.padding.mobile?.bottom};
-            padding-left:${table.padding.mobile?.left};
-            padding-right:${table.padding.mobile?.right};
+      padding:${boxCss(table.padding.mobile)}
           }
         .slide-container.sticky {
-          z-index: ${sticky.zIndex.mobile};
+          z-index: ${sticky.zIndex.mobile} !important;
           position:${sticky.device.includes('Mobile') ? 'fixed' : 'initial'};
-          width:100%;
+          width:${table.width.mobile};
         }
-        .slide-container.sticky.top{
-          top:${sticky.top.mobile}${sticky.topUnit.mobile};
+
+${["left", "right"].map(val => `.slide-container.sticky.${val}{
+    ${val}:${sticky[val].mobile};
+  }`).join("")
           }
-        .slide-container.sticky.left{
-          left:${sticky.left.mobile}${sticky.leftUnit.mobile};
-        }
-        .slide-container.sticky.right{
-          right:${sticky.right.mobile}${sticky.rightUnit.mobile};
-        }
-        .slide-container.sticky.bottom{
-            bottom:${sticky.bottom.mobile}${sticky.bottomUnit.mobile};
+  ${["top", "bottom"].map(val => `.slide-container.sticky.${val}{
+  ${val}:${sticky[val].mobile}
+  }`).join("")
           }
-        .slide-title-heading {
-          margin-top:${slideTitle.space.mobile}${slideTitle.spaceUnit.mobile};
-          margin-bottom: ${slideTitle.spaceBottom.mobile}${
-          slideTitle.spaceBottomUnit.mobile
-        };
+        ${sticky.verticalAlign === "center" ? `.slide-container.sticky.center{top:50%;  transform: translateY(-50%)}` : null
+          }
+        .slide-title {
+          margin-top:${slideTitle.space.mobile};
+          margin-bottom: ${slideTitle.spaceBottom.mobile};
         }
         .slide-list {
-          margin-bottom:${slideList.space.mobile}${slideList.spaceUnit.mobile};
+          margin-bottom:${slideList.space.mobile};
         }
         .slide-list-items>.slide-list>a{
-          font-size:${slideList.fontSize.mobile}${slideList.fontUnit.mobile};
+          font-size:${slideList.fontSize.mobile};
         }
         }
 
