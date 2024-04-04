@@ -7,7 +7,7 @@
  * Author URI: http://bplugins.com
  * License: GPLv3
  * License URI: https://www.gnu.org/licenses/gpl-3.0.txt
- * Text Domain: b-blocks
+ * Text Domain: table-of-content-block
  */
 
 // ABS PATH

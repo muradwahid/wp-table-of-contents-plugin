@@ -1,11 +1,11 @@
 {
   "apiVersion": "1",
-  "name": "b-blocks/table-of-content-block",
+  "name": "table-of-content-block/table-of-content-block",
   "title": "Table of Content Block",
   "description": "The Table of Contents block automatically generates a table of contents for your WordPress post or page.",
   "category": "widgets",
   "keywords": ["table", "content", "table of contents"],
-  "textdomain": "b-blocks",
+  "textdomain": "table-of-content-block",
   "attributes": {
     "align": {
       "type": "string",
@@ -15,12 +15,12 @@
       "type": "string",
       "default": ""
     },
-    "rendered":true,
+    "rendered": true,
     "table": {
       "type": "object",
       "default": {
-        "width":{"desktop":"617px","tablet":"90%","mobile":"100%"},
-        "border":{"color":"#000"},
+        "width": { "desktop": "617px", "tablet": "90%", "mobile": "100%" },
+        "border": { "color": "#000" },
         "bgColor": { "bg": "#ffffff" },
         "shadow": [
           {
@@ -173,10 +173,14 @@
         "titleColor": "#2e2e2e",
         "slideBarColor": "#abababbf",
         "spaceDevice": "desktop",
-        "space": {"desktop": "15px", "tablet": "15px", "mobile": "15px"},
+        "space": { "desktop": "15px", "tablet": "15px", "mobile": "15px" },
         "spaceUnit": { "desktop": "px", "tablet": "px", "mobile": "px" },
         "spaceBottomDevice": "desktop",
-        "spaceBottom": { "desktop": "15px", "tablet": "15px", "mobile": "15px" },
+        "spaceBottom": {
+          "desktop": "15px",
+          "tablet": "15px",
+          "mobile": "15px"
+        },
         "spaceBottomUnit": { "desktop": "px", "tablet": "px", "mobile": "px" }
       }
     },
@@ -187,7 +191,7 @@
         "space": { "desktop": "15px", "tablet": "15px", "mobile": "15px" },
         "spaceUnit": { "desktop": "px", "tablet": "px", "mobile": "px" },
         "fontDevice": "desktop",
-        "fontSize": { "desktop":"16px", "tablet":"16px", "mobile":"16px" },
+        "fontSize": { "desktop": "16px", "tablet": "16px", "mobile": "16px" },
         "fontUnit": { "desktop": "px", "tablet": "px", "mobile": "px" }
       }
     }

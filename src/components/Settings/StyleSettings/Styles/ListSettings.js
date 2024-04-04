@@ -11,10 +11,10 @@ const ListSettings = ({ attributes, setAttributes }) => {
   const [device, setDevice] = useState("desktop")
   return (
     <Fragment>
-      <PanelBody title={__("List","b-blocks")} initialOpen={false}>
+      <PanelBody title={__("List", "table-of-content-block")} initialOpen={false}>
         <strong style={{ marginBottom: '15px', color: 'gray' }}>Heading</strong>
         <PanelColorControl
-          label={__("Title Color","b-blocks")}
+          label={__("Title Color", "table-of-content-block")}
           value={slideTitle.titleColor}
           colors={[
             { name: 'Orange', color: '#F57C00' },
@@ -33,7 +33,7 @@ const ListSettings = ({ attributes, setAttributes }) => {
         <div style={{ marginTop: '10px' }} className='panelPosition'>
           <Device className="devicePosition" value={device} onChange={val => setDevice(val)} style={{ left: "110px" }} />
           <RangeUnitControl
-            label={__("Space Top", "b-blocks")}
+            label={__("Space Top", "table-of-content-block")}
             value={slideTitle.space[device]}
             min={0}
             max={slideTitle.space[device].includes("%") ? 100 : 200}
@@ -48,7 +48,7 @@ const ListSettings = ({ attributes, setAttributes }) => {
         <div style={{ marginTop: '10px' }} className='panelPosition'>
           <Device className="devicePosition" value={device} onChange={val => setDevice(val)} style={{ left: "110px" }} />
           <RangeUnitControl
-            label={__("Space Bottom", "b-blocks")}
+            label={__("Space Bottom", "table-of-content-block")}
             value={slideTitle.spaceBottom[device]}
             min={0}
             max={slideTitle.spaceBottom[device].includes("%") ? 100 : 200}
@@ -74,7 +74,7 @@ const ListSettings = ({ attributes, setAttributes }) => {
           <div style={{ marginTop: '10px' }} className='panelPosition'>
             <Device className="devicePosition" value={device} onChange={val => setDevice(val)} style={{ left: "110px" }} />
             <RangeUnitControl
-              label={__("List Space Bottom", "b-blocks")}
+              label={__("List Space Bottom", "table-of-content-block")}
               value={slideList.space[device]}
               min={0}
               max={slideList.space[device].includes("%") ? 100 : 200}
@@ -89,7 +89,7 @@ const ListSettings = ({ attributes, setAttributes }) => {
           <div style={{ marginTop: '10px' }} className='panelPosition'>
             <Device className="devicePosition" value={device} onChange={val => setDevice(val)} style={{ left: "110px" }} />
             <RangeUnitControl
-              label={__("List Font Size", "b-blocks")}
+              label={__("List Font Size", "table-of-content-block")}
               value={slideList.fontSize[device]}
               min={0}
               max={slideList.fontSize[device].includes("%") ? 100 : 200}
@@ -115,7 +115,7 @@ const ListSettings = ({ attributes, setAttributes }) => {
         {boxList.txtStyle === 'normal' ? (
           <Fragment>
             <PanelColorControl
-              label={__("Text Color","b-blocks")}
+              label={__("Text Color", "table-of-content-block")}
               value={boxList.nTxtColor}
               colors={[
                 { name: 'Purple', color: '#9C27B0' },
@@ -130,7 +130,7 @@ const ListSettings = ({ attributes, setAttributes }) => {
               }
             />
             <PanelColorControl
-              label={__("Bar Color","b-blocks")}
+              label={__("Bar Color", "table-of-content-block")}
               value={boxList.nbarColor}
               defaults="#b0aeb1"
               colors={[
@@ -149,7 +149,7 @@ const ListSettings = ({ attributes, setAttributes }) => {
         ) : (
           <Fragment>
             <PanelColorControl
-              label={__("Text Color","b-blocks")}
+              label={__("Text Color", "table-of-content-block")}
               value={boxList.hTxtColor}
               colors={[
                 { name: 'Purple', color: '#9C27B0' },
@@ -164,7 +164,7 @@ const ListSettings = ({ attributes, setAttributes }) => {
               }
             />
             <PanelColorControl
-              label={__("Bar Color","b-blocks")}
+              label={__("Bar Color", "table-of-content-block")}
               value={boxList.hBarColor}
               defaults="#b0aeb1"
               colors={[

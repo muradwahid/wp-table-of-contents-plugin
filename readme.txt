@@ -4,12 +4,12 @@ Donate link: https://gum.co/wpdonate/
 Tags: block, table, content, table of contents, Gutenberg block
 Requires at least: 6.2+
 Tested up to: 6.4.3
-Stable tag: 2.0.0
+Stable tag: 1.0.0
 Requires PHP: 7.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Description of the Table of Contents
+The Table of Contents block allows you to automatically generate a table of contents for your WordPress post or page
 
 == Description ==
 

@@ -19,10 +19,10 @@ const SlideSettings = ({ attributes, setAttributes }) => {
   const [device, setDevice] = useState("desktop");
   return (
     <Fragment>
-      <PanelBody title={__("Slide",'b-blocks')} initialOpen={false}>
+      <PanelBody title={__("Slide", 'table-of-content-block')} initialOpen={false}>
         <strong style={{ marginBottom: '15px', color: 'gray' }}>Heading</strong>
         <PanelColorControl
-          label={__("Title Color","b-blocks")}
+          label={__("Title Color", "table-of-content-block")}
           value={slideTitle.titleColor}
           colors={colorOptions}
           renderFunction={(value) =>
@@ -30,7 +30,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
           }
         />
         <PanelColorControl
-          label={__("Bar Color","b-blocks")}
+          label={__("Bar Color", "table-of-content-block")}
           value={slideTitle.slideBarColor}
           colors={colorOptions}
           renderFunction={(value) =>
@@ -45,7 +45,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
           <div style={{ marginTop: '10px' }} className='panelPosition'>
             <Device className="devicePosition" value={device} onChange={val => setDevice(val)} style={{ left: "70px" }} />
             <RangeUnitControl
-              label={__("Space Top", "b-blocks")}
+              label={__("Space Top", "table-of-content-block")}
               value={slideTitle.space[device]}
               min={0}
               step={1}
@@ -60,7 +60,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
           <div style={{ marginTop: '10px' }} className='panelPosition'>
             <Device className="devicePosition" value={device} onChange={val => setDevice(val)} style={{ left: "90px" }} />
             <RangeUnitControl
-              label={__("Space Bottom", "b-blocks")}
+              label={__("Space Bottom", "table-of-content-block")}
               value={slideTitle.spaceBottom[device]}
               min={0}
               step={1}
@@ -88,7 +88,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
           <div style={{ marginTop: '10px' }} className='panelPosition'>
             <Device className="devicePosition" value={device} onChange={val => setDevice(val)} style={{ left: "110px" }} />
             <RangeUnitControl
-              label={__("List Space Bottom", "b-blocks")}
+              label={__("List Space Bottom", "table-of-content-block")}
               value={slideList.space[device]}
               min={0}
               max={slideList.space[device].includes("%") ? 100 : 200}
@@ -102,7 +102,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
           <div style={{ marginTop: '10px' }} className='panelPosition'>
             <Device className="devicePosition" value={device} onChange={val => setDevice(val)} style={{ left: "90px" }} />
             <RangeUnitControl
-              label={__("List Font Size", "b-blocks")}
+              label={__("List Font Size", "table-of-content-block")}
               value={slideList.fontSize[device]}
               min={0}
               max={slideList.fontSize[device].includes("%") ? 100 : 200}
@@ -128,7 +128,7 @@ const SlideSettings = ({ attributes, setAttributes }) => {
         {boxList.txtStyle === 'normal' ? (
           <Fragment>
             <PanelColorControl
-              label={__("Text Color","b-blocks")}
+              label={__("Text Color", "table-of-content-block")}
               value={boxList.nTxtColor}
               colors={[
                 { name: 'Purple', color: '#9C27B0' },
@@ -139,11 +139,11 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                 { name: 'Brown', color: '#795548' },
               ]}
               renderFunction={(value) =>
-                setAttributes({ boxList: updateData(boxList,value,"nTxtColor") })
+                setAttributes({ boxList: updateData(boxList, value, "nTxtColor") })
               }
             />
             <PanelColorControl
-              label={__("Bar Color","b-blocks")}
+              label={__("Bar Color", "table-of-content-block")}
               value={boxList.nBarColor}
               defaults="#b0aeb1"
               colors={[
@@ -155,14 +155,14 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                 { name: 'Brown', color: '#795548' },
               ]}
               renderFunction={(value) =>
-                setAttributes({ boxList: updateData(boxList,value,"nBarColor") })
+                setAttributes({ boxList: updateData(boxList, value, "nBarColor") })
               }
             />
           </Fragment>
         ) : (
           <Fragment>
             <PanelColorControl
-              label={__("Text Color","b-blocks")}
+              label={__("Text Color", "table-of-content-block")}
               value={boxList.hTxtColor}
               colors={[
                 { name: 'Purple', color: '#9C27B0' },
@@ -173,11 +173,11 @@ const SlideSettings = ({ attributes, setAttributes }) => {
                 { name: 'Brown', color: '#795548' },
               ]}
               renderFunction={(value) =>
-                setAttributes({ boxList:updateData(boxList,value,"hTxtColor") })
+                setAttributes({ boxList: updateData(boxList, value, "hTxtColor") })
               }
             />
             <PanelColorControl
-              label={__("Bar Color","b-blocks")}
+              label={__("Bar Color", "table-of-content-block")}
               value={boxList.hBarColor}
               defaults="#b0aeb1"
               colors={[

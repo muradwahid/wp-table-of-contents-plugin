@@ -12,9 +12,9 @@ const DefaultHeaderStyle = ({ attributes, setAttributes }) => {
   const [device, setDevice] = useState("desktop");
   return (
     <Fragment>
-      <PanelBody title={__("Header", "b-blocks")} initialOpen={false}>
+      <PanelBody title={__("Header", "table-of-content-block")} initialOpen={false}>
         <PanelColorControl
-          label={__("Background Color", "b-blocks")}
+          label={__("Background Color", "table-of-content-block")}
           value={header.bgColor}
           colors={[
             { name: 'red', color: '#f00' },
@@ -26,7 +26,7 @@ const DefaultHeaderStyle = ({ attributes, setAttributes }) => {
           }
         />
         <PanelColorControl
-          label={__("Text Color", "b-blocks")}
+          label={__("Text Color", "table-of-content-block")}
           value={header.txtColor}
           colors={[
             { name: 'red', color: '#f00' },
@@ -38,7 +38,7 @@ const DefaultHeaderStyle = ({ attributes, setAttributes }) => {
           }
         />
         <PanelColorControl
-          label={__("Icon Color", "b-blocks")}
+          label={__("Icon Color", "table-of-content-block")}
           value={header.iconColor}
           colors={[
             { name: 'red', color: '#f00' },
@@ -50,7 +50,7 @@ const DefaultHeaderStyle = ({ attributes, setAttributes }) => {
           }
         />
         <RangeControl
-          label={__("Separator Width", "b-blocks")}
+          label={__("Separator Width", "table-of-content-block")}
           value={header.separatorWidth}
           onChange={(value) =>
             setAttributes({ header: updateData(header, value, "separatorWidth") })
@@ -60,7 +60,7 @@ const DefaultHeaderStyle = ({ attributes, setAttributes }) => {
           step={1}
         />
         <PanelColorControl
-          label={__("Separator Color", "b-blocks")}
+          label={__("Separator Color", "table-of-content-block")}
           value={header.separatorColor}
           defaults="#ccc"
           colors={[
@@ -73,12 +73,12 @@ const DefaultHeaderStyle = ({ attributes, setAttributes }) => {
           }
         />
       </PanelBody>
-      
-      <PanelBody title={__("List Item", "b-blocks")} initialOpen={false}>
+
+      <PanelBody title={__("List Item", "table-of-content-block")} initialOpen={false}>
         <div style={{ marginTop: '10px' }} className='panelPosition'>
           <Device className="devicePosition" value={device} onChange={val => setDevice(val)} style={{ left: "60px", top: "0px" }} />
           <BoxControl
-            label={__("Padding", "b-blocks")}
+            label={__("Padding", "table-of-content-block")}
             values={boxList.padding[device]}
             resetValues={{
               top: '0px',
@@ -97,7 +97,7 @@ const DefaultHeaderStyle = ({ attributes, setAttributes }) => {
         <div style={{ marginTop: '10px' }} className='panelPosition'>
           <Device className="devicePosition" value={device} onChange={val => setDevice(val)} style={{ left: "80px", top: "0px" }} />
           <RangeControl
-            label={__("Max Height", "b-blocks")}
+            label={__("Max Height", "table-of-content-block")}
             value={boxList.maxHeight[device]}
             onChange={(value) =>
               setAttributes({
@@ -120,7 +120,7 @@ const DefaultHeaderStyle = ({ attributes, setAttributes }) => {
         {boxList.txtStyle === 'normal' ? (
           <>
             <PanelColorControl
-              label={__("Text Color", "b-blocks")}
+              label={__("Text Color", "table-of-content-block")}
               value={boxList.nTxtColor}
               colors={[
                 { name: 'red', color: '#f00' },
@@ -133,7 +133,7 @@ const DefaultHeaderStyle = ({ attributes, setAttributes }) => {
             />
             <div style={{ marginTop: '10px' }}>
               <ToggleControl
-                label={__("Underline", "b-blocks")}
+                label={__("Underline", "table-of-content-block")}
                 checked={boxList.nTxtDecoration}
                 onChange={(value) =>
                   setAttributes({
@@ -146,7 +146,7 @@ const DefaultHeaderStyle = ({ attributes, setAttributes }) => {
         ) : (
           <>
             <PanelColorControl
-              label={__("Text Color", "b-blocks")}
+              label={__("Text Color", "table-of-content-block")}
               value={boxList.hTxtColor}
               colors={[
                 { name: 'red', color: '#f00' },
@@ -159,7 +159,7 @@ const DefaultHeaderStyle = ({ attributes, setAttributes }) => {
             />
             <div style={{ marginTop: '10px' }}>
               <ToggleControl
-                label={__("Underline", "b-blocks")}
+                label={__("Underline", "table-of-content-block")}
                 checked={boxList.hTxtDecoration}
                 onChange={(value) =>
                   setAttributes({
@@ -180,7 +180,7 @@ const DefaultHeaderStyle = ({ attributes, setAttributes }) => {
           <strong>Marker</strong>
         </div>
         <PanelColorControl
-          label={__("Color", "b-blocks")}
+          label={__("Color", "table-of-content-block")}
           value={markup.color}
           colors={[
             { name: 'red', color: '#f00' },
@@ -196,7 +196,7 @@ const DefaultHeaderStyle = ({ attributes, setAttributes }) => {
           <div style={{ marginTop: '10px' }} className='panelPosition'>
             <Device className="devicePosition" value={device} onChange={val => setDevice(val)} />
             <RangeUnitControl
-              label={__("Size", "b-blocks")}
+              label={__("Size", "table-of-content-block")}
               value={markup.markupSize[device]}
               min={0}
               step={1}

@@ -1,14 +1,14 @@
 import { PanelBody, ToggleControl } from '@wordpress/components';
-import {__} from "@wordpress/i18n"
+import { __ } from "@wordpress/i18n";
 import React from 'react';
 import IconPicker from '../../../Panel/IconPicker/IconPicker';
 
 const DefaultSettings = ({ attributes, setAttributes }) => {
-  const {  minimize } = attributes;
+  const { minimize } = attributes;
   return (
-    <PanelBody title={__("Settings","b-blocks")} initialOpen={false}>
+    <PanelBody title={__("Settings", "table-of-content-block")} initialOpen={false}>
       <ToggleControl
-        label={__("Minimize Box", "b-blocks")}
+        label={__("Minimize Box", "table-of-content-block")}
         checked={minimize.toggle}
         onChange={(value) =>
           setAttributes({ minimize: { ...minimize, toggle: value } })
@@ -40,7 +40,7 @@ const DefaultSettings = ({ attributes, setAttributes }) => {
           },
         ]}
         default={'fa-solid fa-chevron-down'}
-        label={__('Expand Icon',"b-blocks")}
+        label={__('Expand Icon', "table-of-content-block")}
         value={minimize.expandIcon}
         renderFunction={(value) =>
           setAttributes({
@@ -72,7 +72,7 @@ const DefaultSettings = ({ attributes, setAttributes }) => {
             },
           ]}
           default={'fa-solid fa-chevron-up'}
-          label={__('Collapse Icon',"b-blocks")}
+          label={__('Collapse Icon', "table-of-content-block")}
           value={minimize.collapseIcon}
           renderFunction={(value) =>
             setAttributes({

@@ -1,23 +1,21 @@
 === Table of Content Block ===
 Contributors: abuhayat
 Donate link: https://gum.co/wpdonate/
-Tags: block, table, content, table of contents, Gutenberg block
+Tags: block,"table", "content", "table of contents" Gutenberg block
 Requires at least: 6.2+
 Tested up to: 6.4.3
-Stable tag: 2.0.0
+Stable tag: 1.0.0
 Requires PHP: 7.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Description of the Table of Contents
+The Table of Contents block allows you to automatically generate a table of contents for your WordPress post or page
 
 == Description ==
 
 The Table of Contents block allows you to automatically generate a table of contents for your WordPress post or page. It helps visitors easily navigate your content, especially on long-form articles.
 
-
 **[Demos](https://bblockswp.com/demo/table-of-content-block)**
-
 
 = Features =
 
@@ -35,8 +33,6 @@ The Table of Contents block allows you to automatically generate a table of cont
 
 - **Responsive Design**: The table of contents is designed to be responsive and adapt to different screen sizes.
 
-
-
 Benefits:
 
 - **Improved Navigation**: Provides an easy way for visitors to navigate long-form content.
@@ -46,6 +42,7 @@ Benefits:
 - **SEO Optimization**: Helps search engines understand the structure of your content, which can improve your SEO rankings.
 
 = How to use =
+
 - First, install the Table of Contents plugin
 - Add the Table of Contents from the block category called "Widgets" in Gutenberg editor.
 - You can change block settings from the right-side settings sidebar.
@@ -53,15 +50,13 @@ Benefits:
 
 * For installation help click on Installation Tab
 
-
 = Feedback =
-- Did you like this plugin? Dislike it? Have a feature request? [Please share your feedback with us](mailto:support@bplugins.com 'Send feedback')
 
+- Did you like this plugin? Dislike it? Have a feature request? [Please share your feedback with us](mailto:support@bplugins.com "Send feedback")
 
 = ⭐ Check out the Parent Plugin of this plugin- =
 
 🔥 **[b Blocks](https://bblockswp.com)** – Best gutenberg blocks collections for WordPress.
-
 
 = ⭐ Check out our other WordPress Plugins- =
 
@@ -77,24 +72,25 @@ Benefits:
 
 🔥 **[Advanced Post Block](https://bplugins.com/products/advanced-post-block/)** – Display your Posts, Custom Post Content and Blogs in a professional way!
 
-
 == Installation ==
 
 = From Gutenberg Editor: =
+
 1. Go to the WordPress Block/Gutenberg Editor
 2. Search For **Table of Contents**
 3. Click on the **Table of Contents** to add the block
 
 = Download & Upload: =
-1. Download the **Table of Contents** plugin (*.zip file*)
+
+1. Download the **Table of Contents** plugin (_.zip file_)
 2. In your admin area, go to the Plugins menu and click on **Add New**
 3. Click on **Upload Plugin** and choose the **`plugin-slug.zip`** file and click on **Install Now**
 4. Activate the plugin and Enjoy!
 
 = Manually: =
+
 1. Download and upload the **Table of Contents** plugin to the **`/wp-content/plugins/`** directory
 2. Activate the plugin through the Plugins menu in WordPress
-
 
 == Frequently Asked Questions ==
 
@@ -118,20 +114,19 @@ You can use unlimited times as you want.
 
 You can post your questions on the [support forum here](https://wordpress.org/support/plugin/table-of-content-block/)
 
-
 == Screenshots ==
 
 1. Table of Contents
 2. Settings
 
-
 == Changelog ==
 
 = 1.0.0 =
-* Initial Release
 
+- Initial Release
 
 == Upgrade Notice ==
 
 = 1.0.0 =
-* Initial Release
+
+- Initial Release

@@ -12,9 +12,9 @@ const StickySettings = ({ attributes, setAttributes }) => {
   const { sticky } = attributes;
   const [device, setDevice] = useState("desktop");
   return (
-    <PanelBody title={__("Sticky","b-blocks")} initialOpen={false}>
+    <PanelBody title={__("Sticky", "table-of-content-block")} initialOpen={false}>
       <ToggleControl
-        label={__("Sticky","b-blocks")}
+        label={__("Sticky", "table-of-content-block")}
         checked={sticky.toggle}
         onChange={(value) =>
           setAttributes({ sticky: updateData(sticky, value, "toggle") })
@@ -27,7 +27,7 @@ const StickySettings = ({ attributes, setAttributes }) => {
 
           <div style={{ marginTop: '10px' }}>
             <PanelAlign
-              label={__('Horizontal Align',"b-blocks")}
+              label={__('Horizontal Align', "table-of-content-block")}
               icons={[
                 { label: 'Left', value: <HiArrowNarrowLeft /> },
                 { label: 'Right', value: <HiArrowNarrowRight /> },
@@ -42,7 +42,7 @@ const StickySettings = ({ attributes, setAttributes }) => {
           </div>
           <div style={{ marginTop: '10px' }}>
             <PanelAlign
-              label={__('Vertical Align',"b-blocks")}
+              label={__('Vertical Align', "table-of-content-block")}
               icons={[
                 { label: 'Top', value: <HiOutlineArrowUp /> },
                 {
@@ -62,7 +62,7 @@ const StickySettings = ({ attributes, setAttributes }) => {
           <div style={{ marginTop: '10px' }} className='panelPosition'>
             <Device className="devicePosition" value={device} onChange={val => setDevice(val)} />
             <RangeUnitControl
-              label={__(`${sticky.horizonAlign === "left" ? "Left" : "Right"}`, "b-blocks")}
+              label={__(`${sticky.horizonAlign === "left" ? "Left" : "Right"}`, "table-of-content-block")}
               value={sticky[sticky.horizonAlign][device]}
               min={0}
               max={sticky[sticky.horizonAlign][device].includes("px") ? 1000 : 100}
@@ -77,7 +77,7 @@ const StickySettings = ({ attributes, setAttributes }) => {
             sticky.verticalAlign !== "center" && <div style={{ marginTop: '10px' }} className='panelPosition'>
               <Device className="devicePosition" style={{ left: "50px" }} value={device} onChange={val => setDevice(val)} />
               <RangeUnitControl
-                label={__(`${sticky.verticalAlign === "top" ? "Top" : "Bottom"}`, "b-blocks")}
+                label={__(`${sticky.verticalAlign === "top" ? "Top" : "Bottom"}`, "table-of-content-block")}
                 value={sticky[sticky.verticalAlign][device]}
                 min={0}
                 max={sticky[sticky.verticalAlign][device].includes("px") ? 1000 : 100}
@@ -92,7 +92,7 @@ const StickySettings = ({ attributes, setAttributes }) => {
           <div style={{ marginTop: '10px' }} className='panelPosition'>
             <Device className="devicePosition" style={{ left: "55px" }} value={device} onChange={val => setDevice(val)} />
             <RangeControl
-              label={__("Z-Index", "b-blocks")}
+              label={__("Z-Index", "table-of-content-block")}
               value={sticky.zIndex[device]}
               min={0}
               max={10000}

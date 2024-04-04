@@ -1,8 +1,8 @@
-import React from 'react';
-import { bullets, htmlTags, markups, themes } from '../../../../utils/options';
 import { PanelBody, PanelRow, SelectControl, TextControl } from '@wordpress/components';
 import { __ } from '@wordpress/i18n';
+import React from 'react';
 import { Label } from '../../../../../../Components';
+import { bullets, htmlTags, markups, themes } from '../../../../utils/options';
 import AnchorsByTag from '../../../Panel/AnchorsByTag/AnchorsByTag';
 import IconPicker from '../../../Panel/IconPicker/IconPicker';
 
@@ -11,12 +11,12 @@ const TableContentSettings = ({ attributes, setAttributes }) => {
   return (
     <PanelBody
       className="bPlPanelBody"
-      title={__("Table of Contents","b-blocks")}
+      title={__("Table of Contents", "table-of-content-block")}
       initialOpen={true}
     >
-      
+
       <TextControl
-        label={__('Title', 'b-blocks')}
+        label={__('Title', 'table-of-content-block')}
         value={title.text}
         onChange={(value) =>
           setAttributes({ title: { ...title, text: value } })
@@ -25,7 +25,7 @@ const TableContentSettings = ({ attributes, setAttributes }) => {
 
       <PanelRow className="mt20">
         <Label className="">
-          {__('HTML Tag', 'b-blocks')}
+          {__('HTML Tag', 'table-of-content-block')}
         </Label>
         <SelectControl
           value={title.tag}
@@ -36,7 +36,7 @@ const TableContentSettings = ({ attributes, setAttributes }) => {
         />
       </PanelRow>
 
-      <Label>{__('Anchors By Tags', 'b-blocks')}</Label>
+      <Label>{__('Anchors By Tags', 'table-of-content-block')}</Label>
       <AnchorsByTag
         attributes={attributes}
         setAttributes={setAttributes}
