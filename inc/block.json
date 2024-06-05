@@ -21,7 +21,7 @@
       "default": {
         "width": { "desktop": "617px", "tablet": "90%", "mobile": "100%" },
         "border": { "color": "#000" },
-        "bgColor": { "bg": "#ffffff" },
+        "bgColor": { "bg": "" },
         "shadow": [
           {
             "hOffset": "0px",
