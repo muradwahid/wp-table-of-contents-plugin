@@ -16,20 +16,26 @@ const Timeline = ({ attributes, setAttributes }) => {
     const accordionTitle = document.querySelector('.timeline-title-container');
     const removeAttrHeading = accordionTitle?.querySelector(`${title?.tag}`);
     const savedElements = [];
-    Array.from(headingElements).forEach((headingElement) => {
-      if (headingElement.className !== 'timeline-title') {
-        for (let index = 0; index < headingElement.children.length; index++) {
-          if (index + 1 !== 1) {
-            headingElement.children[index].remove();
-          }
-        }
-        savedElements.push({
-          contents: headingElement.textContent,
-          tag: headingElement.tagName,
-          id: headingElement.children[0]?.getAttribute('id'),
+    if (headingElements) {
+        Array.from(headingElements).forEach((headingElement) => {
+            if (headingElement.className !== "timeline-title") {
+                for (
+                    let index = 0;
+                    index < headingElement.children.length;
+                    index++
+                ) {
+                    if (index + 1 !== 1) {
+                        headingElement.children[index].remove();
+                    }
+                }
+                savedElements.push({
+                    contents: headingElement.textContent,
+                    tag: headingElement.tagName,
+                    id: headingElement.children[0]?.getAttribute("id"),
+                });
+            }
         });
-      }
-    });
+    }
     setAttributes({ headings: savedElements });
     if (headingElements?.length) {
       for (let i = 0; i < headingElements.length; i++) {

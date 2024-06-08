@@ -9,7 +9,7 @@ const ContentSettings = ({ attributes, setAttributes }) => {
     <Fragment>
       <TableContentSettings attributes={attributes} setAttributes={setAttributes} />
       {theme === "default" && <DefaultSettings attributes={attributes} setAttributes={setAttributes} />}
-      <StickySettings attributes={attributes} setAttributes={setAttributes} />
+      <StickySettings attributes={attributes} setAttributes={setAttributes}/>
     </Fragment>
   );
 };

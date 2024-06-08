@@ -74,7 +74,7 @@ const RangeUnitControl = ({
             cursor: pointer;
             font-weight: 600;
             background-color: #0000;
-            height: 30px;
+            height: 32px;
             width: 21px;
             border-radius: 0 2px 2px 0;
             text-transform: uppercase;

@@ -9,9 +9,9 @@ import { boxCss } from '../../utils/functions';
 const TimelineStyle = ({ attributes }) => {
   const { table, sticky, slideTitle, slideList, boxList } = attributes;
   return (
-    <>
-      <style>
-        {`
+      <>
+          <style>
+              {`
 .timeline-container {
   ${getBackgroundCSS(table.bgColor)};
   box-shadow: ${getMultiShadowCSS(table.shadow)};
@@ -79,16 +79,24 @@ padding:${boxCss(table.padding.desktop)};
 
   position:fixed;
 }
-${
-["left", "right"].map(val => `.timeline-container.sticky.${val}{
+${["left", "right"]
+    .map(
+        (val) => `.timeline-container.sticky.${val}{
 ${val}:${sticky[val].desktop};
-}`).join("")
-}
-${["top", "bottom"].map(val => `.timeline-container.sticky.${val}{
+}`
+    )
+    .join("")}
+${["top", "bottom"]
+    .map(
+        (val) => `.timeline-container.sticky.${val}{
 ${val}:${sticky[val].desktop}
-}`).join("")
-}
-${sticky.verticalAlign === "center" ? `.timeline-container.sticky.center{top:50%;  transform: translateY(-50%)}` : null
+}`
+    )
+    .join("")}
+${
+    sticky.verticalAlign === "center"
+        ? `.timeline-container.sticky.center{top:50%;  transform: translateY(-50%)}`
+        : null
 }
 
 
@@ -114,21 +122,29 @@ padding:${boxCss(table.padding.desktop)}
   box-shadow: ${getMultiShadowCSS(table.shadow)};
 padding:${boxCss(table.padding.desktop)};
   z-index: ${sticky.zIndex.desktop} !important;
-  position:${sticky.device.includes('Desktop') ? 'fixed' : 'initial'};
+  position:${sticky.device.includes("Desktop") ? "fixed" : "initial"};
 }
-${
-["left", "right"].map(val => `.timeline-container.sticky.${val}{
+${["left", "right"]
+    .map(
+        (val) => `.timeline-container.sticky.${val}{
 ${val}:${sticky[val].desktop};
-}`).join("")
-}
-${["top", "bottom"].map(val => `.timeline-container.sticky.${val}{
+}`
+    )
+    .join("")}
+${["top", "bottom"]
+    .map(
+        (val) => `.timeline-container.sticky.${val}{
 ${val}:${sticky[val].desktop}
-}`).join("")
-}
-${sticky.verticalAlign === "center" ? `.timeline-container.sticky.center{top:50%;  transform: translateY(-50%)}` : null
+}`
+    )
+    .join("")}
+${
+    sticky.verticalAlign === "center"
+        ? `.timeline-container.sticky.center{top:50%;  transform: translateY(-50%)}`
+        : null
 }  
 }
-@media (min-width: 768px) and (max-width: 1023px) {
+@media only screen and (min-width:641px) and (max-width: 1024px) {
 
   .timeline-container {
 padding:${boxCss(table.padding.tablet)}
@@ -146,24 +162,30 @@ padding:${boxCss(table.padding.tablet)}
 .timeline-container.sticky {
   width:${table.width.tablet};
   z-index: ${sticky.zIndex.tablet} !important;
-  position:${sticky.device.includes('Tablet') ? 'fixed' : 'initial'};
+  position:${sticky.device.includes("Tablet") ? "fixed" : "initial"};
 }
 
-${
-["left", "right"].map(val => `.timeline-container.sticky.${val}{
+${["left", "right"].map(
+    (val) => `.timeline-container.sticky.${val}{
 ${val}:${sticky[val].tablet};
-}`)
-}
+}`
+)}
 
-${["top", "bottom"].map(val => `.timeline-container.sticky.${val}{
+${["top", "bottom"]
+    .map(
+        (val) => `.timeline-container.sticky.${val}{
 ${val}:${sticky[val].tablet}
-}`).join("")
-}
-${sticky.verticalAlign === "center" ? `.timeline-container.sticky.center{top:50%;  transform: translateY(-50%)}` : null
+}`
+    )
+    .join("")}
+${
+    sticky.verticalAlign === "center"
+        ? `.timeline-container.sticky.center{top:50%;  transform: translateY(-50%)}`
+        : null
 }
 
 }
-@media screen and (max-width: 767px) {
+@media only screen and (max-width: 640px) {
 
 .timeline-container {
   width:${table.width.mobile};
@@ -181,24 +203,30 @@ padding:${boxCss(table.padding.mobile)}
 }
 .timeline-container.sticky {
   z-index: ${sticky.zIndex.mobile} !important;
-  position:${sticky.device.includes('Mobile') ? 'fixed' : 'initial'};
+  position:${sticky.device.includes("Mobile") ? "fixed" : "initial"};
 }
 
-${["top", "bottom"].map(val => `.timeline-container.sticky.${val}{
+${["top", "bottom"]
+    .map(
+        (val) => `.timeline-container.sticky.${val}{
 ${val}:${sticky[val].mobile}
-}`).join("")
-}
-${sticky.verticalAlign === "center" ? `.timeline-container.sticky.center{top:50%;  transform: translateY(-50%)}` : null
-}
+}`
+    )
+    .join("")}
 ${
-["left", "right"].map(val => `.timeline-container.sticky.${val}{
-${val}:${sticky[val].mobile};
-}`)
+    sticky.verticalAlign === "center"
+        ? `.timeline-container.sticky.center{top:50%;  transform: translateY(-50%)}`
+        : null
 }
+${["left", "right"].map(
+    (val) => `.timeline-container.sticky.${val}{
+${val}:${sticky[val].mobile};
+}`
+)}
 }
 `}
-      </style>
-    </>
+          </style>
+      </>
   );
 };
 

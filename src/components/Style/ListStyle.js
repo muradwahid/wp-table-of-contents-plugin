@@ -16,8 +16,8 @@ const ListStyle = ({ attributes }) => {
         const list = `${listItems} .list-item`;
 
         return (
-                <style>
-                        {`
+            <style>
+                {`
 p{
 margin: 0px;
 }
@@ -46,7 +46,7 @@ top: 50%;
 transform: translateY(-50%);
 height:20px;
 width:3px;
-background-color:${boxList.nBarColor ? boxList.nBarColor : '#ccc'} !important;
+background-color:${boxList.nBarColor ? boxList.nBarColor : "#ccc"} !important;
 position: absolute;
 transition: background .3s ease-in-out;
 }
@@ -78,17 +78,26 @@ z-index: ${sticky.zIndex.desktop} !important;
 position:fixed;
 }
 
-${["left", "right"].map(val => `${listBlWrapper}.sticky.${val}{
+${["left", "right"]
+    .map(
+        (val) => `${listBlWrapper}.sticky.${val}{
 ${val}:${sticky[val].desktop};
-}`).join("")
-                                }
+}`
+    )
+    .join("")}
 
-${["top", "bottom"].map(val => `${listBlWrapper}.sticky.${val}{
+${["top", "bottom"]
+    .map(
+        (val) => `${listBlWrapper}.sticky.${val}{
 ${val}:${sticky[val].desktop}
-}`).join("")
-                                }
-${sticky.verticalAlign === "center" ? `${listBlWrapper}.sticky.center{top:50%;  transform: translateY(-50%)}` : null
-                                }
+}`
+    )
+    .join("")}
+${
+    sticky.verticalAlign === "center"
+        ? `${listBlWrapper}.sticky.center{top:50%;  transform: translateY(-50%)}`
+        : null
+}
 
 @media screen and (min-width: 1024px) {
 ${listBlWrapper}{
@@ -109,24 +118,33 @@ ${listBlWrapper}.sticky {
 width:${table.width.desktop};
 padding:${boxCss(table.padding.desktop)};
 z-index: ${sticky.zIndex.desktop} !important;
-position:${sticky?.device.includes('Desktop') ? 'fixed' : 'initial'};
+position:${sticky?.device.includes("Desktop") ? "fixed" : "initial"};
 }
 
-${["left", "right"].map(val => `${listBlWrapper}.sticky.${val}{
+${["left", "right"]
+    .map(
+        (val) => `${listBlWrapper}.sticky.${val}{
 ${val}:${sticky[val].desktop};
-}`).join("")
-                                }
+}`
+    )
+    .join("")}
 
-${["top", "bottom"].map(val => `${listBlWrapper}.sticky.${val}{
+${["top", "bottom"]
+    .map(
+        (val) => `${listBlWrapper}.sticky.${val}{
 ${val}:${sticky[val].desktop}
-}`).join("")
-                                }
+}`
+    )
+    .join("")}
 
-${sticky.verticalAlign === "center" ? `${listBlWrapper}.sticky.center{top:50%;  transform: translateY(-50%)}` : null
-                                }
+${
+    sticky.verticalAlign === "center"
+        ? `${listBlWrapper}.sticky.center{top:50%;  transform: translateY(-50%)}`
+        : null
+}
 
 }
-@media (min-width: 768px) and (max-width: 1023px) {
+@media only screen and (min-width:641px) and (max-width: 1024px) {
 
 ${listBlWrapper}{
 padding:${boxCss(table.padding.tablet)}
@@ -145,22 +163,31 @@ ${listBlWrapper}.sticky {
 width:${table.width.tablet};
 padding:${boxCss(table.padding.tablet)};
 z-index: ${sticky.zIndex.tablet} !important;
-position:${sticky?.device.includes('Tablet') ? 'fixed' : 'initial'};
+position:${sticky?.device.includes("Tablet") ? "fixed" : "initial"};
 }
-${["left", "right"].map(val => `${listBlWrapper}.sticky.${val}{
+${["left", "right"]
+    .map(
+        (val) => `${listBlWrapper}.sticky.${val}{
 ${val}:${sticky[val].tablet};
-}`).join("")
-                                }
-${["top", "bottom"].map(val => `${listBlWrapper}.sticky.${val}{
+}`
+    )
+    .join("")}
+${["top", "bottom"]
+    .map(
+        (val) => `${listBlWrapper}.sticky.${val}{
 ${val}:${sticky[val].tablet}
-}`).join("")
-                                }
+}`
+    )
+    .join("")}
 
-${sticky.verticalAlign === "center" ? `${listBlWrapper}.sticky.center{top:50%;  transform: translateY(-50%)}` : null
-                                }
+${
+    sticky.verticalAlign === "center"
+        ? `${listBlWrapper}.sticky.center{top:50%;  transform: translateY(-50%)}`
+        : null
+}
 
 }
-@media screen and (max-width: 767px) {
+@media only screen and (max-width: 640px) {
 ${listBlWrapper}{
 padding:${boxCss(table.padding.mobile)}
 }
@@ -178,23 +205,32 @@ ${listBlWrapper}.sticky {
 width:${table.width.mobile};
 padding:${boxCss(table.padding.mobile)};
 z-index: ${sticky.zIndex.mobile} !important;
-position:${sticky?.device.includes('Mobile') ? 'fixed' : 'initial'};
+position:${sticky?.device.includes("Mobile") ? "fixed" : "initial"};
 }
 
-${["left", "right"].map(val => `${listBlWrapper}.sticky.${val}{
+${["left", "right"]
+    .map(
+        (val) => `${listBlWrapper}.sticky.${val}{
 ${val}:${sticky[val].mobile};
-}`).join("")
-                                }
-${["top", "bottom"].map(val => `${listBlWrapper}.sticky.${val}{
+}`
+    )
+    .join("")}
+${["top", "bottom"]
+    .map(
+        (val) => `${listBlWrapper}.sticky.${val}{
 ${val}:${sticky[val].mobile}
-}`).join("")
-                                }
+}`
+    )
+    .join("")}
 
-${sticky.verticalAlign === "center" ? `${listBlWrapper}.sticky.center{top:50%;  transform: translateY(-50%)}` : null
-                                }
+${
+    sticky.verticalAlign === "center"
+        ? `${listBlWrapper}.sticky.center{top:50%;  transform: translateY(-50%)}`
+        : null
+}
 }
 `}
-                </style>
+            </style>
         );
 };
 

@@ -21,18 +21,18 @@ const Style = ({ attributes }) => {
 
   const listSl = `${blockWrapper} ol>li>a.table-content-anchor-list`;
   return (
-    <>
-      <style>
-        {`
+      <>
+          <style>
+              {`
         ${listSl}:hover{
           color:${boxList.hTxtColor} !important; 
           text-decoration:${
-            boxList.hTxtDecoration ? 'underline' : 'none'
+              boxList.hTxtDecoration ? "underline" : "none"
           } !important;
         }
         ${listSl}{
           color:${boxList.nTxtColor} !important;
-          text-decoration:${boxList.nTxtDecoration ? 'underline' : 'none'};
+          text-decoration:${boxList.nTxtDecoration ? "underline" : "none"};
           margin-left:5px;
         }
         ${accordion}{
@@ -48,21 +48,29 @@ const Style = ({ attributes }) => {
 
           position:fixed;
         }
-        ${
-          ["left", "right"].map(val => `${accordion}.sticky.${val}{
+        ${["left", "right"]
+            .map(
+                (val) => `${accordion}.sticky.${val}{
             ${val}:${sticky[val].desktop};
-          }`).join("")
-        }
+          }`
+            )
+            .join("")}
 
-      ${["top", "bottom"].map(val => `${accordion}.sticky.${val}{
+      ${["top", "bottom"]
+          .map(
+              (val) => `${accordion}.sticky.${val}{
         ${val}:${sticky[val]?.desktop}
-        }`).join("")
-                  }
-        ${sticky.verticalAlign === "center" ? `${accordion}.sticky.center{top:50%;  transform: translateY(-50%)}` : null
+        }`
+          )
+          .join("")}
+        ${
+            sticky.verticalAlign === "center"
+                ? `${accordion}.sticky.center{top:50%;  transform: translateY(-50%)}`
+                : null
         }
       ${
-        markup.view === 'decimal'
-          ? `
+          markup.view === "decimal"
+              ? `
           
         ${panelLists}{
           list-style-type:decimal;
@@ -74,7 +82,7 @@ const Style = ({ attributes }) => {
           font-size:${markup.markupSize.desktop};
         }
         `
-          : `
+              : `
         ${panelLists}{
           list-style-type:none;
         }
@@ -92,17 +100,17 @@ const Style = ({ attributes }) => {
       ${titleWrapper}{
         background:${header.bgColor};
         border-bottom: ${header.separatorWidth}px solid ${
-          header.separatorColor
-        };
+                  header.separatorColor
+              };
         margin-bottom:-2px;
       }
       ${accordion}>.panel{
         ${
-          boxList.maxHeight.desktop > 0
-            ? 'max-height:' + boxList.maxHeight.desktop + 'px;'
-            : ''
+            boxList.maxHeight.desktop > 0
+                ? "max-height:" + boxList.maxHeight.desktop + "px;"
+                : ""
         }
-        ${boxList.maxHeight.desktop > 0 ? 'overflow-y:auto;' : ''}
+        ${boxList.maxHeight.desktop > 0 ? "overflow-y:auto;" : ""}
         
         
       }
@@ -125,26 +133,34 @@ const Style = ({ attributes }) => {
         ${accordion}.sticky {
           width:${table.width.desktop};
           z-index: ${sticky.zIndex.desktop} !important;
-          position:${sticky?.device.includes('Desktop') ? 'fixed' : 'initial'};
+          position:${sticky?.device.includes("Desktop") ? "fixed" : "initial"};
         }
-        ${
-          ["left", "right"].map(val => `${accordion}.sticky.${val}{
+        ${["left", "right"]
+            .map(
+                (val) => `${accordion}.sticky.${val}{
             ${val}:${sticky[val].desktop};
-          }`).join("")
-        }
-        ${["top", "bottom"].map(val => `${accordion}.sticky.${val}{
+          }`
+            )
+            .join("")}
+        ${["top", "bottom"]
+            .map(
+                (val) => `${accordion}.sticky.${val}{
         ${val}:${sticky[val].desktop}
-        }`).join("")
-                  }
-        ${sticky.verticalAlign === "center" ? `${accordion}.sticky.center{top:50%;  transform: translateY(-50%)}` : null
+        }`
+            )
+            .join("")}
+        ${
+            sticky.verticalAlign === "center"
+                ? `${accordion}.sticky.center{top:50%;  transform: translateY(-50%)}`
+                : null
         }
         ${panelWrapper}{
           ${
-            boxList.maxHeight.desktop > 0
-              ? 'max-height:' + boxList.maxHeight.desktop + 'px;'
-              : ''
+              boxList.maxHeight.desktop > 0
+                  ? "max-height:" + boxList.maxHeight.desktop + "px;"
+                  : ""
           }
-          ${boxList.maxHeight.desktop > 0 ? 'overflow-y:auto;' : ''}
+          ${boxList.maxHeight.desktop > 0 ? "overflow-y:auto;" : ""}
       }
       ${panelItem}{
         padding-top:${boxList.padding.desktop?.top};
@@ -155,8 +171,8 @@ const Style = ({ attributes }) => {
         padding-left:${boxList.padding.desktop?.left};
       }
       ${
-          markup.view === 'decimal'
-            ? `
+          markup.view === "decimal"
+              ? `
           
         ${panelLists}{
           list-style-type:decimal;
@@ -168,7 +184,7 @@ const Style = ({ attributes }) => {
           font-size:${markup.markupSize.desktop};
         }
         `
-            : `
+              : `
         ${panelLists}{
           list-style-type:none;
         }
@@ -184,30 +200,38 @@ const Style = ({ attributes }) => {
         `
       }
       }
-      @media (min-width: 768px) and (max-width: 1023px) {
+      @media only screen and (min-width:641px) and (max-width: 1024px){
         ${accordion}.sticky {
           width:${table.width.tablet};
           z-index: ${sticky.zIndex.tablet} !important;
-          position:${sticky.device.includes('Tablet') ? 'fixed' : 'initial'};
+          position:${sticky.device.includes("Tablet") ? "fixed" : "initial"};
         }
-      ${
-          ["left", "right"].map(val => `${accordion}.sticky.${val}{
+      ${["left", "right"]
+          .map(
+              (val) => `${accordion}.sticky.${val}{
           ${val}:${sticky[val].tablet};
-        }`).join("")
-        }
-        ${["top", "bottom"].map(val => `${accordion}.sticky.${val}{
+        }`
+          )
+          .join("")}
+        ${["top", "bottom"]
+            .map(
+                (val) => `${accordion}.sticky.${val}{
         ${val}:${sticky[val].tablet}
-        }`).join("")
-        }
-        ${sticky.verticalAlign === "center" ? `${accordion}.sticky.center{top:50%;  transform: translateY(-50%)}` : null
+        }`
+            )
+            .join("")}
+        ${
+            sticky.verticalAlign === "center"
+                ? `${accordion}.sticky.center{top:50%;  transform: translateY(-50%)}`
+                : null
         }
         ${panelWrapper}{
           ${
-            boxList.maxHeight.tablet > 0
-              ? 'max-height:' + boxList.maxHeight.tablet + 'px;'
-              : ''
+              boxList.maxHeight.tablet > 0
+                  ? "max-height:" + boxList.maxHeight.tablet + "px;"
+                  : ""
           }
-          ${boxList.maxHeight.tablet > 0 ? 'overflow-y:auto;' : ''}
+          ${boxList.maxHeight.tablet > 0 ? "overflow-y:auto;" : ""}
         }
       ${panelItem}{
         padding-top:${boxList.padding.tablet?.top};
@@ -218,8 +242,8 @@ const Style = ({ attributes }) => {
         padding-left:${boxList.padding.tablet?.left};
       }
       ${
-          markup.view === 'decimal'
-            ? `
+          markup.view === "decimal"
+              ? `
           
         ${panelLists}{
           list-style-type:decimal;
@@ -231,7 +255,7 @@ const Style = ({ attributes }) => {
           font-size:${markup.markupSize.tablet};
         }
         `
-        : `
+              : `
         ${panelLists}{
           list-style-type:none;
         }
@@ -248,30 +272,38 @@ const Style = ({ attributes }) => {
       }
 
       }
-      @media screen and (max-width: 767px) {
+      @media only screen and (max-width: 640px) {
         ${accordion}.sticky {
           width:${table.width.mobile};
           z-index: ${sticky.zIndex.mobile} !important;
-          position:${sticky.device.includes('Mobile') ? 'fixed' : 'initial'};
+          position:${sticky.device.includes("Mobile") ? "fixed" : "initial"};
         }
-        ${
-          ["left", "right"].map(val => `${accordion}.sticky.${val}{
+        ${["left", "right"]
+            .map(
+                (val) => `${accordion}.sticky.${val}{
           ${val}:${sticky[val].mobile};
-        }`).join("")
-        }
-        ${["top", "bottom"].map(val => `${accordion}.sticky.${val}{
+        }`
+            )
+            .join("")}
+        ${["top", "bottom"]
+            .map(
+                (val) => `${accordion}.sticky.${val}{
           ${val}:${sticky[val].mobile}
-          }`).join("")
-        }
-          ${sticky.verticalAlign === "center" ? `${accordion}.sticky.center{top:50%;  transform: translateY(-50%)}` : null
+          }`
+            )
+            .join("")}
+          ${
+              sticky.verticalAlign === "center"
+                  ? `${accordion}.sticky.center{top:50%;  transform: translateY(-50%)}`
+                  : null
           }
         ${panelWrapper}{
           ${
-            boxList.maxHeight.mobile > 0
-              ? 'max-height:' + boxList.maxHeight.mobile + 'px;'
-              : ''
+              boxList.maxHeight.mobile > 0
+                  ? "max-height:" + boxList.maxHeight.mobile + "px;"
+                  : ""
           }
-          ${boxList.maxHeight.mobile > 0 ? 'overflow-y:auto;' : ''}
+          ${boxList.maxHeight.mobile > 0 ? "overflow-y:auto;" : ""}
         }
       ${panelItem}{
         padding-top:${boxList.padding.mobile?.top};
@@ -282,7 +314,8 @@ const Style = ({ attributes }) => {
         padding-left:${boxList.padding.mobile?.left};
       }
       ${
-          markup.view === 'decimal'? `
+          markup.view === "decimal"
+              ? `
         ${panelLists}{
           list-style-type:decimal;
           margin:0px;
@@ -293,7 +326,7 @@ const Style = ({ attributes }) => {
           font-size:${markup.markupSize.mobile};
         }
         `
-        : `
+              : `
         ${panelLists}{
           list-style-type:none;
         }
@@ -310,8 +343,8 @@ const Style = ({ attributes }) => {
       }
       }
       `}
-      </style>
-    </>
+          </style>
+      </>
   );
 };
 

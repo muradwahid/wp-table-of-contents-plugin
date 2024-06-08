@@ -17,9 +17,9 @@ const SlideStyle = ({ attributes }) => {
   const slideListWrapper = `${slideContainer} .slide-list-items`;
   const list = `${slideListWrapper} .slide-list`;
   return (
-    <>
-      <style>
-        {`
+      <>
+          <style>
+              {`
 .slide-title {
   position: relative;
   margin-top:${slideTitle.space.desktop};
@@ -123,16 +123,25 @@ padding:${boxCss(table.padding.desktop)};
   z-index: ${sticky.zIndex.desktop} !important;
   position:fixed;
 }
-${["left", "right"].map(val => `.slide-container.sticky.${val}{
+${["left", "right"]
+    .map(
+        (val) => `.slide-container.sticky.${val}{
 ${val}:${sticky[val].desktop};
-}`).join("")
-          }
-${["top", "bottom"].map(val => `.slide-container.sticky.${val}{
+}`
+    )
+    .join("")}
+${["top", "bottom"]
+    .map(
+        (val) => `.slide-container.sticky.${val}{
 ${val}:${sticky[val].desktop}
-}`).join("")
-          }
-${sticky.verticalAlign === "center" ? `.slide-container.sticky.center{top:50%;  transform: translateY(-50%)}` : null
-          }
+}`
+    )
+    .join("")}
+${
+    sticky.verticalAlign === "center"
+        ? `.slide-container.sticky.center{top:50%;  transform: translateY(-50%)}`
+        : null
+}
 
         
 @media screen and (min-width: 1024px) {
@@ -142,19 +151,28 @@ padding:${boxCss(table.padding.desktop)}
 .slide-container.sticky {
   width:${table.width.desktop};
   z-index: ${sticky.zIndex.desktop} !important;
-  position:${sticky.device.includes('Desktop') ? 'fixed' : 'initial'};
+  position:${sticky.device.includes("Desktop") ? "fixed" : "initial"};
 }
 
-${["left", "right"].map(val => `.slide-container.sticky.${val}{
+${["left", "right"]
+    .map(
+        (val) => `.slide-container.sticky.${val}{
   ${val}:${sticky[val].desktop};
-}`).join("")
-          }
-${["top", "bottom"].map(val => `.slide-container.sticky.${val}{
+}`
+    )
+    .join("")}
+${["top", "bottom"]
+    .map(
+        (val) => `.slide-container.sticky.${val}{
 ${val}:${sticky[val].desktop}
-}`).join("")
-          }
-        ${sticky.verticalAlign === "center" ? `.slide-container.sticky.center{top:50%;  transform: translateY(-50%)}` : null
-          }
+}`
+    )
+    .join("")}
+        ${
+            sticky.verticalAlign === "center"
+                ? `.slide-container.sticky.center{top:50%;  transform: translateY(-50%)}`
+                : null
+        }
 
         .slide-title {
   margin-top:${slideTitle.space.desktop};
@@ -168,25 +186,34 @@ ${val}:${sticky[val].desktop}
         }
         }
 
-@media (min-width: 768px) and (max-width: 1023px) {
+@media only screen and (min-width:641px) and (max-width: 1024px) {
           .slide-container{
   padding:${boxCss(table.padding.tablet)}
           }
         .slide-container.sticky {
           width:${table.width.tablet};
           z-index: ${sticky.zIndex.tablet} !important;
-          position:${sticky.device.includes('Tablet') ? 'fixed' : 'initial'};
+          position:${sticky.device.includes("Tablet") ? "fixed" : "initial"};
         }
-        ${["left", "right"].map(val => `.slide-container.sticky.${val}{
+        ${["left", "right"]
+            .map(
+                (val) => `.slide-container.sticky.${val}{
             ${val}:${sticky[val].tablet};
-          }`).join("")
-          }
-        ${["top", "bottom"].map(val => `.slide-container.sticky.${val}{
+          }`
+            )
+            .join("")}
+        ${["top", "bottom"]
+            .map(
+                (val) => `.slide-container.sticky.${val}{
         ${val}:${sticky[val].tablet}
-        }`).join("")
-          }
-        ${sticky.verticalAlign === "center" ? `.slide-container.sticky.center{top:50%;  transform: translateY(-50%)}` : null
-          }
+        }`
+            )
+            .join("")}
+        ${
+            sticky.verticalAlign === "center"
+                ? `.slide-container.sticky.center{top:50%;  transform: translateY(-50%)}`
+                : null
+        }
         .slide-title {
           margin-top:${slideTitle.space.tablet};
           margin-bottom: ${slideTitle.spaceBottom.tablet};
@@ -199,26 +226,35 @@ ${val}:${sticky[val].desktop}
         }
         }
 
-        @media screen and (max-width: 767px) {
+        @media only screen and (max-width: 640px) {
           .slide-container{
       padding:${boxCss(table.padding.mobile)}
           }
         .slide-container.sticky {
           z-index: ${sticky.zIndex.mobile} !important;
-          position:${sticky.device.includes('Mobile') ? 'fixed' : 'initial'};
+          position:${sticky.device.includes("Mobile") ? "fixed" : "initial"};
           width:${table.width.mobile};
         }
 
-${["left", "right"].map(val => `.slide-container.sticky.${val}{
+${["left", "right"]
+    .map(
+        (val) => `.slide-container.sticky.${val}{
     ${val}:${sticky[val].mobile};
-  }`).join("")
-          }
-  ${["top", "bottom"].map(val => `.slide-container.sticky.${val}{
+  }`
+    )
+    .join("")}
+  ${["top", "bottom"]
+      .map(
+          (val) => `.slide-container.sticky.${val}{
   ${val}:${sticky[val].mobile}
-  }`).join("")
-          }
-        ${sticky.verticalAlign === "center" ? `.slide-container.sticky.center{top:50%;  transform: translateY(-50%)}` : null
-          }
+  }`
+      )
+      .join("")}
+        ${
+            sticky.verticalAlign === "center"
+                ? `.slide-container.sticky.center{top:50%;  transform: translateY(-50%)}`
+                : null
+        }
         .slide-title {
           margin-top:${slideTitle.space.mobile};
           margin-bottom: ${slideTitle.spaceBottom.mobile};
@@ -232,8 +268,8 @@ ${["left", "right"].map(val => `.slide-container.sticky.${val}{
         }
 
           `}
-      </style>
-    </>
+          </style>
+      </>
   );
 };
 
